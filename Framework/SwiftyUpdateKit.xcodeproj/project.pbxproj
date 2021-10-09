@@ -43,6 +43,7 @@
 		5EC35DAB271092AD00CAC3C9 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC35DA9271092AD00CAC3C9 /* Utility.swift */; };
 		5EC35DAD271096CA00CAC3C9 /* RequestReviewCondition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC35DAC271096CA00CAC3C9 /* RequestReviewCondition.swift */; };
 		5EC35DAE271096CA00CAC3C9 /* RequestReviewCondition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC35DAC271096CA00CAC3C9 /* RequestReviewCondition.swift */; };
+		5ED8531B2711D9FD00CC0699 /* VersionCompareTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED8531A2711D9FD00CC0699 /* VersionCompareTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,6 +75,7 @@
 		5EC35DA6271091BD00CAC3C9 /* CheckVersionCondition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckVersionCondition.swift; sourceTree = "<group>"; };
 		5EC35DA9271092AD00CAC3C9 /* Utility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
 		5EC35DAC271096CA00CAC3C9 /* RequestReviewCondition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestReviewCondition.swift; sourceTree = "<group>"; };
+		5ED8531A2711D9FD00CC0699 /* VersionCompareTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionCompareTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,6 +139,7 @@
 			children = (
 				5E56B69023ED10B3007AA082 /* Info.plist */,
 				5E1AF24B271020A800240C38 /* SwiftyUpdateKitTests.swift */,
+				5ED8531A2711D9FD00CC0699 /* VersionCompareTests.swift */,
 			);
 			path = SwiftyUpdateKitTests;
 			sourceTree = "<group>";
@@ -353,6 +356,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5ED8531B2711D9FD00CC0699 /* VersionCompareTests.swift in Sources */,
 				5E1AF24C271020A800240C38 /* SwiftyUpdateKitTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

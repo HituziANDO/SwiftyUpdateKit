@@ -28,23 +28,19 @@ public class VersionCompare: VersionComparable {
     }
 
     /// Converts the version to Int type.
-    /// e.g.)
-    /// 1.2.3 => 1002003
-    /// 1.2 => 1002000
-    /// 1 => 1000000
     ///
-    /// - Parameter ver: major.minor.patch. minor: [0,999], patch: [0,999]
+    /// - Parameter ver: major.minor.patch. minor: [0,999], patch: [0,99999999]
     /// - Returns: Int value.
-    private func versionToInt(_ ver: String) -> Int {
-        let arr = ver.split(separator: ".").map { Int($0) ?? 0 }
+    private func versionToInt(_ ver: String) -> Int64 {
+        let arr = ver.split(separator: ".").map { Int64($0) ?? 0 }
 
         switch arr.count {
             case 3:
-                return arr[0] * 1000 * 1000 + arr[1] * 1000 + arr[2]
+                return arr[0] * 1000 * 100_000_000 + arr[1] * 100_000_000 + arr[2]
             case 2:
-                return arr[0] * 1000 * 1000 + arr[1] * 1000
+                return arr[0] * 1000 * 100_000_000 + arr[1] * 100_000_000
             case 1:
-                return arr[0] * 1000 * 1000
+                return arr[0] * 1000 * 100_000_000
             default:
                 assertionFailure("Illegal version string.")
                 return 0
