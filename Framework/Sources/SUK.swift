@@ -32,10 +32,10 @@ public class SUK {
     ///
     /// - Parameters:
     ///   - condition:
-    ///   - update: The closure is called when current app version is old.
+    ///   - update: The closure is called when current app version is old. If nil is specified, default alert is shown.
     ///   - noop: The closure is called when no operation.
     public static func checkVersion(_ condition: CheckVersionCondition,
-                                    update: ((_ newVersion: String?, _ releaseNotes: String?) -> Bool)? = nil,
+                                    update: ((_ newVersion: String?, _ releaseNotes: String?) -> ())? = nil,
                                     noop: (() -> ())? = nil) {
         DispatchQueue.main.async {
             guard let config = config else {
@@ -75,7 +75,7 @@ public class SUK {
 
                         if isOld {
                             logf("This app version is old.", log)
-                            if update == nil || update?(lookUpResult.version, lookUpResult.releaseNotes) == true {
+                            if update == nil {
                                 DispatchQueue.main.async {
                                     let alert = Alert(title: config.updateAlertTitle,
                                                       message: config.updateAlertMessage)
@@ -86,6 +86,11 @@ public class SUK {
                                         alert.addAction(title)
                                     }
                                     alert.showAsModal()
+                                }
+                            }
+                            else {
+                                DispatchQueue.main.async {
+                                    update?(lookUpResult.version, lookUpResult.releaseNotes)
                                 }
                             }
                         }
