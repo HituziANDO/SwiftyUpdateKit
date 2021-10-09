@@ -19,6 +19,6 @@ class SwiftyUpdateKitTests: XCTestCase {
     }
 
     func testVersion() throws {
-        XCTAssertNotNil(SwiftyUpdateKit.version)
+        XCTAssertNotNil(SUK.version)
     }
 }

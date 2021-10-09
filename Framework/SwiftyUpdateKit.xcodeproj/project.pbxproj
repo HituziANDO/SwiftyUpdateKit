@@ -21,13 +21,13 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		5E1AF21C27101CF000240C38 /* SwiftyUpdateKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1AF21B27101CF000240C38 /* SwiftyUpdateKit.swift */; };
-		5E1AF2462710206100240C38 /* SwiftyUpdateKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1AF21B27101CF000240C38 /* SwiftyUpdateKit.swift */; };
+		5E1AF21C27101CF000240C38 /* SUK.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1AF21B27101CF000240C38 /* SUK.swift */; };
+		5E1AF2462710206100240C38 /* SUK.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1AF21B27101CF000240C38 /* SUK.swift */; };
 		5E1AF24C271020A800240C38 /* SwiftyUpdateKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1AF24B271020A800240C38 /* SwiftyUpdateKitTests.swift */; };
 		5E1AF26A2710257B00240C38 /* SwiftyUpdateKitConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1AF2692710257B00240C38 /* SwiftyUpdateKitConfig.swift */; };
 		5E1AF26F271025CF00240C38 /* SwiftyUpdateKitConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1AF2692710257B00240C38 /* SwiftyUpdateKitConfig.swift */; };
-		5E1AF2762710279700240C38 /* ITunesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1AF2752710279700240C38 /* ITunesAPI.swift */; };
-		5E1AF27F27102B2B00240C38 /* ITunesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1AF2752710279700240C38 /* ITunesAPI.swift */; };
+		5E1AF2762710279700240C38 /* ITunesSearchAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1AF2752710279700240C38 /* ITunesSearchAPI.swift */; };
+		5E1AF27F27102B2B00240C38 /* ITunesSearchAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1AF2752710279700240C38 /* ITunesSearchAPI.swift */; };
 		5E56B68A23ED10B3007AA082 /* SwiftyUpdateKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E56B68023ED10B2007AA082 /* SwiftyUpdateKit.framework */; };
 		5E56B6A623ED118A007AA082 /* SwiftyUpdateKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 5E56B6A023ED118A007AA082 /* SwiftyUpdateKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5E56B6C223ED12AC007AA082 /* SwiftyUpdateKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 5E56B6B423ED12AC007AA082 /* SwiftyUpdateKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -56,10 +56,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		5E1AF21B27101CF000240C38 /* SwiftyUpdateKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftyUpdateKit.swift; sourceTree = "<group>"; };
+		5E1AF21B27101CF000240C38 /* SUK.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SUK.swift; sourceTree = "<group>"; };
 		5E1AF24B271020A800240C38 /* SwiftyUpdateKitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftyUpdateKitTests.swift; sourceTree = "<group>"; };
 		5E1AF2692710257B00240C38 /* SwiftyUpdateKitConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftyUpdateKitConfig.swift; sourceTree = "<group>"; };
-		5E1AF2752710279700240C38 /* ITunesAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ITunesAPI.swift; sourceTree = "<group>"; };
+		5E1AF2752710279700240C38 /* ITunesSearchAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ITunesSearchAPI.swift; sourceTree = "<group>"; };
 		5E56B68023ED10B2007AA082 /* SwiftyUpdateKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftyUpdateKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E56B68423ED10B2007AA082 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5E56B68923ED10B3007AA082 /* SwiftyUpdateKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftyUpdateKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -146,10 +146,10 @@
 			children = (
 				5EC35D9D271064D800CAC3C9 /* Alert.swift */,
 				5EC35DA6271091BD00CAC3C9 /* CheckVersionCondition.swift */,
-				5E1AF2752710279700240C38 /* ITunesAPI.swift */,
+				5E1AF2752710279700240C38 /* ITunesSearchAPI.swift */,
 				5EC35DA02710802E00CAC3C9 /* Log.swift */,
 				5EC35DAC271096CA00CAC3C9 /* RequestReviewCondition.swift */,
-				5E1AF21B27101CF000240C38 /* SwiftyUpdateKit.swift */,
+				5E1AF21B27101CF000240C38 /* SUK.swift */,
 				5E1AF2692710257B00240C38 /* SwiftyUpdateKitConfig.swift */,
 				5EC35DA9271092AD00CAC3C9 /* Utility.swift */,
 				5EC35DA327108A7800CAC3C9 /* VersionCompare.swift */,
@@ -337,12 +337,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5E1AF2762710279700240C38 /* ITunesAPI.swift in Sources */,
+				5E1AF2762710279700240C38 /* ITunesSearchAPI.swift in Sources */,
 				5EC35DA7271091BD00CAC3C9 /* CheckVersionCondition.swift in Sources */,
 				5E1AF26A2710257B00240C38 /* SwiftyUpdateKitConfig.swift in Sources */,
 				5EC35DA427108A7800CAC3C9 /* VersionCompare.swift in Sources */,
 				5EC35DA12710802E00CAC3C9 /* Log.swift in Sources */,
-				5E1AF21C27101CF000240C38 /* SwiftyUpdateKit.swift in Sources */,
+				5E1AF21C27101CF000240C38 /* SUK.swift in Sources */,
 				5EC35D9E271064D900CAC3C9 /* Alert.swift in Sources */,
 				5EC35DAA271092AD00CAC3C9 /* Utility.swift in Sources */,
 				5EC35DAD271096CA00CAC3C9 /* RequestReviewCondition.swift in Sources */,
@@ -361,13 +361,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5E1AF27F27102B2B00240C38 /* ITunesAPI.swift in Sources */,
+				5E1AF27F27102B2B00240C38 /* ITunesSearchAPI.swift in Sources */,
 				5EC35DA8271091BD00CAC3C9 /* CheckVersionCondition.swift in Sources */,
 				5E1AF26F271025CF00240C38 /* SwiftyUpdateKitConfig.swift in Sources */,
 				5EC35DA527108A7800CAC3C9 /* VersionCompare.swift in Sources */,
 				5EC35DA22710802E00CAC3C9 /* Log.swift in Sources */,
 				5EC35D9F271064D900CAC3C9 /* Alert.swift in Sources */,
-				5E1AF2462710206100240C38 /* SwiftyUpdateKit.swift in Sources */,
+				5E1AF2462710206100240C38 /* SUK.swift in Sources */,
 				5EC35DAB271092AD00CAC3C9 /* Utility.swift in Sources */,
 				5EC35DAE271096CA00CAC3C9 /* RequestReviewCondition.swift in Sources */,
 			);
@@ -528,6 +528,7 @@
 					"@loader_path/Frameworks",
 				);
 				MARKETING_VERSION = 1;
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = jp.hituzi.SwiftyUpdateKit;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;

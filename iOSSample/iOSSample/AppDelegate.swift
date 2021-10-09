@@ -13,7 +13,7 @@ import SwiftyUpdateKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        print("SwiftyUpdateKit.version: \(SwiftyUpdateKit.version)")
+        print("SwiftyUpdateKit.version: \(SUK.version)")
 
         let config = SwiftyUpdateKitConfig(
             version: Bundle.main.infoDictionary!["CFBundleShortVersionString"] as! String,
@@ -22,7 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             country: "jp",
             updateButtonTitle: "Update"
         )
-        SwiftyUpdateKit.applicationDidFinishLaunching(withConfig: config) { print($0) }
+        SUK.applicationDidFinishLaunching(withConfig: config) { print($0) }
 
         return true
     }

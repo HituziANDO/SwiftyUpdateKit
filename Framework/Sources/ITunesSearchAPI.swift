@@ -1,5 +1,5 @@
 //
-//  ITunesAPI.swift
+//  ITunesSearchAPI.swift
 //  SwiftyUpdateKit
 //
 //  Created by Masaki Ando on 2021/10/08.
@@ -49,14 +49,14 @@ public struct LookUpResult {
     let wrapperType: String?
 }
 
-public enum ITunesAPIError: Error {
+public enum ITunesSearchAPIError: Error {
     /// HTTP Error with the HTTP status code.
     case httpError(Int)
     /// The response data is invalid.
     case invalidResponseData
 }
 
-public struct ITunesAPI {
+public struct ITunesSearchAPI {
 
     public static func lookUp(with config: SwiftyUpdateKitConfig,
                               completion: @escaping (Result<[LookUpResult], Error>) -> Void) {
@@ -75,18 +75,18 @@ public struct ITunesAPI {
             }
 
             guard let data = data, let response = response as? HTTPURLResponse else {
-                completion(.failure(ITunesAPIError.invalidResponseData))
+                completion(.failure(ITunesSearchAPIError.invalidResponseData))
                 return
             }
 
             guard response.statusCode == 200 else {
-                completion(.failure(ITunesAPIError.httpError(response.statusCode)))
+                completion(.failure(ITunesSearchAPIError.httpError(response.statusCode)))
                 return
             }
 
             guard let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
                   let results = json["results"] as? [[String: Any]] else {
-                completion(.failure(ITunesAPIError.invalidResponseData))
+                completion(.failure(ITunesSearchAPIError.invalidResponseData))
                 return
             }
 

@@ -1,5 +1,5 @@
 //
-//  SwiftyUpdateKit.swift
+//  SUK.swift
 //  SwiftyUpdateKit
 //
 //  Created by Masaki Ando on 2021/10/08.
@@ -9,7 +9,7 @@
 import Foundation
 import StoreKit
 
-public class SwiftyUpdateKit {
+public class SUK {
     /// SwiftyUpdateKit version.
     public static let version = "0.1.0"
 
@@ -50,7 +50,7 @@ public class SwiftyUpdateKit {
                 return
             }
 
-            ITunesAPI.lookUp(with: config) { result in
+            ITunesSearchAPI.lookUp(with: config) { result in
                 switch result {
                     case .failure(let error):
                         // Ignore an error.

@@ -13,7 +13,7 @@ import SwiftyUpdateOSXKit
 class AppDelegate: NSObject, NSApplicationDelegate {
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-        print("SwiftyUpdateKit.version: \(SwiftyUpdateKit.version)")
+        print("SwiftyUpdateKit.version: \(SUK.version)")
 
         let config = SwiftyUpdateKitConfig(
             version: Bundle.main.infoDictionary!["CFBundleShortVersionString"] as! String,
@@ -22,7 +22,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             country: "jp",
             updateButtonTitle: "Update"
         )
-        SwiftyUpdateKit.applicationDidFinishLaunching(withConfig: config) { print($0) }
+        SUK.applicationDidFinishLaunching(withConfig: config) { print($0) }
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
