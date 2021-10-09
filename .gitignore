@@ -66,5 +66,8 @@ fastlane/test_output
 iOSInjectionProject/
 
 # App
-docs
+docs/ios/*
+docs/macos/*
+!docs/ios/badge.svg
+!docs/macos/badge.svg
 Output/
