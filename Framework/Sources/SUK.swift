@@ -9,9 +9,10 @@
 import Foundation
 import StoreKit
 
+/// SwiftyUpdateKit.
 public class SUK {
     /// SwiftyUpdateKit version.
-    public static let version = "0.1.0"
+    public static let version = "0.1.2"
 
     private static var config: SwiftyUpdateKitConfig?
     private static var log: Log?

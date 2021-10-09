@@ -28,6 +28,7 @@ public struct SwiftyUpdateKitConfig {
     /// The country code used by iTunes Search API. For example: "jp".
     /// See http://en.wikipedia.org/wiki/ ISO_3166-1_alpha-2 for a list of ISO Country Codes.
     public let country: String?
+    /// The method to compare the app version.
     public let versionCompare: VersionComparable
     public let updateAlertTitle: String
     public let updateAlertMessage: String

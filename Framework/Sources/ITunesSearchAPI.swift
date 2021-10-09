@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct LookUpResult {
+struct LookUpResult {
     let artistId: UInt?
     let artistName: String?
     let artistViewUrl: String?
@@ -49,14 +49,14 @@ public struct LookUpResult {
     let wrapperType: String?
 }
 
-public enum ITunesSearchAPIError: Error {
+enum ITunesSearchAPIError: Error {
     /// HTTP Error with the HTTP status code.
     case httpError(Int)
     /// The response data is invalid.
     case invalidResponseData
 }
 
-public struct ITunesSearchAPI {
+struct ITunesSearchAPI {
 
     public static func lookUp(with config: SwiftyUpdateKitConfig,
                               completion: @escaping (Result<[LookUpResult], Error>) -> Void) {
