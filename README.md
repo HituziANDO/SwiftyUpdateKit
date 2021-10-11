@@ -82,9 +82,17 @@ SUK.checkVersion(VersionCheckConditionAlways(), newRelease: { [weak self] newVer
 }
 ```
 
-First, this code shows the update alert if current app version is old.  
-Next, when new app version is installed, it shows the release notes of your app's App Store page.  
+First, this code shows the update alert if current app version is old.
+
+<img src="./readme-images/update_alert.png" width="200">
+
+Next, when new app version is installed, it shows the release notes of your app's App Store page.
+
+<img src="./readme-images/release_notes.png" width="200">
+
 Finally, if the app version is latest and the release notes have already shown, it requests the review about your app.
+
+<img src="./readme-images/request_review.png" width="200">
 
 ### Use custom UI
 
