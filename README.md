@@ -17,16 +17,20 @@ SwiftyUpdateKit is a framework for iOS and macOS. This framework supports for a 
 
 ## Installation
 
-### CocoaPods
-
-TBA
-
-### Carthage
+### Carthage (recommended)
 
 SwiftyUpdateKit is available through [Carthage](https://github.com/Carthage/Carthage). To install it, simply add the following line to your Cartfile:
 
 ```
 github "HituziANDO/SwiftyUpdateKit"
+```
+
+### CocoaPods
+
+SwiftyUpdateKit is available through [CocoaPods](http://cocoapods.org). To install it, simply add the following line to your Podfile:
+	
+```ruby
+pod "SwiftyUpdateKit"
 ```
 
 ## Usage
