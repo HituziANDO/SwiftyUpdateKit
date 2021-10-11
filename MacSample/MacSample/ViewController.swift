@@ -18,6 +18,11 @@ class ViewController: NSViewController {
     override func viewDidAppear() {
         super.viewDidAppear()
 
-        SUK.checkVersion(CheckVersionConditionAlways())
+//        SUK.checkVersion(CheckVersionConditionAlways())
+        SUK.checkVersion(CheckVersionConditionAlways(), newRelease: { newVersion, releaseNotes in
+            ReleaseNotesController.show(from: self, text: releaseNotes, version: newVersion)
+        }) {
+            SUK.requestReview(RequestReviewConditionAlways())
+        }
     }
 }

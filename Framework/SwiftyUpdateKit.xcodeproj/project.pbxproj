@@ -44,6 +44,10 @@
 		5EC35DAD271096CA00CAC3C9 /* RequestReviewCondition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC35DAC271096CA00CAC3C9 /* RequestReviewCondition.swift */; };
 		5EC35DAE271096CA00CAC3C9 /* RequestReviewCondition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC35DAC271096CA00CAC3C9 /* RequestReviewCondition.swift */; };
 		5ED8531B2711D9FD00CC0699 /* VersionCompareTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED8531A2711D9FD00CC0699 /* VersionCompareTests.swift */; };
+		5ED8531F2711DF6300CC0699 /* ReleaseNotes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED8531E2711DF6300CC0699 /* ReleaseNotes.swift */; };
+		5ED853202711DF6300CC0699 /* ReleaseNotes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED8531E2711DF6300CC0699 /* ReleaseNotes.swift */; };
+		5ED85325271327F500CC0699 /* ReleaseNotesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED85324271327F500CC0699 /* ReleaseNotesController.swift */; };
+		5ED85326271327F500CC0699 /* ReleaseNotesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED85324271327F500CC0699 /* ReleaseNotesController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,6 +80,8 @@
 		5EC35DA9271092AD00CAC3C9 /* Utility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
 		5EC35DAC271096CA00CAC3C9 /* RequestReviewCondition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestReviewCondition.swift; sourceTree = "<group>"; };
 		5ED8531A2711D9FD00CC0699 /* VersionCompareTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionCompareTests.swift; sourceTree = "<group>"; };
+		5ED8531E2711DF6300CC0699 /* ReleaseNotes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReleaseNotes.swift; sourceTree = "<group>"; };
+		5ED85324271327F500CC0699 /* ReleaseNotesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReleaseNotesController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -151,6 +157,8 @@
 				5EC35DA6271091BD00CAC3C9 /* CheckVersionCondition.swift */,
 				5E1AF2752710279700240C38 /* ITunesSearchAPI.swift */,
 				5EC35DA02710802E00CAC3C9 /* Log.swift */,
+				5ED8531E2711DF6300CC0699 /* ReleaseNotes.swift */,
+				5ED85324271327F500CC0699 /* ReleaseNotesController.swift */,
 				5EC35DAC271096CA00CAC3C9 /* RequestReviewCondition.swift */,
 				5E1AF21B27101CF000240C38 /* SUK.swift */,
 				5E1AF2692710257B00240C38 /* SwiftyUpdateKitConfig.swift */,
@@ -345,7 +353,9 @@
 				5E1AF26A2710257B00240C38 /* SwiftyUpdateKitConfig.swift in Sources */,
 				5EC35DA427108A7800CAC3C9 /* VersionCompare.swift in Sources */,
 				5EC35DA12710802E00CAC3C9 /* Log.swift in Sources */,
+				5ED8531F2711DF6300CC0699 /* ReleaseNotes.swift in Sources */,
 				5E1AF21C27101CF000240C38 /* SUK.swift in Sources */,
+				5ED85325271327F500CC0699 /* ReleaseNotesController.swift in Sources */,
 				5EC35D9E271064D900CAC3C9 /* Alert.swift in Sources */,
 				5EC35DAA271092AD00CAC3C9 /* Utility.swift in Sources */,
 				5EC35DAD271096CA00CAC3C9 /* RequestReviewCondition.swift in Sources */,
@@ -370,7 +380,9 @@
 				5E1AF26F271025CF00240C38 /* SwiftyUpdateKitConfig.swift in Sources */,
 				5EC35DA527108A7800CAC3C9 /* VersionCompare.swift in Sources */,
 				5EC35DA22710802E00CAC3C9 /* Log.swift in Sources */,
+				5ED853202711DF6300CC0699 /* ReleaseNotes.swift in Sources */,
 				5EC35D9F271064D900CAC3C9 /* Alert.swift in Sources */,
+				5ED85326271327F500CC0699 /* ReleaseNotesController.swift in Sources */,
 				5E1AF2462710206100240C38 /* SUK.swift in Sources */,
 				5EC35DAB271092AD00CAC3C9 /* Utility.swift in Sources */,
 				5EC35DAE271096CA00CAC3C9 /* RequestReviewCondition.swift in Sources */,

@@ -15,12 +15,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         print("SwiftyUpdateKit.version: \(SUK.version)")
 
+//        SUK.reset()
+
         let config = SwiftyUpdateKitConfig(
             version: Bundle.main.infoDictionary!["CFBundleShortVersionString"] as! String,
             iTunesID: "1492010457",
             storeURL: "https://apps.apple.com/app/blue-sketch/id1492010457",
             country: "jp",
-            updateButtonTitle: "Update"
+            releaseNotesVersion: 1
         )
         SUK.applicationDidFinishLaunching(withConfig: config) { print($0) }
     }
