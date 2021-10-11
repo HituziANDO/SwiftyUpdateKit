@@ -136,7 +136,6 @@ class ReleaseNotesController: UIViewController {
         view.isEditable = false
         view.isSelectable = false
         view.backgroundColor = .clear
-        view.textColor = .label
         view.textContainerInset = UIEdgeInsets(top: 8, left: 24, bottom: 100, right: 24)
         view.font = .systemFont(ofSize: 15, weight: .regular)
         return view
@@ -196,7 +195,9 @@ class ReleaseNotesController: UIViewController {
         let style = NSMutableParagraphStyle()
         style.lineSpacing = 10
         textView.attributedText = NSAttributedString(string: text,
-                                                     attributes: [.paragraphStyle: style, .font: textView.font!])
+                                                     attributes: [.paragraphStyle: style,
+                                                                  .font: textView.font!,
+                                                                  .foregroundColor: UIColor.label])
 
         view.addSubview(effectView)
         view.addSubview(textView)
