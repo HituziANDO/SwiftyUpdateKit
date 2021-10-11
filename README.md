@@ -53,7 +53,7 @@ let config = SwiftyUpdateKitConfig(
     // e.g.) App Store URL: "https://apps.apple.com/app/sampleapp/id1234567890" -> iTunesID is 1234567890
     iTunesID: "1234567890",
     // App Store URL of your app.
-    storeURL: "https://apps.apple.com/app/your-app/id 1234567890",
+    storeURL: "https://apps.apple.com/app/your-app/id1234567890",
     // The country code used by iTunes Search API.
     // See http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2 for a list of ISO Country Codes.
     country: "us",
