@@ -19,8 +19,9 @@ class ViewController: NSViewController {
         super.viewDidAppear()
 
 //        SUK.checkVersion(CheckVersionConditionAlways())
-        SUK.checkVersion(CheckVersionConditionAlways(), newRelease: { newVersion, releaseNotes in
-            ReleaseNotesController.show(from: self, text: releaseNotes, version: newVersion)
+        SUK.checkVersion(CheckVersionConditionAlways(), newRelease: { [weak self] newVersion, releaseNotes in
+            guard let self = self else { return }
+            SUK.showReleaseNotes(from: self, text: releaseNotes, version: newVersion)
         }) {
             SUK.requestReview(RequestReviewConditionAlways())
         }

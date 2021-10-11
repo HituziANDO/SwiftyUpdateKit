@@ -15,12 +15,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         print("SwiftyUpdateKit.version: \(SUK.version)")
 
+        SUK.reset()
+
         let config = SwiftyUpdateKitConfig(
             version: Bundle.main.infoDictionary!["CFBundleShortVersionString"] as! String,
             iTunesID: "1491913803",
             storeURL: "https://apps.apple.com/app/blue-sketch/id1491913803",
             country: "jp",
-            updateButtonTitle: "Update"
+            releaseNotesVersion: 1
         )
         SUK.applicationDidFinishLaunching(withConfig: config) { print($0) }
 

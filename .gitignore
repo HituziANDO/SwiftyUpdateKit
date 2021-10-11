@@ -71,3 +71,4 @@ docs/macos/*
 !docs/ios/badge.svg
 !docs/macos/badge.svg
 Output/
+*.sketch

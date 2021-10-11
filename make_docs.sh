@@ -15,5 +15,5 @@ jazzy \
 --clean \
 --author "Hituzi Ando" \
 --author_url https://hituzi-ando.com/ \
---build-tool-arguments -scheme,SwiftyUpdateOSXKit \
+--build-tool-arguments -scheme,SwiftyUpdateKit macOS \
 --output docs/macos

@@ -9,6 +9,12 @@
 import Foundation
 import StoreKit
 
+#if os(OSX)
+public typealias SUKViewController = NSViewController
+#elseif os(iOS)
+public typealias SUKViewController = UIViewController
+#endif
+
 /// SwiftyUpdateKit.
 public class SUK {
     /// SwiftyUpdateKit version.
@@ -102,6 +108,35 @@ public class SUK {
             }
             #endif
         }
+    }
+
+    /// Shows the release notes to a user when new app version is installed.
+    ///
+    /// - Parameters:
+    ///   - rootViewController: A parent view controller presents this view controller.
+    ///   - text: Release notes.
+    ///   - title: A title. Default value of this argument is "Release Notes".
+    ///   - version: new app version.
+    ///   - windowSize: A window size. Default value of this argument is (480, 320). This value is used on macOS only.
+    public static func showReleaseNotes(from rootViewController: SUKViewController,
+                                        text: String?,
+                                        title: String = "Release Notes",
+                                        version: String? = nil,
+                                        windowSize: CGSize = CGSize(width: 480, height: 320)) {
+        #if os(OSX)
+        let viewController = ReleaseNotesController(windowSize: windowSize,
+                                                    title: title,
+                                                    text: text ?? "",
+                                                    version: version)
+        rootViewController.presentAsModalWindow(viewController)
+        #elseif os(iOS)
+        let viewController = ReleaseNotesController(title: title,
+                                                    text: text ?? "",
+                                                    version: version)
+        viewController.modalTransitionStyle = .coverVertical
+        viewController.modalPresentationStyle = .automatic
+        rootViewController.present(viewController, animated: true)
+        #endif
     }
 
     /// Asks a user for a review of the app if specified condition returns true.
