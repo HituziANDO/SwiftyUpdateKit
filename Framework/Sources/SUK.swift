@@ -18,7 +18,7 @@ public typealias SUKViewController = UIViewController
 /// SwiftyUpdateKit.
 public class SUK {
     /// SwiftyUpdateKit version.
-    public static let version = "0.9.0"
+    public static let version = "1.0.0"
 
     private static var config: SwiftyUpdateKitConfig?
     private static var log: Log?

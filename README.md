@@ -131,6 +131,10 @@ For example, you may use `SUK.reset` method during testing and development.
 SUK.reset()
 ```
 
+## Version Comparison Method
+
+Default version comparison method refers to [here](https://github.com/HituziANDO/SwiftyUpdateKit/blob/main/Framework/Sources/VersionCompare.swift#L26). If you need another comparison method, you implement the `VersionComparable` protocol and set it to `versionCompare` argument in the SwiftyUpdateKitConfig.
+
 ## API Reference
 
 To make the document of this framework, you run following command on the Terminal. This script depends on [jazzy](https://github.com/realm/jazzy).
