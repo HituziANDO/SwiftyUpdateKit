@@ -7,7 +7,7 @@
 
 import Cocoa
 
-import SwiftyUpdateOSXKit
+import SwiftyUpdateKit
 
 @main
 class AppDelegate: NSObject, NSApplicationDelegate {

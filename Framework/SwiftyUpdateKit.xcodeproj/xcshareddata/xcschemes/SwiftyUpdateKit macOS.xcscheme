@@ -14,8 +14,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "5E56B6B123ED12AC007AA082"
-               BuildableName = "SwiftyUpdateOSXKit.framework"
-               BlueprintName = "SwiftyUpdateOSXKit"
+               BuildableName = "SwiftyUpdateKit.framework"
+               BlueprintName = "SwiftyUpdateKit macOS"
                ReferencedContainer = "container:SwiftyUpdateKit.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
