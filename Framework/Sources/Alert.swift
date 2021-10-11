@@ -34,7 +34,7 @@ extension UIViewController {
 }
 #endif
 
-open class Alert {
+class Alert {
 
     /// The button click event handler.
     public typealias ActionHandler = () -> ()

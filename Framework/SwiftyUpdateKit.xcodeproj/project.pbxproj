@@ -37,8 +37,8 @@
 		5EC35DA22710802E00CAC3C9 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC35DA02710802E00CAC3C9 /* Log.swift */; };
 		5EC35DA427108A7800CAC3C9 /* VersionCompare.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC35DA327108A7800CAC3C9 /* VersionCompare.swift */; };
 		5EC35DA527108A7800CAC3C9 /* VersionCompare.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC35DA327108A7800CAC3C9 /* VersionCompare.swift */; };
-		5EC35DA7271091BD00CAC3C9 /* CheckVersionCondition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC35DA6271091BD00CAC3C9 /* CheckVersionCondition.swift */; };
-		5EC35DA8271091BD00CAC3C9 /* CheckVersionCondition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC35DA6271091BD00CAC3C9 /* CheckVersionCondition.swift */; };
+		5EC35DA7271091BD00CAC3C9 /* VersionCheckCondition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC35DA6271091BD00CAC3C9 /* VersionCheckCondition.swift */; };
+		5EC35DA8271091BD00CAC3C9 /* VersionCheckCondition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC35DA6271091BD00CAC3C9 /* VersionCheckCondition.swift */; };
 		5EC35DAA271092AD00CAC3C9 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC35DA9271092AD00CAC3C9 /* Utility.swift */; };
 		5EC35DAB271092AD00CAC3C9 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC35DA9271092AD00CAC3C9 /* Utility.swift */; };
 		5EC35DAD271096CA00CAC3C9 /* RequestReviewCondition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC35DAC271096CA00CAC3C9 /* RequestReviewCondition.swift */; };
@@ -76,7 +76,7 @@
 		5EC35D9D271064D800CAC3C9 /* Alert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		5EC35DA02710802E00CAC3C9 /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 		5EC35DA327108A7800CAC3C9 /* VersionCompare.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionCompare.swift; sourceTree = "<group>"; };
-		5EC35DA6271091BD00CAC3C9 /* CheckVersionCondition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckVersionCondition.swift; sourceTree = "<group>"; };
+		5EC35DA6271091BD00CAC3C9 /* VersionCheckCondition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionCheckCondition.swift; sourceTree = "<group>"; };
 		5EC35DA9271092AD00CAC3C9 /* Utility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
 		5EC35DAC271096CA00CAC3C9 /* RequestReviewCondition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestReviewCondition.swift; sourceTree = "<group>"; };
 		5ED8531A2711D9FD00CC0699 /* VersionCompareTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionCompareTests.swift; sourceTree = "<group>"; };
@@ -154,7 +154,6 @@
 			isa = PBXGroup;
 			children = (
 				5EC35D9D271064D800CAC3C9 /* Alert.swift */,
-				5EC35DA6271091BD00CAC3C9 /* CheckVersionCondition.swift */,
 				5E1AF2752710279700240C38 /* ITunesSearchAPI.swift */,
 				5EC35DA02710802E00CAC3C9 /* Log.swift */,
 				5ED8531E2711DF6300CC0699 /* ReleaseNotes.swift */,
@@ -163,6 +162,7 @@
 				5E1AF21B27101CF000240C38 /* SUK.swift */,
 				5E1AF2692710257B00240C38 /* SwiftyUpdateKitConfig.swift */,
 				5EC35DA9271092AD00CAC3C9 /* Utility.swift */,
+				5EC35DA6271091BD00CAC3C9 /* VersionCheckCondition.swift */,
 				5EC35DA327108A7800CAC3C9 /* VersionCompare.swift */,
 			);
 			path = Sources;
@@ -349,7 +349,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5E1AF2762710279700240C38 /* ITunesSearchAPI.swift in Sources */,
-				5EC35DA7271091BD00CAC3C9 /* CheckVersionCondition.swift in Sources */,
+				5EC35DA7271091BD00CAC3C9 /* VersionCheckCondition.swift in Sources */,
 				5E1AF26A2710257B00240C38 /* SwiftyUpdateKitConfig.swift in Sources */,
 				5EC35DA427108A7800CAC3C9 /* VersionCompare.swift in Sources */,
 				5EC35DA12710802E00CAC3C9 /* Log.swift in Sources */,
@@ -376,7 +376,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5E1AF27F27102B2B00240C38 /* ITunesSearchAPI.swift in Sources */,
-				5EC35DA8271091BD00CAC3C9 /* CheckVersionCondition.swift in Sources */,
+				5EC35DA8271091BD00CAC3C9 /* VersionCheckCondition.swift in Sources */,
 				5E1AF26F271025CF00240C38 /* SwiftyUpdateKitConfig.swift in Sources */,
 				5EC35DA527108A7800CAC3C9 /* VersionCompare.swift in Sources */,
 				5EC35DA22710802E00CAC3C9 /* Log.swift in Sources */,

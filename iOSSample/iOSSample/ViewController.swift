@@ -18,8 +18,7 @@ class ViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
-//        SUK.checkVersion(CheckVersionConditionAlways())
-        SUK.checkVersion(CheckVersionConditionAlways(), newRelease: { [weak self] newVersion, releaseNotes in
+        SUK.checkVersion(VersionCheckConditionAlways(), newRelease: { [weak self] newVersion, releaseNotes in
             guard let self = self else { return }
             SUK.showReleaseNotes(from: self, text: releaseNotes, version: newVersion)
         }) {

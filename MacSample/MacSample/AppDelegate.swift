@@ -15,13 +15,30 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         print("SwiftyUpdateKit.version: \(SUK.version)")
 
-        SUK.reset()
+//        SUK.reset()
 
         let config = SwiftyUpdateKitConfig(
+            // Current app version.
             version: Bundle.main.infoDictionary!["CFBundleShortVersionString"] as! String,
+            // iTunes ID.
+            // e.g.) App Store URL: "https://apps.apple.com/app/sampleapp/id1234567890" -> iTunesID is 1234567890
             iTunesID: "1492010457",
+            // App Store URL of your app.
             storeURL: "https://apps.apple.com/app/blue-sketch/id1492010457",
-            country: "jp",
+            // The country code used by iTunes Search API.
+            // See http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2 for a list of ISO Country Codes.
+            country: "us",
+            // The method to compare the app version.
+            versionCompare: VersionCompare(),
+            // The update alert's title.
+            updateAlertTitle: "Released new version!",
+            // The update alert's message.
+            updateAlertMessage: "Please update the app. Please refer to the App Store for details of the update contents.",
+            // The update button's label.
+            updateButtonTitle: "Update",
+            // The remind-me-later button's label. If nil is specified, the button is hidden.
+            remindMeLaterButtonTitle: "Remind me later",
+            // Latest version of the release notes. If you publish new release notes, you increment this value.
             releaseNotesVersion: 1
         )
         SUK.applicationDidFinishLaunching(withConfig: config) { print($0) }

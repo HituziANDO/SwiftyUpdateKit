@@ -21,20 +21,25 @@ public struct SwiftyUpdateKitConfig {
     /// ```
     public let version: String
     /// iTunes ID.
-    /// e.g.) Store URL: "https://apps.apple.com/app/sampleapp/id1234567890" -> iTunesID is 1234567890
+    /// e.g.) App Store URL: "https://apps.apple.com/app/sampleapp/id1234567890" -> iTunesID is 1234567890
     public let iTunesID: String
-    /// App Store URL of the product.
+    /// App Store URL of your app.
     public let storeURL: String
     /// The country code used by iTunes Search API. For example: "jp".
-    /// See http://en.wikipedia.org/wiki/ ISO_3166-1_alpha-2 for a list of ISO Country Codes.
+    /// See http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2 for a list of ISO Country Codes.
     public let country: String?
     /// The method to compare the app version.
     public let versionCompare: VersionComparable
+    /// The update alert's title.
     public let updateAlertTitle: String
+    /// The update alert's message.
     public let updateAlertMessage: String
+    /// The update button's label.
     public let updateButtonTitle: String
+    /// The remind-me-later button's label. If nil is specified, the button is hidden.
     public let remindMeLaterButtonTitle: String?
     /// Latest version of the release notes. Default value of this property is 0.
+    /// If you publish new release notes, you increment this value.
     public let releaseNotesVersion: Int
 
     public init(version: String,

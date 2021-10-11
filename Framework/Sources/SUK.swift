@@ -18,7 +18,7 @@ public typealias SUKViewController = UIViewController
 /// SwiftyUpdateKit.
 public class SUK {
     /// SwiftyUpdateKit version.
-    public static let version = "0.1.2"
+    public static let version = "0.9.0"
 
     private static var config: SwiftyUpdateKitConfig?
     private static var log: Log?
@@ -40,10 +40,10 @@ public class SUK {
     /// - Parameters:
     ///   - condition: If the condition returns true, checks the app version.
     ///   - update: The closure is called when current app version is old. If nil is specified, default alert is shown.
-    ///   - newRelease: The closure is called when new app version is installed.
+    ///   - newRelease: The closure is called when new app version is installed. If nil is specified, to show the release notes to a user is ignored.
     ///   - userID: A user's ID to show the release notes when new app version is installed. Default value of this argument is "SwiftyUpdateKitUser".
     ///   - noop: The closure is called when no operation.
-    public static func checkVersion(_ condition: CheckVersionCondition,
+    public static func checkVersion(_ condition: VersionCheckCondition,
                                     update: ((_ newVersion: String?, _ releaseNotes: String?) -> ())? = nil,
                                     newRelease: ((_ newVersion: String?, _ releaseNotes: String?) -> ())? = nil,
                                     forUserID userID: String = "SwiftyUpdateKitUser",
@@ -110,6 +110,26 @@ public class SUK {
         }
     }
 
+    /// Shows the update alert for a user to install new app version.
+    public static func showUpdateAlert() {
+        DispatchQueue.main.async {
+            guard let config = config else {
+                logf("`applicationDidFinishLaunching(withConfig:)` method is not called yet.", log)
+                return
+            }
+
+            let alert = Alert(title: config.updateAlertTitle,
+                              message: config.updateAlertMessage)
+                .addAction(config.updateButtonTitle) { Self.openAppStore() }
+
+            if let title = config.remindMeLaterButtonTitle, !title.isEmpty {
+                alert.addAction(title)
+            }
+
+            alert.showAsModal()
+        }
+    }
+
     /// Shows the release notes to a user when new app version is installed.
     ///
     /// - Parameters:
@@ -148,11 +168,11 @@ public class SUK {
         }
     }
 
-    /// Resets the status.
+    /// Resets the status: stored date of version check condition, stored date of request review condition, and stored version of the release notes.
     /// For example, you may use this method during testing and development.
     public static func reset() {
         let ud = UserDefaults.standard
-        ud.set(nil, forKey: SwiftyUpdateKitLastCheckVersionDateKey)
+        ud.set(nil, forKey: SwiftyUpdateKitLastVersionCheckDateKey)
         ud.set(nil, forKey: SwiftyUpdateKitLastRequireReviewDateKey)
         ud.set(nil, forKey: SwiftyUpdateKitReleaseNotesVersionKey)
         ud.synchronize()
@@ -161,7 +181,7 @@ public class SUK {
 
 private extension SUK {
 
-    static func checkVersion(_ condition: CheckVersionCondition,
+    static func checkVersion(_ condition: VersionCheckCondition,
                              update: ((_ newVersion: String?, _ releaseNotes: String?) -> ())?,
                              noop: @escaping () -> ()) {
         DispatchQueue.main.async {
@@ -203,17 +223,8 @@ private extension SUK {
                         if isOld {
                             logf("This app version is old.", log)
                             if update == nil {
-                                DispatchQueue.main.async {
-                                    let alert = Alert(title: config.updateAlertTitle,
-                                                      message: config.updateAlertMessage)
-                                        .addAction(config.updateButtonTitle) {
-                                            Self.openAppStore()
-                                        }
-                                    if let title = config.remindMeLaterButtonTitle, !title.isEmpty {
-                                        alert.addAction(title)
-                                    }
-                                    alert.showAsModal()
-                                }
+                                // Use default update alert.
+                                Self.showUpdateAlert()
                             }
                             else {
                                 DispatchQueue.main.async {

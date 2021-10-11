@@ -20,6 +20,9 @@ public protocol VersionComparable {
 
 public class VersionCompare: VersionComparable {
 
+    public init() {
+    }
+
     public func compare(_ storeVersion: String, with currentVersion: String) -> Bool {
         let storeVerInt = versionToInt(storeVersion)
         let currentVerInt = versionToInt(currentVersion)
