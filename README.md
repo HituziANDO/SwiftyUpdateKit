@@ -1,5 +1,6 @@
 # SwiftyUpdateKit
 
+[![CI](https://github.com/HituziANDO/SwiftyUpdateKit/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/HituziANDO/SwiftyUpdateKit/actions/workflows/ci.yml)
 <img src="https://raw.githubusercontent.com/HituziANDO/SwiftyUpdateKit/main/docs/ios/badge.svg">
 
 SwiftyUpdateKit is a framework for iOS and macOS. This framework supports for a user to update your app when new app version is released on the App Store.
