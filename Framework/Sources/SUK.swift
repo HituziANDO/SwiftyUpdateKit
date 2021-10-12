@@ -25,7 +25,7 @@ public typealias NewReleaseHandler = (_ newVersion: String?, _ releaseNotes: Str
 /// SwiftyUpdateKit.
 public class SUK {
     /// SwiftyUpdateKit version.
-    public static let version = "1.1.0"
+    public static let version = "1.1.1"
 
     private static var config: SwiftyUpdateKitConfig?
     private static var log: Log?
@@ -76,6 +76,14 @@ public class SUK {
                               let storeVersion = lookUpResult.version else {
                             // Ignore an error.
                             logf("version does not exist in the response data.", log)
+                            DispatchQueue.main.async {
+                                noop?()
+                            }
+                            return
+                        }
+
+                        guard !config.versionCompare.compare(storeVersion, with: config.version) else {
+                            logf("Current app version is not latest yet.", log)
                             DispatchQueue.main.async {
                                 noop?()
                             }

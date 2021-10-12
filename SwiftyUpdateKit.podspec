@@ -1,10 +1,10 @@
 Pod::Spec.new do |s|
   s.name = "SwiftyUpdateKit"
-  s.version = "1.1.0"
+  s.version = "1.1.1"
   s.summary = "SwiftyUpdateKit supports for a user to update your app w
-    hen new app version is released on App Store."
+    hen new app version is released on the App Store."
   s.description = <<-DESC
-  SwiftyUpdateKit is a framework for iOS and macOS. This framework supports for a user to update your app when new app version is released on App Store.
+  SwiftyUpdateKit is a framework for iOS and macOS. This framework supports for a user to update your app when new app version is released on the App Store.
                    DESC
   s.homepage = "https://github.com/HituziANDO/SwiftyUpdateKit"
   s.license = { :type => 'MIT', :file => 'LICENSE' }
