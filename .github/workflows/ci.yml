@@ -1,0 +1,21 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+
+    runs-on: macos-latest
+
+    steps:
+    - name: Xcodebuild Action
+      uses: sersoft-gmbh/xcodebuild-action@v1.8.0
+      with:
+        project: SwiftyUpdateKit.xcworkspace
+        scheme: SwiftyUpdateKit
+        destination: platform=iphoneos
+        action: test
