@@ -15,7 +15,7 @@ jobs:
     - name: Xcodebuild Action
       uses: sersoft-gmbh/xcodebuild-action@v1.8.0
       with:
-        workspace: SwiftyUpdateKit.xcworkspace
+        project: ./Framework/SwiftyUpdateKit.xcodeproj
         scheme: SwiftyUpdateKit
         destination: platform=iOS
         action: test
