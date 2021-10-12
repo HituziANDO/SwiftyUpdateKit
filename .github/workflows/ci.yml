@@ -12,10 +12,11 @@ jobs:
     runs-on: macos-latest
 
     steps:
+    - uses: actions/checkout@v2
     - name: Xcodebuild Action
       uses: sersoft-gmbh/xcodebuild-action@v1.8.0
       with:
-        project: ./Framework/SwiftyUpdateKit.xcodeproj
+        workspace: SwiftyUpdateKit.xcworkspace
         scheme: SwiftyUpdateKit
         destination: platform=iOS
         action: test
