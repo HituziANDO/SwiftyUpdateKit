@@ -12,7 +12,7 @@ public protocol VersionComparable {
     /// The compare method.
     ///
     /// - Parameters:
-    ///   - storeVersion: The version of the app released on App Store.
+    ///   - storeVersion: The version of the app released on the App Store.
     ///   - currentVersion: Current version of the app.
     /// - Returns: true if storeVersion > currentVersion.
     func compare(_ storeVersion: String, with currentVersion: String) -> Bool

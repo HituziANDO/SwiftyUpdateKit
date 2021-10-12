@@ -15,10 +15,17 @@ public typealias SUKViewController = NSViewController
 public typealias SUKViewController = UIViewController
 #endif
 
+/// The closure is called when new app version is released on the App Store.
+public typealias UpdateHandler = (_ newVersion: String?, _ releaseNotes: String?) -> ()
+
+/// The closure is called when new app version is installed.
+/// If a user has installed firstly, `firstInstalled` flag is true, otherwise false.
+public typealias NewReleaseHandler = (_ newVersion: String?, _ releaseNotes: String?, _ firstInstalled: Bool) -> ()
+
 /// SwiftyUpdateKit.
 public class SUK {
     /// SwiftyUpdateKit version.
-    public static let version = "1.0.0"
+    public static let version = "1.1.0"
 
     private static var config: SwiftyUpdateKitConfig?
     private static var log: Log?
@@ -44,18 +51,12 @@ public class SUK {
     ///   - userID: A user's ID to show the release notes when new app version is installed. Default value of this argument is "SwiftyUpdateKitUser".
     ///   - noop: The closure is called when no operation.
     public static func checkVersion(_ condition: VersionCheckCondition,
-                                    update: ((_ newVersion: String?, _ releaseNotes: String?) -> ())? = nil,
-                                    newRelease: ((_ newVersion: String?, _ releaseNotes: String?) -> ())? = nil,
+                                    update: UpdateHandler? = nil,
+                                    newRelease: NewReleaseHandler? = nil,
                                     forUserID userID: String = "SwiftyUpdateKitUser",
                                     noop: (() -> ())? = nil) {
         checkVersion(condition, update: update) {
             guard let config = config else { return }
-
-            guard !ReleaseNotes.isLatest(config.releaseNotesVersion, forUserID: userID) else {
-                logf("Saved version of the release notes is already latest.", log)
-                noop?()
-                return
-            }
 
             guard let newRelease = newRelease else {
                 noop?()
@@ -71,26 +72,46 @@ public class SUK {
                             noop?()
                         }
                     case .success(let lookUpResults):
-                        guard let lookUpResult = lookUpResults.first else {
+                        guard let lookUpResult = lookUpResults.first,
+                              let storeVersion = lookUpResult.version else {
                             // Ignore an error.
-                            logf("lookUpResult does not exist in the response data.", log)
+                            logf("version does not exist in the response data.", log)
                             DispatchQueue.main.async {
                                 noop?()
                             }
                             return
                         }
 
-                        ReleaseNotes.update(config.releaseNotesVersion, forUserID: userID)
+                        guard let appVersion = ReleaseNotes.first(forUserID: userID).latest else {
+                            // First installed.
+                            logf("A user has installed the app firstly.", log)
+                            ReleaseNotes.update(storeVersion, forUserID: userID)
+
+                            DispatchQueue.main.async {
+                                newRelease(storeVersion, lookUpResult.releaseNotes, true)
+                            }
+                            return
+                        }
+
+                        guard config.versionCompare.compare(storeVersion, with: appVersion) else {
+                            logf("Saved app version is already latest.", log)
+                            DispatchQueue.main.async {
+                                noop?()
+                            }
+                            return
+                        }
+
+                        ReleaseNotes.update(storeVersion, forUserID: userID)
 
                         DispatchQueue.main.async {
-                            newRelease(lookUpResult.version, lookUpResult.releaseNotes)
+                            newRelease(storeVersion, lookUpResult.releaseNotes, false)
                         }
                 }
             }
         }
     }
 
-    /// Opens App Store.
+    /// Opens the App Store.
     public static func openAppStore() {
         DispatchQueue.main.async {
             guard let config = config else {
@@ -168,13 +189,13 @@ public class SUK {
         }
     }
 
-    /// Resets the status: stored date of version check condition, stored date of request review condition, and stored version of the release notes.
+    /// Resets the status: stored date of version check condition, stored date of request review condition, and stored app version for the release notes.
     /// For example, you may use this method during testing and development.
     public static func reset() {
         let ud = UserDefaults.standard
         ud.set(nil, forKey: SwiftyUpdateKitLastVersionCheckDateKey)
         ud.set(nil, forKey: SwiftyUpdateKitLastRequireReviewDateKey)
-        ud.set(nil, forKey: SwiftyUpdateKitReleaseNotesVersionKey)
+        ud.set(nil, forKey: SwiftyUpdateKitLatestAppVersionKey)
         ud.synchronize()
     }
 }
@@ -182,7 +203,7 @@ public class SUK {
 private extension SUK {
 
     static func checkVersion(_ condition: VersionCheckCondition,
-                             update: ((_ newVersion: String?, _ releaseNotes: String?) -> ())?,
+                             update: UpdateHandler?,
                              noop: @escaping () -> ()) {
         DispatchQueue.main.async {
             guard let config = config else {

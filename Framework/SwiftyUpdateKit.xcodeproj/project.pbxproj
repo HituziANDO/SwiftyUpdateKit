@@ -48,6 +48,7 @@
 		5ED853202711DF6300CC0699 /* ReleaseNotes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED8531E2711DF6300CC0699 /* ReleaseNotes.swift */; };
 		5ED85325271327F500CC0699 /* ReleaseNotesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED85324271327F500CC0699 /* ReleaseNotesController.swift */; };
 		5ED85326271327F500CC0699 /* ReleaseNotesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED85324271327F500CC0699 /* ReleaseNotesController.swift */; };
+		5ED853582715172A00CC0699 /* ReleaseNotesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED853572715172A00CC0699 /* ReleaseNotesTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -82,6 +83,7 @@
 		5ED8531A2711D9FD00CC0699 /* VersionCompareTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionCompareTests.swift; sourceTree = "<group>"; };
 		5ED8531E2711DF6300CC0699 /* ReleaseNotes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReleaseNotes.swift; sourceTree = "<group>"; };
 		5ED85324271327F500CC0699 /* ReleaseNotesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReleaseNotesController.swift; sourceTree = "<group>"; };
+		5ED853572715172A00CC0699 /* ReleaseNotesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReleaseNotesTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -144,6 +146,7 @@
 			isa = PBXGroup;
 			children = (
 				5E56B69023ED10B3007AA082 /* Info.plist */,
+				5ED853572715172A00CC0699 /* ReleaseNotesTests.swift */,
 				5E1AF24B271020A800240C38 /* SwiftyUpdateKitTests.swift */,
 				5ED8531A2711D9FD00CC0699 /* VersionCompareTests.swift */,
 			);
@@ -366,6 +369,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5ED853582715172A00CC0699 /* ReleaseNotesTests.swift in Sources */,
 				5ED8531B2711D9FD00CC0699 /* VersionCompareTests.swift in Sources */,
 				5E1AF24C271020A800240C38 /* SwiftyUpdateKitTests.swift in Sources */,
 			);

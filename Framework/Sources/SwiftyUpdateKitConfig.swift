@@ -21,9 +21,9 @@ public struct SwiftyUpdateKitConfig {
     /// ```
     public let version: String
     /// iTunes ID.
-    /// e.g.) App Store URL: "https://apps.apple.com/app/sampleapp/id1234567890" -> iTunesID is 1234567890
+    /// e.g.) The App Store URL: "https://apps.apple.com/app/sampleapp/id1234567890" -> iTunesID is 1234567890
     public let iTunesID: String
-    /// App Store URL of your app.
+    /// The App Store URL of your app.
     public let storeURL: String
     /// The country code used by iTunes Search API. For example: "jp".
     /// See http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2 for a list of ISO Country Codes.
@@ -38,9 +38,6 @@ public struct SwiftyUpdateKitConfig {
     public let updateButtonTitle: String
     /// The remind-me-later button's label. If nil is specified, the button is hidden.
     public let remindMeLaterButtonTitle: String?
-    /// Latest version of the release notes. Default value of this property is 0.
-    /// If you publish new release notes, you increment this value.
-    public let releaseNotesVersion: Int
 
     public init(version: String,
                 iTunesID: String,
@@ -50,8 +47,7 @@ public struct SwiftyUpdateKitConfig {
                 updateAlertTitle: String = SwiftyUpdateKitConfig.defaultUpdateAlertTitle,
                 updateAlertMessage: String = SwiftyUpdateKitConfig.defaultUpdateAlertMessage,
                 updateButtonTitle: String = SwiftyUpdateKitConfig.defaultUpdateButtonTitle,
-                remindMeLaterButtonTitle: String? = SwiftyUpdateKitConfig.defaultRemindMeLaterButtonTitle,
-                releaseNotesVersion: Int = 0) {
+                remindMeLaterButtonTitle: String? = SwiftyUpdateKitConfig.defaultRemindMeLaterButtonTitle) {
         self.version = version
         self.iTunesID = iTunesID
         self.storeURL = storeURL
@@ -61,6 +57,5 @@ public struct SwiftyUpdateKitConfig {
         self.updateAlertMessage = updateAlertMessage.isEmpty ? SwiftyUpdateKitConfig.defaultUpdateAlertMessage : updateAlertMessage
         self.updateButtonTitle = updateButtonTitle.isEmpty ? SwiftyUpdateKitConfig.defaultUpdateButtonTitle : updateButtonTitle
         self.remindMeLaterButtonTitle = remindMeLaterButtonTitle
-        self.releaseNotesVersion = releaseNotesVersion
     }
 }

@@ -21,9 +21,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             // Current app version.
             version: Bundle.main.infoDictionary!["CFBundleShortVersionString"] as! String,
             // iTunes ID.
-            // e.g.) App Store URL: "https://apps.apple.com/app/sampleapp/id1234567890" -> iTunesID is 1234567890
+            // e.g.) The App Store URL: "https://apps.apple.com/app/sampleapp/id1234567890" -> iTunesID is 1234567890
             iTunesID: "1492010457",
-            // App Store URL of your app.
+            // The App Store URL of your app.
             storeURL: "https://apps.apple.com/app/blue-sketch/id1492010457",
             // The country code used by iTunes Search API.
             // See http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2 for a list of ISO Country Codes.
@@ -37,9 +37,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             // The update button's label.
             updateButtonTitle: "Update",
             // The remind-me-later button's label. If nil is specified, the button is hidden.
-            remindMeLaterButtonTitle: "Remind me later",
-            // Latest version of the release notes. If you publish new release notes, you increment this value.
-            releaseNotesVersion: 1
+            remindMeLaterButtonTitle: "Remind me later"
         )
         SUK.applicationDidFinishLaunching(withConfig: config) { print($0) }
     }

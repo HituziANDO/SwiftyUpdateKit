@@ -9,11 +9,11 @@
 import Foundation
 
 /// The key of UserDefaults.standard.
-public let SwiftyUpdateKitReleaseNotesVersionKey = "jp.hituzi.SwiftyUpdateKit.ReleaseNotesVersionKey"
+public let SwiftyUpdateKitLatestAppVersionKey = "jp.hituzi.SwiftyUpdateKit.LatestAppVersionKey"
 
 struct ReleaseNotes: Codable {
-    /// Latest version of the release notes. Default value of this property is 0.
-    let latest: Int
+    /// Latest app version. Default value of this property is nil.
+    let latest: String?
     /// A user ID.
     let userID: String
 
@@ -23,23 +23,19 @@ struct ReleaseNotes: Codable {
             return releaseNotes
         }
         else {
-            return ReleaseNotes(latest: 0, userID: userID)
+            return ReleaseNotes(latest: nil, userID: userID)
         }
     }
 
-    static func isLatest(_ releaseNotesVersion: Int, forUserID userID: String) -> Bool {
-        first(forUserID: userID).latest >= releaseNotesVersion
-    }
-
-    static func update(_ releaseNotesVersion: Int, forUserID userID: String) {
+    static func update(_ appVersion: String, forUserID userID: String) {
         var dict = dictionary()
-        let releaseNotes = ReleaseNotes(latest: releaseNotesVersion, userID: userID)
+        let releaseNotes = ReleaseNotes(latest: appVersion, userID: userID)
         dict[userID] = releaseNotes
         setDictionary(dict)
     }
 
     private static func dictionary() -> [String: ReleaseNotes] {
-        if let string = UserDefaults.standard.string(forKey: SwiftyUpdateKitReleaseNotesVersionKey),
+        if let string = UserDefaults.standard.string(forKey: SwiftyUpdateKitLatestAppVersionKey),
            let data = Data(base64Encoded: string),
            let dictionary = try? JSONDecoder().decode([String: ReleaseNotes].self, from: data) {
             return dictionary
@@ -53,7 +49,7 @@ struct ReleaseNotes: Codable {
         if let data = try? JSONEncoder().encode(dictionary) {
             let string = data.base64EncodedString()
             let ud = UserDefaults.standard
-            ud.set(string, forKey: SwiftyUpdateKitReleaseNotesVersionKey)
+            ud.set(string, forKey: SwiftyUpdateKitLatestAppVersionKey)
             ud.synchronize()
         }
     }
