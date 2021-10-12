@@ -37,6 +37,7 @@ public struct SwiftyUpdateKitConfig {
     /// The update button's label.
     public let updateButtonTitle: String
     /// The remind-me-later button's label. If nil is specified, the button is hidden.
+    /// That is, you can force a user to update because it cannot be canceled.
     public let remindMeLaterButtonTitle: String?
 
     public init(version: String,

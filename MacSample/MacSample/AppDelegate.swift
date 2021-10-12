@@ -37,6 +37,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             // The update button's label.
             updateButtonTitle: "Update",
             // The remind-me-later button's label. If nil is specified, the button is hidden.
+            // That is, you can force a user to update because it cannot be canceled.
             remindMeLaterButtonTitle: "Remind me later"
         )
         SUK.applicationDidFinishLaunching(withConfig: config) { print($0) }
