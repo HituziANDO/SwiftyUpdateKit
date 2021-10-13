@@ -19,11 +19,11 @@ class ReleaseNotesTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
-    func testFirstInstalled() throws {
+    func testFirstUpdated() throws {
         let userID = "Test"
 
         guard let appVersion = ReleaseNotes.first(forUserID: userID).latest else {
-            // First installed.
+            // First updated.
             XCTAssertNil(ReleaseNotes.first(forUserID: userID).latest)
             return
         }

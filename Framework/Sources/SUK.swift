@@ -19,8 +19,8 @@ public typealias SUKViewController = UIViewController
 public typealias UpdateHandler = (_ newVersion: String?, _ releaseNotes: String?) -> ()
 
 /// The closure is called when new app version is installed.
-/// If a user has installed firstly, `firstInstalled` flag is true, otherwise false.
-public typealias NewReleaseHandler = (_ newVersion: String?, _ releaseNotes: String?, _ firstInstalled: Bool) -> ()
+/// If a user has updated or installed firstly since the introduction of SwiftyUpdateKit, `firstUpdated` flag is true, otherwise false.
+public typealias NewReleaseHandler = (_ newVersion: String?, _ releaseNotes: String?, _ firstUpdated: Bool) -> ()
 
 /// SwiftyUpdateKit.
 public class SUK {
@@ -91,7 +91,7 @@ public class SUK {
                         }
 
                         guard let appVersion = ReleaseNotes.first(forUserID: userID).latest else {
-                            // First installed.
+                            // First updated.
                             logf("A user has installed the app firstly.", log)
                             ReleaseNotes.update(storeVersion, forUserID: userID)
 

@@ -78,7 +78,7 @@ SUK.applicationDidFinishLaunching(withConfig: config)
 To check whether new version is released, you use `SUK.checkVersion` method in `viewDidAppear` method of the view controller. See following:
 
 ```swift
-SUK.checkVersion(VersionCheckConditionAlways(), newRelease: { [weak self] newVersion, releaseNotes, firstInstalled in
+SUK.checkVersion(VersionCheckConditionAlways(), newRelease: { [weak self] newVersion, releaseNotes, firstUpdated in
     guard let self = self else { return }
     SUK.showReleaseNotes(from: self, text: releaseNotes, version: newVersion)
 }) {
@@ -107,7 +107,7 @@ SUK.checkVersion(VersionCheckConditionAlways(), update: { [weak self] newVersion
     guard let self = self else { return }
     // This closure is called when current app version is old.
     // Show custom update alert: present your view controller or add your view for the update alert.
-}, newRelease: { [weak self] newVersion, releaseNotes, firstInstalled in
+}, newRelease: { [weak self] newVersion, releaseNotes, firstUpdated in
     guard let self = self else { return }
     // Show custom release notes: present your view controller or add your view to show the release notes.
 }) {
