@@ -12,6 +12,6 @@ FOUNDATION_EXPORT double SwiftyUpdateKitVersionNumber;
 //! Project version string for SwiftyUpdateKit.
 FOUNDATION_EXPORT const unsigned char SwiftyUpdateKitVersionString[];
 
-// In this header, you should import all the public headers of your framework using statements like #import <CLYRSwiftToolKit/PublicHeader.h>
+// In this header, you should import all the public headers of your framework using statements like #import <SwiftyUpdateKit/PublicHeader.h>
 
 
