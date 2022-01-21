@@ -101,7 +101,7 @@
 			children = (
 				5E1AF23A27101F3800240C38 /* SwiftyUpdateKit.framework */,
 				5E1AF23C27101F3800240C38 /* SwiftyUpdateKitTests.xctest */,
-				5E1AF23E27101F3800240C38 /* SwiftyUpdateOSXKit.framework */,
+				5E1AF23E27101F3800240C38 /* SwiftyUpdateKit.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -181,10 +181,10 @@
 			remoteRef = 5E1AF23B27101F3800240C38 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		5E1AF23E27101F3800240C38 /* SwiftyUpdateOSXKit.framework */ = {
+		5E1AF23E27101F3800240C38 /* SwiftyUpdateKit.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
-			path = SwiftyUpdateOSXKit.framework;
+			path = SwiftyUpdateKit.framework;
 			remoteRef = 5E1AF23D27101F3800240C38 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
