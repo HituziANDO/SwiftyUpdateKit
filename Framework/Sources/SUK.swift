@@ -149,7 +149,7 @@ public class SUK {
 
             let alert = Alert(title: config.updateAlertTitle,
                               message: config.updateAlertMessage)
-                .addAction(config.updateButtonTitle) { Self.openAppStore() }
+                    .addAction(config.updateButtonTitle) { Self.openAppStore() }
 
             if let title = config.remindMeLaterButtonTitle, !title.isEmpty {
                 alert.addAction(title)
@@ -167,16 +167,19 @@ public class SUK {
     ///   - title: A title. Default value of this argument is "Release Notes".
     ///   - version: new app version.
     ///   - windowSize: A window size. Default value of this argument is (480, 320). This value is used on macOS only.
+    ///   - dismissHandler: A handler called when the release notes has been disappeared.
     public static func showReleaseNotes(from rootViewController: SUKViewController,
                                         text: String?,
                                         title: String = "Release Notes",
                                         version: String? = nil,
-                                        windowSize: CGSize = CGSize(width: 480, height: 320)) {
+                                        windowSize: CGSize = CGSize(width: 480, height: 320),
+                                        dismissHandler: (() -> ())? = nil) {
         #if os(OSX)
         let viewController = ReleaseNotesController(windowSize: windowSize,
                                                     title: title,
                                                     text: text ?? "",
                                                     version: version)
+        viewController.dismissHandler = dismissHandler
         rootViewController.presentAsModalWindow(viewController)
         #elseif os(iOS)
         let viewController = ReleaseNotesController(title: title,
@@ -184,6 +187,7 @@ public class SUK {
                                                     version: version)
         viewController.modalTransitionStyle = .coverVertical
         viewController.modalPresentationStyle = .automatic
+        viewController.dismissHandler = dismissHandler
         rootViewController.present(viewController, animated: true)
         #endif
     }

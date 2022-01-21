@@ -20,7 +20,9 @@ class ViewController: NSViewController {
 
         SUK.checkVersion(VersionCheckConditionAlways(), newRelease: { [weak self] newVersion, releaseNotes, firstUpdated in
             guard let self = self else { return }
-            SUK.showReleaseNotes(from: self, text: releaseNotes, version: newVersion)
+            SUK.showReleaseNotes(from: self, text: releaseNotes, version: newVersion) {
+                print("Release Notes has been closed.")
+            }
         }) {
             SUK.requestReview(RequestReviewConditionAlways())
         }

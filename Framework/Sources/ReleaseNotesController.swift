@@ -55,6 +55,8 @@ class ReleaseNotesController: NSViewController {
     /// Latest version of the app.
     private let version: String?
 
+    var dismissHandler: (() -> ())?
+
     init(windowSize: CGSize, title: String, text: String, version: String?) {
         self.windowSize = windowSize
         self.pageTitle = title
@@ -104,6 +106,14 @@ class ReleaseNotesController: NSViewController {
         view.addSubview(scrollView)
         view.addSubview(versionLabel)
         view.addSubview(titleLabel)
+    }
+
+    override func viewDidDisappear() {
+        super.viewDidDisappear()
+
+        DispatchQueue.main.async {
+            self.dismissHandler?()
+        }
     }
 }
 #endif
@@ -172,6 +182,8 @@ class ReleaseNotesController: UIViewController {
     /// Latest version of the app.
     private let version: String?
 
+    var dismissHandler: (() -> ())?
+
     init(title: String, text: String, version: String?) {
         self.pageTitle = title
         self.text = text
@@ -222,6 +234,14 @@ class ReleaseNotesController: UIViewController {
                                 y: versionLabel.frame.maxY + 8,
                                 width: view.frame.width,
                                 height: view.frame.maxY - (versionLabel.frame.maxY + 8))
+    }
+
+    public override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+
+        DispatchQueue.main.async {
+            self.dismissHandler?()
+        }
     }
 }
 
