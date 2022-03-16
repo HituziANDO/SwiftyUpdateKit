@@ -34,6 +34,14 @@ SwiftyUpdateKit is available through [CocoaPods](http://cocoapods.org). To insta
 pod "SwiftyUpdateKit"
 ```
 
+### Swift Package Manager
+
+SwiftyUpdateKit is available through Swift Package Manager. To install it using Xcode, specify the git URL for SwiftyUpdateKit.
+	
+```
+https://github.com/HituziANDO/SwiftyUpdateKit.git
+```
+
 ## Usage
 
 ### Import Framework
