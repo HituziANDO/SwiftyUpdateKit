@@ -25,6 +25,8 @@ let package = Package(
             path: "Framework/Sources"),
         .testTarget(
             name: "SwiftyUpdateKitTests",
-            dependencies: ["SwiftyUpdateKit"]),
+            dependencies: ["SwiftyUpdateKit"],
+            path: "Framework/SwiftyUpdateKitTests",
+            exclude: ["Info.plist"]),
     ]
 )
