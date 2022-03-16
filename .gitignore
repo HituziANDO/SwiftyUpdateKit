@@ -72,3 +72,4 @@ docs/macos/*
 !docs/macos/badge.svg
 Output/
 *.sketch
+.build
