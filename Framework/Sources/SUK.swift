@@ -262,8 +262,8 @@ private extension SUK {
             return
         }
 
-        guard !config.versionCompare.compare(storeVersion, with: config.version) else {
-            logf("Current app version is not latest yet.", log)
+        guard storeVersion == config.version else {
+            logf("Current app version is not equal to the version released on the App Store.", log)
             DispatchQueue.main.async {
                 noop?()
             }
