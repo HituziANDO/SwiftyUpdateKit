@@ -59,7 +59,7 @@ enum ITunesSearchAPIError: Error {
 struct ITunesSearchAPI {
 
     public static func lookUp(with config: SwiftyUpdateKitConfig,
-                              completion: @escaping (Result<[LookUpResult], Error>) -> Void) {
+                              completion: @escaping (Result<[LookUpResult], Error>) -> ()) {
         let url: URL
         if let country = config.country, !country.isEmpty {
             url = URL(string: "https://itunes.apple.com/lookup?id=\(config.iTunesID)&country=\(country)")!
@@ -68,6 +68,46 @@ struct ITunesSearchAPI {
             url = URL(string: "https://itunes.apple.com/lookup?id=\(config.iTunesID)")!
         }
 
+        // Start the task.
+        resumeTask(url,
+                   tryCount: 1,
+                   maxCount: config.retryCount,
+                   delay: config.retryDelay,
+                   completion: completion)
+    }
+}
+
+private extension ITunesSearchAPI {
+
+    static func resumeTask(_ url: URL,
+                           tryCount: Int,
+                           maxCount: Int,
+                           delay: TimeInterval,
+                           completion: @escaping (Result<[LookUpResult], Error>) -> ()) {
+        fetch(url) { result in
+            switch result {
+                case .success(let results):
+                    completion(.success(results))
+                case .failure(let error):
+                    if tryCount <= maxCount {
+                        // Retry
+                        DispatchQueue.global().asyncAfter(deadline: .now() + delay) {
+                            resumeTask(url,
+                                       tryCount: tryCount + 1,
+                                       maxCount: maxCount,
+                                       delay: delay,
+                                       completion: completion)
+                        }
+                    }
+                    else {
+                        // Failed
+                        completion(.failure(error))
+                    }
+            }
+        }
+    }
+
+    static func fetch(_ url: URL, completion: @escaping (Result<[LookUpResult], Error>) -> ()) {
         let task = URLSession.shared.dataTask(with: url) { data, response, error in
             if let error = error {
                 completion(.failure(error))
@@ -85,7 +125,8 @@ struct ITunesSearchAPI {
             }
 
             guard let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
-                  let results = json["results"] as? [[String: Any]] else {
+                  let results = json["results"] as? [[String: Any]]
+            else {
                 completion(.failure(ITunesSearchAPIError.invalidResponseData))
                 return
             }
