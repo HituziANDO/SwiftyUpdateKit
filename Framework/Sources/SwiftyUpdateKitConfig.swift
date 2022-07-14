@@ -39,6 +39,10 @@ public struct SwiftyUpdateKitConfig {
     /// The remind-me-later button's label. If nil is specified, the button is hidden.
     /// That is, you can force a user to update because it cannot be canceled.
     public let remindMeLaterButtonTitle: String?
+    /// The count of retry when iTunes Search API failed. Default value is 2.
+    public let retryCount: Int
+    /// Retries iTunes Search API after this delay in seconds. Default value is 1 second.
+    public let retryDelay: TimeInterval
 
     public init(version: String,
                 iTunesID: String,
@@ -48,7 +52,9 @@ public struct SwiftyUpdateKitConfig {
                 updateAlertTitle: String = SwiftyUpdateKitConfig.defaultUpdateAlertTitle,
                 updateAlertMessage: String = SwiftyUpdateKitConfig.defaultUpdateAlertMessage,
                 updateButtonTitle: String = SwiftyUpdateKitConfig.defaultUpdateButtonTitle,
-                remindMeLaterButtonTitle: String? = SwiftyUpdateKitConfig.defaultRemindMeLaterButtonTitle) {
+                remindMeLaterButtonTitle: String? = SwiftyUpdateKitConfig.defaultRemindMeLaterButtonTitle,
+                retryCount: Int = 2,
+                retryDelay: TimeInterval = 1) {
         self.version = version
         self.iTunesID = iTunesID
         self.storeURL = storeURL
@@ -58,5 +64,7 @@ public struct SwiftyUpdateKitConfig {
         self.updateAlertMessage = updateAlertMessage.isEmpty ? SwiftyUpdateKitConfig.defaultUpdateAlertMessage : updateAlertMessage
         self.updateButtonTitle = updateButtonTitle.isEmpty ? SwiftyUpdateKitConfig.defaultUpdateButtonTitle : updateButtonTitle
         self.remindMeLaterButtonTitle = remindMeLaterButtonTitle
+        self.retryCount = retryCount
+        self.retryDelay = retryDelay
     }
 }
