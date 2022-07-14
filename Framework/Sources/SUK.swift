@@ -55,65 +55,43 @@ public class SUK {
                                     newRelease: NewReleaseHandler? = nil,
                                     forUserID userID: String = "SwiftyUpdateKitUser",
                                     noop: (() -> ())? = nil) {
-        checkVersion(condition, update: update) {
-            guard let config = config else { return }
-
+        checkVersion(condition, update: update) { lookUpResult in
             guard let newRelease = newRelease else {
+                // Not need to show the new release.
                 noop?()
                 return
             }
 
-            ITunesSearchAPI.lookUp(with: config) { result in
-                switch result {
-                    case .failure(let error):
-                        // Ignore an error.
-                        logf(error.localizedDescription, log)
-                        DispatchQueue.main.async {
-                            noop?()
-                        }
-                    case .success(let lookUpResults):
-                        guard let lookUpResult = lookUpResults.first,
-                              let storeVersion = lookUpResult.version else {
+            if let result = lookUpResult {
+                // Use fetched lookUpResult.
+                checkNewRelease(result, newRelease: newRelease, forUserID: userID, noop: noop)
+            }
+            else {
+                guard let config = config else { return }
+
+                ITunesSearchAPI.lookUp(with: config) { result in
+                    switch result {
+                        case .failure(let error):
                             // Ignore an error.
-                            logf("version does not exist in the response data.", log)
+                            logf(error.localizedDescription, log)
                             DispatchQueue.main.async {
                                 noop?()
                             }
-                            return
-                        }
-
-                        guard !config.versionCompare.compare(storeVersion, with: config.version) else {
-                            logf("Current app version is not latest yet.", log)
-                            DispatchQueue.main.async {
-                                noop?()
+                        case .success(let lookUpResults):
+                            guard let lookUpResult = lookUpResults.first else {
+                                // Ignore an error.
+                                logf("lookUpResult does not exist in the response data.", log)
+                                DispatchQueue.main.async {
+                                    noop?()
+                                }
+                                return
                             }
-                            return
-                        }
 
-                        guard let appVersion = ReleaseNotes.first(forUserID: userID).latest else {
-                            // First updated.
-                            logf("A user has installed the app firstly.", log)
-                            ReleaseNotes.update(storeVersion, forUserID: userID)
-
-                            DispatchQueue.main.async {
-                                newRelease(storeVersion, lookUpResult.releaseNotes, true)
-                            }
-                            return
-                        }
-
-                        guard config.versionCompare.compare(storeVersion, with: appVersion) else {
-                            logf("Saved app version is already latest.", log)
-                            DispatchQueue.main.async {
-                                noop?()
-                            }
-                            return
-                        }
-
-                        ReleaseNotes.update(storeVersion, forUserID: userID)
-
-                        DispatchQueue.main.async {
-                            newRelease(storeVersion, lookUpResult.releaseNotes, false)
-                        }
+                            checkNewRelease(lookUpResult,
+                                            newRelease: newRelease,
+                                            forUserID: userID,
+                                            noop: noop)
+                    }
                 }
             }
         }
@@ -201,7 +179,8 @@ public class SUK {
         }
     }
 
-    /// Resets the status: stored date of version check condition, stored date of request review condition, and stored app version for the release notes.
+    /// Resets the status: stored date of version check condition, stored date of request review condition,
+    /// and stored app version for the release notes.
     /// For example, you may use this method during testing and development.
     public static func reset() {
         let ud = UserDefaults.standard
@@ -216,7 +195,7 @@ private extension SUK {
 
     static func checkVersion(_ condition: VersionCheckCondition,
                              update: UpdateHandler?,
-                             noop: @escaping () -> ()) {
+                             next: @escaping (LookUpResult?) -> ()) {
         DispatchQueue.main.async {
             guard let config = config else {
                 logf("`applicationDidFinishLaunching(withConfig:)` method is not called yet.", log)
@@ -226,7 +205,7 @@ private extension SUK {
             guard condition.shouldCheckVersion() else {
                 logf("Skips the version check.", log)
                 DispatchQueue.main.async {
-                    noop()
+                    next(nil)
                 }
                 return
             }
@@ -236,18 +215,13 @@ private extension SUK {
                     case .failure(let error):
                         // Ignore an error.
                         logf(error.localizedDescription, log)
-                        DispatchQueue.main.async {
-                            noop()
-                        }
                     case .success(let lookUpResults):
                         logf(lookUpResults.description, log)
                         guard let lookUpResult = lookUpResults.first,
-                              let storeVersion = lookUpResult.version else {
+                              let storeVersion = lookUpResult.version
+                        else {
                             // Ignore an error.
                             logf("version does not exist in the response data.", log)
-                            DispatchQueue.main.async {
-                                noop()
-                            }
                             return
                         }
 
@@ -269,11 +243,56 @@ private extension SUK {
                             // Latest
                             logf("This app version is already latest.", log)
                             DispatchQueue.main.async {
-                                noop()
+                                next(lookUpResult)
                             }
                         }
                 }
             }
+        }
+    }
+
+    static func checkNewRelease(_ lookUpResult: LookUpResult,
+                                newRelease: @escaping NewReleaseHandler,
+                                forUserID userID: String,
+                                noop: (() -> ())?) {
+        guard let config = config else { return }
+
+        guard let storeVersion = lookUpResult.version else {
+            logf("version does not exist in the response data.", log)
+            return
+        }
+
+        guard !config.versionCompare.compare(storeVersion, with: config.version) else {
+            logf("Current app version is not latest yet.", log)
+            DispatchQueue.main.async {
+                noop?()
+            }
+            return
+        }
+
+        guard let savedVersion = ReleaseNotes.first(forUserID: userID).latest else {
+            // First updated.
+            logf("A user has installed the app firstly.", log)
+            ReleaseNotes.update(storeVersion, forUserID: userID)
+
+            DispatchQueue.main.async {
+                newRelease(storeVersion, lookUpResult.releaseNotes, true)
+            }
+            return
+        }
+
+        guard config.versionCompare.compare(storeVersion, with: savedVersion) else {
+            logf("Saved app version is already latest.", log)
+            DispatchQueue.main.async {
+                noop?()
+            }
+            return
+        }
+
+        ReleaseNotes.update(storeVersion, forUserID: userID)
+
+        DispatchQueue.main.async {
+            newRelease(storeVersion, lookUpResult.releaseNotes, false)
         }
     }
 }
