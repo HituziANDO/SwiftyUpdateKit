@@ -1,7 +1,7 @@
 //
-// SwiftyUpdateKit for iOS
+// SwiftyUpdateKit
 //
-// Copyright © 2021 Hituzi Ando. All rights reserved.
+// Copyright © 2023 Hituzi Ando. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

@@ -30,7 +30,7 @@
 		5E1AF27F27102B2B00240C38 /* ITunesSearchAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1AF2752710279700240C38 /* ITunesSearchAPI.swift */; };
 		5E56B68A23ED10B3007AA082 /* SwiftyUpdateKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E56B68023ED10B2007AA082 /* SwiftyUpdateKit.framework */; };
 		5E56B6A623ED118A007AA082 /* SwiftyUpdateKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 5E56B6A023ED118A007AA082 /* SwiftyUpdateKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		5E56B6C223ED12AC007AA082 /* SwiftyUpdateKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 5E56B6B423ED12AC007AA082 /* SwiftyUpdateKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5E5B66B4296FA1E900EEE370 /* SwiftyUpdateKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 5E56B6A023ED118A007AA082 /* SwiftyUpdateKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5EC35D9E271064D900CAC3C9 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC35D9D271064D800CAC3C9 /* Alert.swift */; };
 		5EC35D9F271064D900CAC3C9 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC35D9D271064D800CAC3C9 /* Alert.swift */; };
 		5EC35DA12710802E00CAC3C9 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC35DA02710802E00CAC3C9 /* Log.swift */; };
@@ -72,7 +72,6 @@
 		5E56B69023ED10B3007AA082 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5E56B6A023ED118A007AA082 /* SwiftyUpdateKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwiftyUpdateKit.h; sourceTree = "<group>"; };
 		5E56B6B223ED12AC007AA082 /* SwiftyUpdateKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftyUpdateKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		5E56B6B423ED12AC007AA082 /* SwiftyUpdateKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwiftyUpdateKit.h; sourceTree = "<group>"; };
 		5E56B6B523ED12AC007AA082 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5EC35D9D271064D800CAC3C9 /* Alert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		5EC35DA02710802E00CAC3C9 /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
@@ -174,7 +173,6 @@
 		5E56B6B323ED12AC007AA082 /* SwiftyUpdateOSXKit */ = {
 			isa = PBXGroup;
 			children = (
-				5E56B6B423ED12AC007AA082 /* SwiftyUpdateKit.h */,
 				5E56B6B523ED12AC007AA082 /* Info.plist */,
 			);
 			path = SwiftyUpdateOSXKit;
@@ -195,7 +193,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5E56B6C223ED12AC007AA082 /* SwiftyUpdateKit.h in Headers */,
+				5E5B66B4296FA1E900EEE370 /* SwiftyUpdateKit.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
