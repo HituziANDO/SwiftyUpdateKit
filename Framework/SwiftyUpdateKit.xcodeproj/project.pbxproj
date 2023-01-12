@@ -7,15 +7,15 @@
 	objects = {
 
 /* Begin PBXAggregateTarget section */
-		5E56B6A823ED1223007AA082 /* MakeSwiftyUpdateKit */ = {
+		5E56B6A823ED1223007AA082 /* MakeFramework */ = {
 			isa = PBXAggregateTarget;
-			buildConfigurationList = 5E56B6A923ED1223007AA082 /* Build configuration list for PBXAggregateTarget "MakeSwiftyUpdateKit" */;
+			buildConfigurationList = 5E56B6A923ED1223007AA082 /* Build configuration list for PBXAggregateTarget "MakeFramework" */;
 			buildPhases = (
 				5E96F0AB24D7F8BA009CE8EF /* ShellScript */,
 			);
 			dependencies = (
 			);
-			name = MakeSwiftyUpdateKit;
+			name = MakeFramework;
 			productName = MakeCLYRSwiftToolKit;
 		};
 /* End PBXAggregateTarget section */
@@ -295,9 +295,9 @@
 			projectRoot = "";
 			targets = (
 				5E56B67F23ED10B2007AA082 /* SwiftyUpdateKit */,
-				5E56B68823ED10B3007AA082 /* SwiftyUpdateKitTests */,
 				5E56B6B123ED12AC007AA082 /* SwiftyUpdateKit macOS */,
-				5E56B6A823ED1223007AA082 /* MakeSwiftyUpdateKit */,
+				5E56B68823ED10B3007AA082 /* SwiftyUpdateKitTests */,
+				5E56B6A823ED1223007AA082 /* MakeFramework */,
 			);
 		};
 /* End PBXProject section */
@@ -729,7 +729,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		5E56B6A923ED1223007AA082 /* Build configuration list for PBXAggregateTarget "MakeSwiftyUpdateKit" */ = {
+		5E56B6A923ED1223007AA082 /* Build configuration list for PBXAggregateTarget "MakeFramework" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				5E56B6AA23ED1223007AA082 /* Debug */,
