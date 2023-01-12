@@ -18,7 +18,15 @@ SwiftyUpdateKit is a framework for iOS and macOS. This framework supports for a 
 
 ## Installation
 
-### Carthage (recommended)
+### Swift Package Manager
+
+SwiftyUpdateKit is available through Swift Package Manager. To install it using Xcode, specify the git URL for SwiftyUpdateKit.
+	
+```
+https://github.com/HituziANDO/SwiftyUpdateKit.git
+```
+
+### Carthage
 
 SwiftyUpdateKit is available through [Carthage](https://github.com/Carthage/Carthage). To install it, simply add the following line to your Cartfile:
 
@@ -32,14 +40,6 @@ SwiftyUpdateKit is available through [CocoaPods](http://cocoapods.org). To insta
 	
 ```ruby
 pod "SwiftyUpdateKit"
-```
-
-### Swift Package Manager
-
-SwiftyUpdateKit is available through Swift Package Manager. To install it using Xcode, specify the git URL for SwiftyUpdateKit.
-	
-```
-https://github.com/HituziANDO/SwiftyUpdateKit.git
 ```
 
 ## Usage
