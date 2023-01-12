@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name = "SwiftyUpdateKit"
-  s.version = "1.1.6"
+  s.version = "1.2.0"
   s.summary = "SwiftyUpdateKit supports for a user to update your app w
     hen new app version is released on the App Store."
   s.description = <<-DESC
