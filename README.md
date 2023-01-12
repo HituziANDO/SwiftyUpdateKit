@@ -81,8 +81,16 @@ let config = SwiftyUpdateKitConfig(
     retryCount: 2,
     // (Optional) Retries iTunes Search API after this delay in seconds. Default value is 1 second.
     retryDelay: 1,
-    // (Optional) If true, the database is in development environment. Otherwise it is for production environment. Must set false when release your app.
-    development: false
+    // (Optional) If true, the database is in development environment.
+    // Otherwise it is for production environment.
+    // Must set false when release your app.
+    development: {
+        #if DEBUG
+        return true
+        #else
+        return false
+        #endif
+    }()
 )
 SUK.initialize(withConfig: config)
 ```
