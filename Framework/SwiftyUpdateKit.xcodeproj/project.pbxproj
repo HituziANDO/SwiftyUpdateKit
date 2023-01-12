@@ -31,6 +31,8 @@
 		5E56B68A23ED10B3007AA082 /* SwiftyUpdateKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E56B68023ED10B2007AA082 /* SwiftyUpdateKit.framework */; };
 		5E56B6A623ED118A007AA082 /* SwiftyUpdateKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 5E56B6A023ED118A007AA082 /* SwiftyUpdateKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5E5B66B4296FA1E900EEE370 /* SwiftyUpdateKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 5E56B6A023ED118A007AA082 /* SwiftyUpdateKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5E5B66B6296FC6F100EEE370 /* SUKUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E5B66B5296FC6F100EEE370 /* SUKUserDefaults.swift */; };
+		5E5B66B7296FC6F100EEE370 /* SUKUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E5B66B5296FC6F100EEE370 /* SUKUserDefaults.swift */; };
 		5EC35D9E271064D900CAC3C9 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC35D9D271064D800CAC3C9 /* Alert.swift */; };
 		5EC35D9F271064D900CAC3C9 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC35D9D271064D800CAC3C9 /* Alert.swift */; };
 		5EC35DA12710802E00CAC3C9 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC35DA02710802E00CAC3C9 /* Log.swift */; };
@@ -73,6 +75,7 @@
 		5E56B6A023ED118A007AA082 /* SwiftyUpdateKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwiftyUpdateKit.h; sourceTree = "<group>"; };
 		5E56B6B223ED12AC007AA082 /* SwiftyUpdateKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftyUpdateKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E56B6B523ED12AC007AA082 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5E5B66B5296FC6F100EEE370 /* SUKUserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SUKUserDefaults.swift; sourceTree = "<group>"; };
 		5EC35D9D271064D800CAC3C9 /* Alert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		5EC35DA02710802E00CAC3C9 /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 		5EC35DA327108A7800CAC3C9 /* VersionCompare.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionCompare.swift; sourceTree = "<group>"; };
@@ -162,6 +165,7 @@
 				5ED85324271327F500CC0699 /* ReleaseNotesController.swift */,
 				5EC35DAC271096CA00CAC3C9 /* RequestReviewCondition.swift */,
 				5E1AF21B27101CF000240C38 /* SUK.swift */,
+				5E5B66B5296FC6F100EEE370 /* SUKUserDefaults.swift */,
 				5E1AF2692710257B00240C38 /* SwiftyUpdateKitConfig.swift */,
 				5EC35DA9271092AD00CAC3C9 /* Utility.swift */,
 				5EC35DA6271091BD00CAC3C9 /* VersionCheckCondition.swift */,
@@ -355,6 +359,7 @@
 				5EC35DA427108A7800CAC3C9 /* VersionCompare.swift in Sources */,
 				5EC35DA12710802E00CAC3C9 /* Log.swift in Sources */,
 				5ED8531F2711DF6300CC0699 /* ReleaseNotes.swift in Sources */,
+				5E5B66B6296FC6F100EEE370 /* SUKUserDefaults.swift in Sources */,
 				5E1AF21C27101CF000240C38 /* SUK.swift in Sources */,
 				5ED85325271327F500CC0699 /* ReleaseNotesController.swift in Sources */,
 				5EC35D9E271064D900CAC3C9 /* Alert.swift in Sources */,
@@ -383,6 +388,7 @@
 				5EC35DA527108A7800CAC3C9 /* VersionCompare.swift in Sources */,
 				5EC35DA22710802E00CAC3C9 /* Log.swift in Sources */,
 				5ED853202711DF6300CC0699 /* ReleaseNotes.swift in Sources */,
+				5E5B66B7296FC6F100EEE370 /* SUKUserDefaults.swift in Sources */,
 				5EC35D9F271064D900CAC3C9 /* Alert.swift in Sources */,
 				5ED85326271327F500CC0699 /* ReleaseNotesController.swift in Sources */,
 				5E1AF2462710206100240C38 /* SUK.swift in Sources */,

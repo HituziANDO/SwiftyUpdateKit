@@ -35,7 +35,7 @@ struct ReleaseNotes: Codable {
     }
 
     private static func dictionary() -> [String: ReleaseNotes] {
-        if let string = UserDefaults.standard.string(forKey: SwiftyUpdateKitLatestAppVersionKey),
+        if let string = SUKUserDefaults.standard.string(forKey: SwiftyUpdateKitLatestAppVersionKey),
            let data = Data(base64Encoded: string),
            let dictionary = try? JSONDecoder().decode([String: ReleaseNotes].self, from: data) {
             return dictionary
@@ -48,8 +48,7 @@ struct ReleaseNotes: Codable {
     private static func setDictionary(_ dictionary: [String: ReleaseNotes]) {
         if let data = try? JSONEncoder().encode(dictionary) {
             let string = data.base64EncodedString()
-            let ud = UserDefaults.standard
-            ud.set(string, forKey: SwiftyUpdateKitLatestAppVersionKey)
+            SUKUserDefaults.standard.set(string, forKey: SwiftyUpdateKitLatestAppVersionKey)
         }
     }
 }

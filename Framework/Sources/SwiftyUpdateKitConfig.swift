@@ -43,7 +43,25 @@ public struct SwiftyUpdateKitConfig {
     public let retryCount: Int
     /// Retries iTunes Search API after this delay in seconds. Default value is 1 second.
     public let retryDelay: TimeInterval
+    /// Tells whether the database is in development environment.
+    public let isDevelopment: Bool
 
+    /// Initializes the configuration.
+    ///
+    /// - Parameters:
+    ///   - version:
+    ///   - iTunesID:
+    ///   - storeURL:
+    ///   - country:
+    ///   - versionCompare:
+    ///   - updateAlertTitle:
+    ///   - updateAlertMessage:
+    ///   - updateButtonTitle:
+    ///   - remindMeLaterButtonTitle:
+    ///   - retryCount:
+    ///   - retryDelay:
+    ///   - development: If true, the database is in development environment. Otherwise it is for production environment.
+    /// Must set false when release your app.
     public init(version: String,
                 iTunesID: String,
                 storeURL: String,
@@ -54,7 +72,8 @@ public struct SwiftyUpdateKitConfig {
                 updateButtonTitle: String = SwiftyUpdateKitConfig.defaultUpdateButtonTitle,
                 remindMeLaterButtonTitle: String? = SwiftyUpdateKitConfig.defaultRemindMeLaterButtonTitle,
                 retryCount: Int = 2,
-                retryDelay: TimeInterval = 1) {
+                retryDelay: TimeInterval = 1,
+                development: Bool = false) {
         self.version = version
         self.iTunesID = iTunesID
         self.storeURL = storeURL
@@ -66,5 +85,6 @@ public struct SwiftyUpdateKitConfig {
         self.remindMeLaterButtonTitle = remindMeLaterButtonTitle
         self.retryCount = retryCount
         self.retryDelay = retryDelay
+        self.isDevelopment = development
     }
 }

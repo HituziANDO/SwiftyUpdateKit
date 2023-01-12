@@ -12,6 +12,7 @@ import XCTest
 class ReleaseNotesTests: XCTestCase {
 
     override func setUpWithError() throws {
+        SUKUserDefaults.setEnvironment(.test)
         SUK.reset()
     }
 

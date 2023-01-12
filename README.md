@@ -76,7 +76,13 @@ let config = SwiftyUpdateKitConfig(
     updateButtonTitle: "Update",
     // The remind-me-later button's label. If nil is specified, the button is hidden.
     // That is, you can force a user to update because it cannot be canceled.
-    remindMeLaterButtonTitle: "Remind me later"
+    remindMeLaterButtonTitle: "Remind me later",
+    // (Optional) The count of retry when iTunes Search API failed. Default value is 2.
+    retryCount: 2,
+    // (Optional) Retries iTunes Search API after this delay in seconds. Default value is 1 second.
+    retryDelay: 1,
+    // (Optional) If true, the database is in development environment. Otherwise it is for production environment. Must set false when release your app.
+    development: false
 )
 SUK.applicationDidFinishLaunching(withConfig: config)
 ```

@@ -46,13 +46,12 @@ open class VersionCheckConditionDaily: VersionCheckCondition {
     }
 
     open func shouldCheckVersion() -> Bool {
-        let lastDate = UserDefaults.standard.integer(forKey: SwiftyUpdateKitLastVersionCheckDateKey)
+        let lastDate = SUKUserDefaults.standard.integer(forKey: SwiftyUpdateKitLastVersionCheckDateKey)
         let today = Utility.currentDate()
 
         guard lastDate < today else { return false }
 
-        let ud = UserDefaults.standard
-        ud.set(today, forKey: SwiftyUpdateKitLastVersionCheckDateKey)
+        SUKUserDefaults.standard.set(today, forKey: SwiftyUpdateKitLastVersionCheckDateKey)
 
         return true
     }

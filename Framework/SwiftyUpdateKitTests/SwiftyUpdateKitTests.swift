@@ -12,6 +12,8 @@ class SwiftyUpdateKitTests: XCTestCase {
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
+        SUKUserDefaults.setEnvironment(.test)
+        SUK.reset()
     }
 
     override func tearDownWithError() throws {
@@ -24,7 +26,7 @@ class SwiftyUpdateKitTests: XCTestCase {
 
     func testReset() throws {
         // Set test data.
-        let ud = UserDefaults.standard
+        let ud = SUKUserDefaults.standard
         ud.set(Utility.currentDate(), forKey: SwiftyUpdateKitLastVersionCheckDateKey)
         ud.set(Utility.currentDate(), forKey: SwiftyUpdateKitLastRequireReviewDateKey)
         ReleaseNotes.update("1.2.2", forUserID: "Test")

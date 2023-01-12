@@ -13,6 +13,8 @@ class VersionCompareTests: XCTestCase {
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
+        SUKUserDefaults.setEnvironment(.test)
+        SUK.reset()
     }
 
     override func tearDownWithError() throws {

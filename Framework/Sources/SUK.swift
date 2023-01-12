@@ -183,7 +183,7 @@ public class SUK {
     /// and stored app version for the release notes.
     /// For example, you may use this method during testing and development.
     public static func reset() {
-        let ud = UserDefaults.standard
+        let ud = SUKUserDefaults.standard
         ud.removeObject(forKey: SwiftyUpdateKitLastVersionCheckDateKey)
         ud.removeObject(forKey: SwiftyUpdateKitLastRequireReviewDateKey)
         ud.removeObject(forKey: SwiftyUpdateKitLatestAppVersionKey)
