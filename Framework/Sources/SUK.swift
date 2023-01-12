@@ -184,9 +184,9 @@ public class SUK {
     /// For example, you may use this method during testing and development.
     public static func reset() {
         let ud = UserDefaults.standard
-        ud.set(nil, forKey: SwiftyUpdateKitLastVersionCheckDateKey)
-        ud.set(nil, forKey: SwiftyUpdateKitLastRequireReviewDateKey)
-        ud.set(nil, forKey: SwiftyUpdateKitLatestAppVersionKey)
+        ud.removeObject(forKey: SwiftyUpdateKitLastVersionCheckDateKey)
+        ud.removeObject(forKey: SwiftyUpdateKitLastRequireReviewDateKey)
+        ud.removeObject(forKey: SwiftyUpdateKitLatestAppVersionKey)
     }
 }
 
