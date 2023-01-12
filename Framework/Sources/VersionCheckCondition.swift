@@ -53,7 +53,6 @@ open class VersionCheckConditionDaily: VersionCheckCondition {
 
         let ud = UserDefaults.standard
         ud.set(today, forKey: SwiftyUpdateKitLastVersionCheckDateKey)
-        ud.synchronize()
 
         return true
     }

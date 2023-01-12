@@ -187,7 +187,6 @@ public class SUK {
         ud.set(nil, forKey: SwiftyUpdateKitLastVersionCheckDateKey)
         ud.set(nil, forKey: SwiftyUpdateKitLastRequireReviewDateKey)
         ud.set(nil, forKey: SwiftyUpdateKitLatestAppVersionKey)
-        ud.synchronize()
     }
 }
 

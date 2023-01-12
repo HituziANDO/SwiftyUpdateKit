@@ -53,7 +53,6 @@ open class RequestReviewConditionDaily: RequestReviewCondition {
 
         let ud = UserDefaults.standard
         ud.set(today, forKey: SwiftyUpdateKitLastRequireReviewDateKey)
-        ud.synchronize()
 
         return true
     }
@@ -73,7 +72,6 @@ open class RequestReviewConditionDailySkipFirstDay: RequestReviewCondition {
             let today = Utility.currentDate()
             let ud = UserDefaults.standard
             ud.set(today, forKey: SwiftyUpdateKitLastRequireReviewDateKey)
-            ud.synchronize()
 
             return false
         }

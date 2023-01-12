@@ -50,7 +50,6 @@ struct ReleaseNotes: Codable {
             let string = data.base64EncodedString()
             let ud = UserDefaults.standard
             ud.set(string, forKey: SwiftyUpdateKitLatestAppVersionKey)
-            ud.synchronize()
         }
     }
 }
