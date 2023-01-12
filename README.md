@@ -52,7 +52,7 @@ import SwiftyUpdateKit
 
 ### Initialize
 
-To initialize this framework, you use `SUK.applicationDidFinishLaunching` method in `application(_:,didFinishLaunchingWithOptions:)` method (macOS: `applicationDidFinishLaunching(_:)` method) of AppDelegate. See following:
+To initialize this framework, you use `SUK.initialize` method in `application(_:,didFinishLaunchingWithOptions:)` method (macOS: `applicationDidFinishLaunching(_:)` method) of AppDelegate. See following:
 
 ```swift
 let config = SwiftyUpdateKitConfig(
@@ -84,7 +84,7 @@ let config = SwiftyUpdateKitConfig(
     // (Optional) If true, the database is in development environment. Otherwise it is for production environment. Must set false when release your app.
     development: false
 )
-SUK.applicationDidFinishLaunching(withConfig: config)
+SUK.initialize(withConfig: config)
 ```
 
 ### Quick Usage

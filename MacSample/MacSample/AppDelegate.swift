@@ -40,7 +40,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             // That is, you can force a user to update because it cannot be canceled.
             remindMeLaterButtonTitle: "Remind me later"
         )
-        SUK.applicationDidFinishLaunching(withConfig: config) { print($0) }
+        SUK.initialize(withConfig: config) { print($0) }
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {

@@ -35,10 +35,22 @@ public class SUK {
     /// - Parameters:
     ///   - config: A configuration.
     ///   - log: The closure outputs logs.
-    public static func applicationDidFinishLaunching(withConfig config: SwiftyUpdateKitConfig,
-                                                     log: Log? = nil) {
+    public static func initialize(withConfig config: SwiftyUpdateKitConfig,
+                                  log: Log? = nil) {
         self.config = config
         self.log = log
+    }
+
+    /// Initializes SwiftyUpdateKit.
+    ///
+    /// - Parameters:
+    ///   - config: A configuration.
+    ///   - log: The closure outputs logs.
+    @available(*, deprecated, renamed: "initialize(withConfig:log:)")
+    @inlinable
+    public static func applicationDidFinishLaunching(withConfig config: SwiftyUpdateKitConfig,
+                                                     log: Log? = nil) {
+        initialize(withConfig: config, log: log)
     }
 
     /// If specified condition returns true, this method checks the app version whether new version is released.
