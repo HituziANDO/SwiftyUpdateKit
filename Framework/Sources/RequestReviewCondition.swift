@@ -47,7 +47,7 @@ open class RequestReviewConditionDaily: RequestReviewCondition {
 
     open func shouldRequestReview() -> Bool {
         let lastDate = SUKUserDefaults.standard.integer(forKey: SwiftyUpdateKitLastRequireReviewDateKey)
-        let today = Utility.currentDate()
+        let today = DateUtils.currentDate()
 
         guard lastDate < today else { return false }
 
@@ -68,7 +68,7 @@ open class RequestReviewConditionDailySkipFirstDay: RequestReviewCondition {
 
         // lastDate is 0 means the first day because the value is not set.
         if lastDate == 0 {
-            let today = Utility.currentDate()
+            let today = DateUtils.currentDate()
             SUKUserDefaults.standard.set(today, forKey: SwiftyUpdateKitLastRequireReviewDateKey)
 
             return false

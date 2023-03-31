@@ -28,6 +28,7 @@
 		5E1AF26F271025CF00240C38 /* SwiftyUpdateKitConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1AF2692710257B00240C38 /* SwiftyUpdateKitConfig.swift */; };
 		5E1AF2762710279700240C38 /* ITunesSearchAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1AF2752710279700240C38 /* ITunesSearchAPI.swift */; };
 		5E1AF27F27102B2B00240C38 /* ITunesSearchAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1AF2752710279700240C38 /* ITunesSearchAPI.swift */; };
+		5E45D56F29D6A026006089F7 /* DateUtilsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E45D56E29D6A026006089F7 /* DateUtilsTests.swift */; };
 		5E56B68A23ED10B3007AA082 /* SwiftyUpdateKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E56B68023ED10B2007AA082 /* SwiftyUpdateKit.framework */; };
 		5E56B6A623ED118A007AA082 /* SwiftyUpdateKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 5E56B6A023ED118A007AA082 /* SwiftyUpdateKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5E5B66B4296FA1E900EEE370 /* SwiftyUpdateKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 5E56B6A023ED118A007AA082 /* SwiftyUpdateKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -41,8 +42,8 @@
 		5EC35DA527108A7800CAC3C9 /* VersionCompare.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC35DA327108A7800CAC3C9 /* VersionCompare.swift */; };
 		5EC35DA7271091BD00CAC3C9 /* VersionCheckCondition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC35DA6271091BD00CAC3C9 /* VersionCheckCondition.swift */; };
 		5EC35DA8271091BD00CAC3C9 /* VersionCheckCondition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC35DA6271091BD00CAC3C9 /* VersionCheckCondition.swift */; };
-		5EC35DAA271092AD00CAC3C9 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC35DA9271092AD00CAC3C9 /* Utility.swift */; };
-		5EC35DAB271092AD00CAC3C9 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC35DA9271092AD00CAC3C9 /* Utility.swift */; };
+		5EC35DAA271092AD00CAC3C9 /* DateUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC35DA9271092AD00CAC3C9 /* DateUtils.swift */; };
+		5EC35DAB271092AD00CAC3C9 /* DateUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC35DA9271092AD00CAC3C9 /* DateUtils.swift */; };
 		5EC35DAD271096CA00CAC3C9 /* RequestReviewCondition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC35DAC271096CA00CAC3C9 /* RequestReviewCondition.swift */; };
 		5EC35DAE271096CA00CAC3C9 /* RequestReviewCondition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC35DAC271096CA00CAC3C9 /* RequestReviewCondition.swift */; };
 		5ED8531B2711D9FD00CC0699 /* VersionCompareTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED8531A2711D9FD00CC0699 /* VersionCompareTests.swift */; };
@@ -68,6 +69,7 @@
 		5E1AF24B271020A800240C38 /* SwiftyUpdateKitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftyUpdateKitTests.swift; sourceTree = "<group>"; };
 		5E1AF2692710257B00240C38 /* SwiftyUpdateKitConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftyUpdateKitConfig.swift; sourceTree = "<group>"; };
 		5E1AF2752710279700240C38 /* ITunesSearchAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ITunesSearchAPI.swift; sourceTree = "<group>"; };
+		5E45D56E29D6A026006089F7 /* DateUtilsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateUtilsTests.swift; sourceTree = "<group>"; };
 		5E56B68023ED10B2007AA082 /* SwiftyUpdateKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftyUpdateKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E56B68423ED10B2007AA082 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5E56B68923ED10B3007AA082 /* SwiftyUpdateKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftyUpdateKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -80,7 +82,7 @@
 		5EC35DA02710802E00CAC3C9 /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 		5EC35DA327108A7800CAC3C9 /* VersionCompare.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionCompare.swift; sourceTree = "<group>"; };
 		5EC35DA6271091BD00CAC3C9 /* VersionCheckCondition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionCheckCondition.swift; sourceTree = "<group>"; };
-		5EC35DA9271092AD00CAC3C9 /* Utility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
+		5EC35DA9271092AD00CAC3C9 /* DateUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateUtils.swift; sourceTree = "<group>"; };
 		5EC35DAC271096CA00CAC3C9 /* RequestReviewCondition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestReviewCondition.swift; sourceTree = "<group>"; };
 		5ED8531A2711D9FD00CC0699 /* VersionCompareTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionCompareTests.swift; sourceTree = "<group>"; };
 		5ED8531E2711DF6300CC0699 /* ReleaseNotes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReleaseNotes.swift; sourceTree = "<group>"; };
@@ -147,6 +149,7 @@
 		5E56B68D23ED10B3007AA082 /* SwiftyUpdateKitTests */ = {
 			isa = PBXGroup;
 			children = (
+				5E45D56E29D6A026006089F7 /* DateUtilsTests.swift */,
 				5E56B69023ED10B3007AA082 /* Info.plist */,
 				5ED853572715172A00CC0699 /* ReleaseNotesTests.swift */,
 				5E1AF24B271020A800240C38 /* SwiftyUpdateKitTests.swift */,
@@ -159,6 +162,7 @@
 			isa = PBXGroup;
 			children = (
 				5EC35D9D271064D800CAC3C9 /* Alert.swift */,
+				5EC35DA9271092AD00CAC3C9 /* DateUtils.swift */,
 				5E1AF2752710279700240C38 /* ITunesSearchAPI.swift */,
 				5EC35DA02710802E00CAC3C9 /* Log.swift */,
 				5ED8531E2711DF6300CC0699 /* ReleaseNotes.swift */,
@@ -167,7 +171,6 @@
 				5E1AF21B27101CF000240C38 /* SUK.swift */,
 				5E5B66B5296FC6F100EEE370 /* SUKUserDefaults.swift */,
 				5E1AF2692710257B00240C38 /* SwiftyUpdateKitConfig.swift */,
-				5EC35DA9271092AD00CAC3C9 /* Utility.swift */,
 				5EC35DA6271091BD00CAC3C9 /* VersionCheckCondition.swift */,
 				5EC35DA327108A7800CAC3C9 /* VersionCompare.swift */,
 			);
@@ -363,7 +366,7 @@
 				5E1AF21C27101CF000240C38 /* SUK.swift in Sources */,
 				5ED85325271327F500CC0699 /* ReleaseNotesController.swift in Sources */,
 				5EC35D9E271064D900CAC3C9 /* Alert.swift in Sources */,
-				5EC35DAA271092AD00CAC3C9 /* Utility.swift in Sources */,
+				5EC35DAA271092AD00CAC3C9 /* DateUtils.swift in Sources */,
 				5EC35DAD271096CA00CAC3C9 /* RequestReviewCondition.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -372,6 +375,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5E45D56F29D6A026006089F7 /* DateUtilsTests.swift in Sources */,
 				5ED853582715172A00CC0699 /* ReleaseNotesTests.swift in Sources */,
 				5ED8531B2711D9FD00CC0699 /* VersionCompareTests.swift in Sources */,
 				5E1AF24C271020A800240C38 /* SwiftyUpdateKitTests.swift in Sources */,
@@ -392,7 +396,7 @@
 				5EC35D9F271064D900CAC3C9 /* Alert.swift in Sources */,
 				5ED85326271327F500CC0699 /* ReleaseNotesController.swift in Sources */,
 				5E1AF2462710206100240C38 /* SUK.swift in Sources */,
-				5EC35DAB271092AD00CAC3C9 /* Utility.swift in Sources */,
+				5EC35DAB271092AD00CAC3C9 /* DateUtils.swift in Sources */,
 				5EC35DAE271096CA00CAC3C9 /* RequestReviewCondition.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

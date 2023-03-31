@@ -27,8 +27,8 @@ class SwiftyUpdateKitTests: XCTestCase {
     func testReset() throws {
         // Set test data.
         let ud = SUKUserDefaults.standard
-        ud.set(Utility.currentDate(), forKey: SwiftyUpdateKitLastVersionCheckDateKey)
-        ud.set(Utility.currentDate(), forKey: SwiftyUpdateKitLastRequireReviewDateKey)
+        ud.set(DateUtils.currentDate(), forKey: SwiftyUpdateKitLastVersionCheckDateKey)
+        ud.set(DateUtils.currentDate(), forKey: SwiftyUpdateKitLastRequireReviewDateKey)
         ReleaseNotes.update("1.2.2", forUserID: "Test")
 
         SUK.reset()
