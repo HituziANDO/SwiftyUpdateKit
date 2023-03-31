@@ -169,5 +169,9 @@ Default version comparison method refers to [here](https://github.com/HituziANDO
 To make the document of this framework, you run following command on the Terminal. This script depends on [jazzy](https://github.com/realm/jazzy).
 
 ```
+jazzy -version
+jazzy version: 0.14.3
+
 ./make_docs.sh
 ```
+
