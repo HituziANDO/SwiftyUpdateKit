@@ -1,0 +1,11 @@
+framework module SwiftyUpdateKit {
+  umbrella header "SwiftyUpdateKit.h"
+  export *
+
+  module * { export * }
+}
+
+module SwiftyUpdateKit.Swift {
+  header "SwiftyUpdateKit-Swift.h"
+  requires objc
+}

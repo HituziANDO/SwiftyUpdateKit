@@ -1,0 +1,102 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 5.9 (swiftlang-5.9.0.128.108 clang-1500.0.40.1)
+// swift-module-flags: -target arm64-apple-ios13.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name SwiftyUpdateKit
+// swift-module-flags-ignorable: -enable-bare-slash-regex
+import Foundation
+import StoreKit
+import Swift
+@_exported import SwiftyUpdateKit
+import UIKit
+import _Concurrency
+import _StringProcessing
+import _SwiftConcurrencyShims
+public let SwiftyUpdateKitLastVersionCheckDateKey: Swift.String
+public protocol VersionCheckCondition : AnyObject {
+  func shouldCheckVersion() -> Swift.Bool
+}
+open class VersionCheckConditionAlways : SwiftyUpdateKit.VersionCheckCondition {
+  public init()
+  open func shouldCheckVersion() -> Swift.Bool
+  @objc deinit
+}
+open class VersionCheckConditionDisable : SwiftyUpdateKit.VersionCheckCondition {
+  public init()
+  open func shouldCheckVersion() -> Swift.Bool
+  @objc deinit
+}
+open class VersionCheckConditionDaily : SwiftyUpdateKit.VersionCheckCondition {
+  public init()
+  open func shouldCheckVersion() -> Swift.Bool
+  @objc deinit
+}
+public struct SwiftyUpdateKitConfig {
+  public static let defaultUpdateAlertTitle: Swift.String
+  public static let defaultUpdateAlertMessage: Swift.String
+  public static let defaultUpdateButtonTitle: Swift.String
+  public static let defaultRemindMeLaterButtonTitle: Swift.String
+  public let version: Swift.String
+  public let iTunesID: Swift.String
+  public let storeURL: Swift.String
+  public let country: Swift.String?
+  public let versionCompare: any SwiftyUpdateKit.VersionComparable
+  public let updateAlertTitle: Swift.String
+  public let updateAlertMessage: Swift.String
+  public let updateButtonTitle: Swift.String
+  public let remindMeLaterButtonTitle: Swift.String?
+  public let retryCount: Swift.Int
+  public let retryDelay: Foundation.TimeInterval
+  public let isDevelopment: Swift.Bool
+  public init(version: Swift.String, iTunesID: Swift.String, storeURL: Swift.String, country: Swift.String? = nil, versionCompare: (any SwiftyUpdateKit.VersionComparable)? = nil, updateAlertTitle: Swift.String = SwiftyUpdateKitConfig.defaultUpdateAlertTitle, updateAlertMessage: Swift.String = SwiftyUpdateKitConfig.defaultUpdateAlertMessage, updateButtonTitle: Swift.String = SwiftyUpdateKitConfig.defaultUpdateButtonTitle, remindMeLaterButtonTitle: Swift.String? = SwiftyUpdateKitConfig.defaultRemindMeLaterButtonTitle, retryCount: Swift.Int = 2, retryDelay: Foundation.TimeInterval = 1, development: Swift.Bool = false)
+}
+public protocol VersionComparable {
+  func compare(_ storeVersion: Swift.String, with currentVersion: Swift.String) -> Swift.Bool
+}
+public class VersionCompare : SwiftyUpdateKit.VersionComparable {
+  public init()
+  public func compare(_ storeVersion: Swift.String, with currentVersion: Swift.String) -> Swift.Bool
+  @objc deinit
+}
+public typealias Log = (_ message: Any) -> ()
+public let SwiftyUpdateKitLatestAppVersionKey: Swift.String
+public typealias SUKViewController = UIKit.UIViewController
+public typealias UpdateHandler = (_ newVersion: Swift.String?, _ releaseNotes: Swift.String?) -> ()
+public typealias NewReleaseHandler = (_ newVersion: Swift.String?, _ releaseNotes: Swift.String?, _ firstUpdated: Swift.Bool) -> ()
+@_hasMissingDesignatedInitializers public class SUK {
+  public static let version: Swift.String
+  public static func initialize(withConfig config: SwiftyUpdateKit.SwiftyUpdateKitConfig, log: SwiftyUpdateKit.Log? = nil)
+  @available(*, deprecated, renamed: "initialize(withConfig:log:)")
+  @inlinable public static func applicationDidFinishLaunching(withConfig config: SwiftyUpdateKit.SwiftyUpdateKitConfig, log: SwiftyUpdateKit.Log? = nil) {
+        initialize(withConfig: config, log: log)
+    }
+  public static func checkVersion(_ condition: any SwiftyUpdateKit.VersionCheckCondition, update: SwiftyUpdateKit.UpdateHandler? = nil, newRelease: SwiftyUpdateKit.NewReleaseHandler? = nil, forUserID userID: Swift.String = "SwiftyUpdateKitUser", noop: (() -> ())? = nil)
+  public static func openAppStore()
+  public static func showUpdateAlert()
+  public static func showReleaseNotes(from rootViewController: SwiftyUpdateKit.SUKViewController, text: Swift.String?, title: Swift.String = "Release Notes", version: Swift.String? = nil, windowSize: CoreFoundation.CGSize = CGSize(width: 480, height: 320), dismissHandler: (() -> ())? = nil)
+  public static func requestReview(_ condition: any SwiftyUpdateKit.RequestReviewCondition)
+  public static func reset()
+  @objc deinit
+}
+public let SwiftyUpdateKitLastRequireReviewDateKey: Swift.String
+public protocol RequestReviewCondition : AnyObject {
+  func shouldRequestReview() -> Swift.Bool
+}
+open class RequestReviewConditionAlways : SwiftyUpdateKit.RequestReviewCondition {
+  public init()
+  open func shouldRequestReview() -> Swift.Bool
+  @objc deinit
+}
+open class RequestReviewConditionDisable : SwiftyUpdateKit.RequestReviewCondition {
+  public init()
+  open func shouldRequestReview() -> Swift.Bool
+  @objc deinit
+}
+open class RequestReviewConditionDaily : SwiftyUpdateKit.RequestReviewCondition {
+  public init()
+  open func shouldRequestReview() -> Swift.Bool
+  @objc deinit
+}
+open class RequestReviewConditionDailySkipFirstDay : SwiftyUpdateKit.RequestReviewCondition {
+  public init()
+  open func shouldRequestReview() -> Swift.Bool
+  @objc deinit
+}

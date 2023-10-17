@@ -12,7 +12,8 @@ Pod::Spec.new do |s|
   s.ios.deployment_target = '13.0'
   s.osx.deployment_target = '10.15'
   s.source = { :git => "https://github.com/HituziANDO/SwiftyUpdateKit.git", :tag => "#{s.version}" }
-  s.source_files = "Framework/Sources/*.{swift,h,xcprivacy}"
+#  s.source_files = "Framework/Sources/*.{swift,h,xcprivacy}"
+  s.vendored_frameworks = "Framework/SwiftyUpdateKit.xcframework"
   s.requires_arc = true
   s.swift_versions = '5.0'
 end
