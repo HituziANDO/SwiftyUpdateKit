@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name = "SwiftyUpdateKit"
-  s.version = "1.2.1"
+  s.version = "1.3.0-beta.1"
   s.summary = "SwiftyUpdateKit supports for a user to update your app w
     hen new app version is released on the App Store."
   s.description = <<-DESC
@@ -12,7 +12,7 @@ Pod::Spec.new do |s|
   s.ios.deployment_target = '13.0'
   s.osx.deployment_target = '10.15'
   s.source = { :git => "https://github.com/HituziANDO/SwiftyUpdateKit.git", :tag => "#{s.version}" }
-  s.source_files = "Framework/Sources/*.{swift,h}"
+  s.source_files = "Framework/Sources/*.{swift,h,xcprivacy}"
   s.requires_arc = true
   s.swift_versions = '5.0'
 end
