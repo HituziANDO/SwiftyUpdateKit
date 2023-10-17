@@ -19,14 +19,18 @@ let package = Package(
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
         // Targets can depend on other targets in this package, and on products in packages this package depends on.
-        .target(
+//        .target(
+//            name: "SwiftyUpdateKit",
+//            dependencies: [],
+//            path: "Framework/Sources"),
+//        .testTarget(
+//            name: "SwiftyUpdateKitTests",
+//            dependencies: ["SwiftyUpdateKit"],
+//            path: "Framework/SwiftyUpdateKitTests",
+//            exclude: ["Info.plist"]),
+        .binaryTarget(
             name: "SwiftyUpdateKit",
-            dependencies: [],
-            path: "Framework/Sources"),
-        .testTarget(
-            name: "SwiftyUpdateKitTests",
-            dependencies: ["SwiftyUpdateKit"],
-            path: "Framework/SwiftyUpdateKitTests",
-            exclude: ["Info.plist"]),
+            path: "Framework/SwiftyUpdateKit.xcframework"
+        ),
     ]
 )
