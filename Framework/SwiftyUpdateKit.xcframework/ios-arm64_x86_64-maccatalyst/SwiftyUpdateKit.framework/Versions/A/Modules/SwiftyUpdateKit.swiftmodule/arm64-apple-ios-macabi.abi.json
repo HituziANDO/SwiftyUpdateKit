@@ -722,7 +722,7 @@
               {
                 "kind": "TypeNominal",
                 "name": "VersionComparable",
-                "printedName": "SwiftyUpdateKit.VersionComparable",
+                "printedName": "any SwiftyUpdateKit.VersionComparable",
                 "usr": "s:15SwiftyUpdateKit17VersionComparableP"
               }
             ],
@@ -746,7 +746,7 @@
                   {
                     "kind": "TypeNominal",
                     "name": "VersionComparable",
-                    "printedName": "SwiftyUpdateKit.VersionComparable",
+                    "printedName": "any SwiftyUpdateKit.VersionComparable",
                     "usr": "s:15SwiftyUpdateKit17VersionComparableP"
                   }
                 ],
@@ -1137,12 +1137,12 @@
               {
                 "kind": "TypeNominal",
                 "name": "Optional",
-                "printedName": "SwiftyUpdateKit.VersionComparable?",
+                "printedName": "(any SwiftyUpdateKit.VersionComparable)?",
                 "children": [
                   {
                     "kind": "TypeNominal",
                     "name": "VersionComparable",
-                    "printedName": "SwiftyUpdateKit.VersionComparable",
+                    "printedName": "any SwiftyUpdateKit.VersionComparable",
                     "usr": "s:15SwiftyUpdateKit17VersionComparableP"
                   }
                 ],
@@ -1640,7 +1640,7 @@
               {
                 "kind": "TypeNominal",
                 "name": "VersionCheckCondition",
-                "printedName": "SwiftyUpdateKit.VersionCheckCondition",
+                "printedName": "any SwiftyUpdateKit.VersionCheckCondition",
                 "usr": "s:15SwiftyUpdateKit21VersionCheckConditionP"
               },
               {
@@ -1964,7 +1964,7 @@
               {
                 "kind": "TypeNominal",
                 "name": "RequestReviewCondition",
-                "printedName": "SwiftyUpdateKit.RequestReviewCondition",
+                "printedName": "any SwiftyUpdateKit.RequestReviewCondition",
                 "usr": "s:15SwiftyUpdateKit22RequestReviewConditionP"
               }
             ],
@@ -2422,368 +2422,11 @@
   },
   "ConstValues": [
     {
-      "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/ITunesSearchAPI.swift",
-      "kind": "StringLiteral",
-      "offset": 1858,
-      "length": 74,
-      "value": "\"https:\/\/itunes.apple.com\/lookup?id=\""
-    },
-    {
-      "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/ITunesSearchAPI.swift",
-      "kind": "StringLiteral",
-      "offset": 1912,
-      "length": 1,
-      "value": "\"&country=\""
-    },
-    {
-      "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/ITunesSearchAPI.swift",
-      "kind": "StringLiteral",
-      "offset": 1931,
-      "length": 3,
-      "value": "\"\""
-    },
-    {
-      "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/ITunesSearchAPI.swift",
-      "kind": "StringLiteral",
-      "offset": 1990,
-      "length": 55,
-      "value": "\"https:\/\/itunes.apple.com\/lookup?id=\""
-    },
-    {
-      "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/ITunesSearchAPI.swift",
-      "kind": "StringLiteral",
-      "offset": 2044,
-      "length": 3,
-      "value": "\"\""
-    },
-    {
-      "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/ITunesSearchAPI.swift",
-      "kind": "IntegerLiteral",
-      "offset": 2139,
-      "length": 1,
-      "value": "1"
-    },
-    {
-      "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/ITunesSearchAPI.swift",
-      "kind": "IntegerLiteral",
-      "offset": 3049,
-      "length": 1,
-      "value": "1"
-    },
-    {
-      "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/ITunesSearchAPI.swift",
-      "kind": "IntegerLiteral",
-      "offset": 3983,
-      "length": 3,
-      "value": "200"
-    },
-    {
-      "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/ITunesSearchAPI.swift",
-      "kind": "StringLiteral",
-      "offset": 4253,
-      "length": 9,
-      "value": "\"results\""
-    },
-    {
-      "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/ITunesSearchAPI.swift",
-      "kind": "StringLiteral",
-      "offset": 4529,
-      "length": 10,
-      "value": "\"artistId\""
-    },
-    {
-      "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/ITunesSearchAPI.swift",
-      "kind": "StringLiteral",
-      "offset": 4586,
-      "length": 12,
-      "value": "\"artistName\""
-    },
-    {
-      "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/ITunesSearchAPI.swift",
-      "kind": "StringLiteral",
-      "offset": 4650,
-      "length": 15,
-      "value": "\"artistViewUrl\""
-    },
-    {
-      "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/ITunesSearchAPI.swift",
-      "kind": "StringLiteral",
-      "offset": 4717,
-      "length": 15,
-      "value": "\"artworkUrl100\""
-    },
-    {
-      "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/ITunesSearchAPI.swift",
-      "kind": "StringLiteral",
-      "offset": 4784,
-      "length": 15,
-      "value": "\"artworkUrl512\""
-    },
-    {
-      "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/ITunesSearchAPI.swift",
-      "kind": "StringLiteral",
-      "offset": 4850,
-      "length": 14,
-      "value": "\"artworkUrl60\""
-    },
-    {
-      "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/ITunesSearchAPI.swift",
-      "kind": "StringLiteral",
-      "offset": 4920,
-      "length": 19,
-      "value": "\"averageUserRating\""
-    },
-    {
-      "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/ITunesSearchAPI.swift",
-      "kind": "StringLiteral",
-      "offset": 5009,
-      "length": 36,
-      "value": "\"averageUserRatingForCurrentVersion\""
-    },
-    {
-      "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/ITunesSearchAPI.swift",
-      "kind": "StringLiteral",
-      "offset": 5089,
-      "length": 10,
-      "value": "\"bundleId\""
-    },
-    {
-      "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/ITunesSearchAPI.swift",
-      "kind": "StringLiteral",
-      "offset": 5159,
-      "length": 23,
-      "value": "\"contentAdvisoryRating\""
-    },
-    {
-      "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/ITunesSearchAPI.swift",
-      "kind": "StringLiteral",
-      "offset": 5229,
-      "length": 10,
-      "value": "\"currency\""
-    },
-    {
-      "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/ITunesSearchAPI.swift",
-      "kind": "StringLiteral",
-      "offset": 5303,
-      "length": 27,
-      "value": "\"currentVersionReleaseDate\""
-    },
-    {
-      "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/ITunesSearchAPI.swift",
-      "kind": "StringLiteral",
-      "offset": 5380,
-      "length": 13,
-      "value": "\"description\""
-    },
-    {
-      "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/ITunesSearchAPI.swift",
-      "kind": "StringLiteral",
-      "offset": 5445,
-      "length": 15,
-      "value": "\"fileSizeBytes\""
-    },
-    {
-      "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/ITunesSearchAPI.swift",
-      "kind": "StringLiteral",
-      "offset": 5511,
-      "length": 16,
-      "value": "\"formattedPrice\""
-    },
-    {
-      "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/ITunesSearchAPI.swift",
-      "kind": "StringLiteral",
-      "offset": 5574,
-      "length": 10,
-      "value": "\"genreIds\""
-    },
-    {
-      "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/ITunesSearchAPI.swift",
-      "kind": "StringLiteral",
-      "offset": 5631,
-      "length": 8,
-      "value": "\"genres\""
-    },
-    {
-      "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/ITunesSearchAPI.swift",
-      "kind": "StringLiteral",
-      "offset": 5712,
-      "length": 34,
-      "value": "\"isVppDeviceBasedLicensingEnabled\""
-    },
-    {
-      "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/ITunesSearchAPI.swift",
-      "kind": "StringLiteral",
-      "offset": 5787,
-      "length": 6,
-      "value": "\"kind\""
-    },
-    {
-      "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/ITunesSearchAPI.swift",
-      "kind": "StringLiteral",
-      "offset": 5850,
-      "length": 20,
-      "value": "\"languageCodesISO2A\""
-    },
-    {
-      "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/ITunesSearchAPI.swift",
-      "kind": "StringLiteral",
-      "offset": 5927,
-      "length": 18,
-      "value": "\"minimumOsVersion\""
-    },
-    {
-      "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/ITunesSearchAPI.swift",
-      "kind": "StringLiteral",
-      "offset": 5989,
-      "length": 7,
-      "value": "\"price\""
-    },
-    {
-      "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/ITunesSearchAPI.swift",
-      "kind": "StringLiteral",
-      "offset": 6046,
-      "length": 16,
-      "value": "\"primaryGenreId\""
-    },
-    {
-      "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/ITunesSearchAPI.swift",
-      "kind": "StringLiteral",
-      "offset": 6114,
-      "length": 18,
-      "value": "\"primaryGenreName\""
-    },
-    {
-      "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/ITunesSearchAPI.swift",
-      "kind": "StringLiteral",
-      "offset": 6182,
-      "length": 13,
-      "value": "\"releaseDate\""
-    },
-    {
-      "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/ITunesSearchAPI.swift",
-      "kind": "StringLiteral",
-      "offset": 6246,
-      "length": 14,
-      "value": "\"releaseNotes\""
-    },
-    {
-      "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/ITunesSearchAPI.swift",
-      "kind": "StringLiteral",
-      "offset": 6313,
-      "length": 16,
-      "value": "\"screenshotUrls\""
-    },
-    {
-      "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/ITunesSearchAPI.swift",
-      "kind": "StringLiteral",
-      "offset": 6380,
-      "length": 12,
-      "value": "\"sellerName\""
-    },
-    {
-      "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/ITunesSearchAPI.swift",
-      "kind": "StringLiteral",
-      "offset": 6440,
-      "length": 11,
-      "value": "\"sellerUrl\""
-    },
-    {
-      "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/ITunesSearchAPI.swift",
-      "kind": "StringLiteral",
-      "offset": 6507,
-      "length": 19,
-      "value": "\"trackCensoredName\""
-    },
-    {
-      "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/ITunesSearchAPI.swift",
-      "kind": "StringLiteral",
-      "offset": 6583,
-      "length": 20,
-      "value": "\"trackContentRating\""
-    },
-    {
-      "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/ITunesSearchAPI.swift",
-      "kind": "StringLiteral",
-      "offset": 6649,
-      "length": 9,
-      "value": "\"trackId\""
-    },
-    {
-      "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/ITunesSearchAPI.swift",
-      "kind": "StringLiteral",
-      "offset": 6704,
-      "length": 11,
-      "value": "\"trackName\""
-    },
-    {
-      "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/ITunesSearchAPI.swift",
-      "kind": "StringLiteral",
-      "offset": 6766,
-      "length": 14,
-      "value": "\"trackViewUrl\""
-    },
-    {
-      "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/ITunesSearchAPI.swift",
-      "kind": "StringLiteral",
-      "offset": 6834,
-      "length": 17,
-      "value": "\"userRatingCount\""
-    },
-    {
-      "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/ITunesSearchAPI.swift",
-      "kind": "StringLiteral",
-      "offset": 6919,
-      "length": 34,
-      "value": "\"userRatingCountForCurrentVersion\""
-    },
-    {
-      "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/ITunesSearchAPI.swift",
-      "kind": "StringLiteral",
-      "offset": 6996,
-      "length": 9,
-      "value": "\"version\""
-    },
-    {
-      "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/ITunesSearchAPI.swift",
-      "kind": "StringLiteral",
-      "offset": 7055,
-      "length": 13,
-      "value": "\"wrapperType\""
-    },
-    {
       "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/VersionCheckCondition.swift",
       "kind": "StringLiteral",
       "offset": 348,
       "length": 51,
       "value": "\"jp.hituzi.SwiftyUpdateKit.lastVersionCheckDateKey\""
-    },
-    {
-      "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/VersionCheckCondition.swift",
-      "kind": "BooleanLiteral",
-      "offset": 722,
-      "length": 4,
-      "value": "true"
-    },
-    {
-      "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/VersionCheckCondition.swift",
-      "kind": "BooleanLiteral",
-      "offset": 927,
-      "length": 5,
-      "value": "false"
-    },
-    {
-      "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/VersionCheckCondition.swift",
-      "kind": "BooleanLiteral",
-      "offset": 1318,
-      "length": 5,
-      "value": "false"
-    },
-    {
-      "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/VersionCheckCondition.swift",
-      "kind": "BooleanLiteral",
-      "offset": 1435,
-      "length": 4,
-      "value": "true"
     },
     {
       "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/SwiftyUpdateKitConfig.swift",
@@ -2835,167 +2478,6 @@
       "value": "false"
     },
     {
-      "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/VersionCompare.swift",
-      "kind": "StringLiteral",
-      "offset": 1142,
-      "length": 3,
-      "value": "\".\""
-    },
-    {
-      "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/VersionCompare.swift",
-      "kind": "IntegerLiteral",
-      "offset": 1166,
-      "length": 1,
-      "value": "0"
-    },
-    {
-      "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/VersionCompare.swift",
-      "kind": "IntegerLiteral",
-      "offset": 1215,
-      "length": 1,
-      "value": "3"
-    },
-    {
-      "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/VersionCompare.swift",
-      "kind": "IntegerLiteral",
-      "offset": 1245,
-      "length": 1,
-      "value": "0"
-    },
-    {
-      "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/VersionCompare.swift",
-      "kind": "IntegerLiteral",
-      "offset": 1250,
-      "length": 4,
-      "value": "1000"
-    },
-    {
-      "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/VersionCompare.swift",
-      "kind": "IntegerLiteral",
-      "offset": 1257,
-      "length": 11,
-      "value": "100000000"
-    },
-    {
-      "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/VersionCompare.swift",
-      "kind": "IntegerLiteral",
-      "offset": 1275,
-      "length": 1,
-      "value": "1"
-    },
-    {
-      "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/VersionCompare.swift",
-      "kind": "IntegerLiteral",
-      "offset": 1280,
-      "length": 11,
-      "value": "100000000"
-    },
-    {
-      "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/VersionCompare.swift",
-      "kind": "IntegerLiteral",
-      "offset": 1298,
-      "length": 1,
-      "value": "2"
-    },
-    {
-      "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/VersionCompare.swift",
-      "kind": "IntegerLiteral",
-      "offset": 1318,
-      "length": 1,
-      "value": "2"
-    },
-    {
-      "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/VersionCompare.swift",
-      "kind": "IntegerLiteral",
-      "offset": 1348,
-      "length": 1,
-      "value": "0"
-    },
-    {
-      "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/VersionCompare.swift",
-      "kind": "IntegerLiteral",
-      "offset": 1353,
-      "length": 4,
-      "value": "1000"
-    },
-    {
-      "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/VersionCompare.swift",
-      "kind": "IntegerLiteral",
-      "offset": 1360,
-      "length": 11,
-      "value": "100000000"
-    },
-    {
-      "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/VersionCompare.swift",
-      "kind": "IntegerLiteral",
-      "offset": 1378,
-      "length": 1,
-      "value": "1"
-    },
-    {
-      "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/VersionCompare.swift",
-      "kind": "IntegerLiteral",
-      "offset": 1383,
-      "length": 11,
-      "value": "100000000"
-    },
-    {
-      "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/VersionCompare.swift",
-      "kind": "IntegerLiteral",
-      "offset": 1412,
-      "length": 1,
-      "value": "1"
-    },
-    {
-      "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/VersionCompare.swift",
-      "kind": "IntegerLiteral",
-      "offset": 1442,
-      "length": 1,
-      "value": "0"
-    },
-    {
-      "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/VersionCompare.swift",
-      "kind": "IntegerLiteral",
-      "offset": 1447,
-      "length": 4,
-      "value": "1000"
-    },
-    {
-      "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/VersionCompare.swift",
-      "kind": "IntegerLiteral",
-      "offset": 1454,
-      "length": 11,
-      "value": "100000000"
-    },
-    {
-      "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/VersionCompare.swift",
-      "kind": "StringLiteral",
-      "offset": 1520,
-      "length": 25,
-      "value": "\"Illegal version string.\""
-    },
-    {
-      "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/VersionCompare.swift",
-      "kind": "IntegerLiteral",
-      "offset": 1570,
-      "length": 1,
-      "value": "0"
-    },
-    {
-      "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/Log.swift",
-      "kind": "StringLiteral",
-      "offset": 410,
-      "length": 30,
-      "value": "\"[SwiftyUpdateKit] \""
-    },
-    {
-      "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/Log.swift",
-      "kind": "StringLiteral",
-      "offset": 439,
-      "length": 2,
-      "value": "\"\""
-    },
-    {
       "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/ReleaseNotes.swift",
       "kind": "StringLiteral",
       "offset": 256,
@@ -3003,228 +2485,39 @@
       "value": "\"jp.hituzi.SwiftyUpdateKit.LatestAppVersionKey\""
     },
     {
-      "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/ReleaseNotes.swift",
-      "kind": "Dictionary",
-      "offset": 1388,
-      "length": 3,
-      "value": "[]"
-    },
-    {
-      "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/SUKUserDefaults.swift",
-      "kind": "StringLiteral",
-      "offset": 1631,
-      "length": 12,
-      "value": "\"\""
-    },
-    {
-      "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/SUKUserDefaults.swift",
-      "kind": "StringLiteral",
-      "offset": 1638,
-      "length": 1,
-      "value": "\".dev\""
-    },
-    {
-      "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/SUKUserDefaults.swift",
-      "kind": "StringLiteral",
-      "offset": 1691,
-      "length": 13,
-      "value": "\"\""
-    },
-    {
-      "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/SUKUserDefaults.swift",
-      "kind": "StringLiteral",
-      "offset": 1698,
-      "length": 1,
-      "value": "\".test\""
-    },
-    {
       "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/SUK.swift",
       "kind": "StringLiteral",
       "offset": 904,
-      "length": 14,
-      "value": "\"1.3.0-beta.3\""
+      "length": 7,
+      "value": "\"1.3.0\""
     },
     {
       "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/SUK.swift",
       "kind": "StringLiteral",
-      "offset": 2870,
+      "offset": 2863,
       "length": 21,
       "value": "\"SwiftyUpdateKitUser\""
     },
     {
       "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/SUK.swift",
       "kind": "StringLiteral",
-      "offset": 4082,
-      "length": 51,
-      "value": "\"lookUpResult does not exist in the response data.\""
-    },
-    {
-      "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/SUK.swift",
-      "kind": "StringLiteral",
-      "offset": 4833,
-      "length": 72,
-      "value": "\"`applicationDidFinishLaunching(withConfig:)` method is not called yet.\""
-    },
-    {
-      "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/SUK.swift",
-      "kind": "StringLiteral",
-      "offset": 5502,
-      "length": 72,
-      "value": "\"`applicationDidFinishLaunching(withConfig:)` method is not called yet.\""
-    },
-    {
-      "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/SUK.swift",
-      "kind": "StringLiteral",
-      "offset": 6758,
+      "offset": 6751,
       "length": 15,
       "value": "\"Release Notes\""
     },
     {
       "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/SUK.swift",
       "kind": "IntegerLiteral",
-      "offset": 6914,
+      "offset": 6907,
       "length": 3,
       "value": "480"
     },
     {
       "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/SUK.swift",
       "kind": "IntegerLiteral",
-      "offset": 6927,
+      "offset": 6920,
       "length": 3,
       "value": "320"
-    },
-    {
-      "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/SUK.swift",
-      "kind": "StringLiteral",
-      "offset": 7587,
-      "length": 2,
-      "value": "\"\""
-    },
-    {
-      "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/SUK.swift",
-      "kind": "BooleanLiteral",
-      "offset": 7897,
-      "length": 4,
-      "value": "true"
-    },
-    {
-      "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/SUK.swift",
-      "kind": "StringLiteral",
-      "offset": 9103,
-      "length": 72,
-      "value": "\"`applicationDidFinishLaunching(withConfig:)` method is not called yet.\""
-    },
-    {
-      "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/SUK.swift",
-      "kind": "StringLiteral",
-      "offset": 9297,
-      "length": 26,
-      "value": "\"Skips the version check.\""
-    },
-    {
-      "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/SUK.swift",
-      "kind": "StringLiteral",
-      "offset": 10071,
-      "length": 46,
-      "value": "\"version does not exist in the response data.\""
-    },
-    {
-      "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/SUK.swift",
-      "kind": "StringLiteral",
-      "offset": 10357,
-      "length": 26,
-      "value": "\"This app version is old.\""
-    },
-    {
-      "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/SUK.swift",
-      "kind": "StringLiteral",
-      "offset": 10962,
-      "length": 37,
-      "value": "\"This app version is already latest.\""
-    },
-    {
-      "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/SUK.swift",
-      "kind": "StringLiteral",
-      "offset": 11592,
-      "length": 46,
-      "value": "\"version does not exist in the response data.\""
-    },
-    {
-      "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/SUK.swift",
-      "kind": "StringLiteral",
-      "offset": 11744,
-      "length": 76,
-      "value": "\"Current app version is not equal to the version released on the App Store.\""
-    },
-    {
-      "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/SUK.swift",
-      "kind": "StringLiteral",
-      "offset": 12066,
-      "length": 39,
-      "value": "\"A user has installed the app firstly.\""
-    },
-    {
-      "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/SUK.swift",
-      "kind": "BooleanLiteral",
-      "offset": 12285,
-      "length": 4,
-      "value": "true"
-    },
-    {
-      "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/SUK.swift",
-      "kind": "StringLiteral",
-      "offset": 12437,
-      "length": 38,
-      "value": "\"Saved app version is already latest.\""
-    },
-    {
-      "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/SUK.swift",
-      "kind": "BooleanLiteral",
-      "offset": 12750,
-      "length": 5,
-      "value": "false"
-    },
-    {
-      "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/ReleaseNotesController.swift",
-      "kind": "IntegerLiteral",
-      "offset": 3706,
-      "length": 1,
-      "value": "0"
-    },
-    {
-      "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/ReleaseNotesController.swift",
-      "kind": "IntegerLiteral",
-      "offset": 3712,
-      "length": 1,
-      "value": "0"
-    },
-    {
-      "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/ReleaseNotesController.swift",
-      "kind": "IntegerLiteral",
-      "offset": 3722,
-      "length": 2,
-      "value": "32"
-    },
-    {
-      "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/ReleaseNotesController.swift",
-      "kind": "IntegerLiteral",
-      "offset": 3734,
-      "length": 2,
-      "value": "32"
-    },
-    {
-      "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/ReleaseNotesController.swift",
-      "kind": "StringLiteral",
-      "offset": 3761,
-      "length": 5690,
-      "value": "\"iVBORw0KGgoAAAANSUhEUgAAAGwAAABsCAYAAACPZlfNAAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAbKADAAQAAAABAAAAbAAAAAD529oeAAAQE0lEQVR4Ae1dbYwdVRk+c+\/dbttQtBhpVFRooe0uNpYYSXcpWoqfP2haAhqNwfjHtltIqSRCJCRNCBpIhDbSbesfIzEarLEETBSlpdqySzAIpqHbD7YgVk01ilLSdnfvvePznJl37tyv+bozc+e2M8nuOXPmzJn3PM89Z86c8573VSo\/cgRyBHIEcgRyBHIEcgRyBHIEcgR6HAGjl+VftdUsVf9x8qqKmrpSFY15FVPNM\/Cn+MfDUGdM\/BXxpyrmmaLqf7PwgYVvHNhqlPX1HvzXM4QNbfnrHDV9dtgsV1YZhlqmTGOJqcxFwLwvJO4zhjImlWEeM0112CgVD6hZc8fGH\/vwuZDldCV7pgn71MjxgZlq+TY0lZuBzgrTNPuTQMkwjCmU+6JS5r6+QukXfxhdPJHEc+IoM3OE3XjXifdXZipfqSrzDmWan\/CuJDpAwzyF1vY68r2NlncG4Rl2hfo+q2uch5bELnI+8l6NvFeAGO96G8bLBWU8Uewr\/uzgD675ly4rI\/+8BU9RyKE7J5aZZfUdQ5m3AeBSq0dD2NfQne0H8GOqUDr6vssvOf7M1g+ebZW3XdotW\/8+99\/\/fHexqpaXgrdhdKurTaWubZUfPwC864w9kOZ7448PHG6VJ+20rhM2PHLsk2a1cr9pGmsaf\/kg5zzIeRpC7p3TP\/v5fdsXnk4CoJs3n1xwbur8TSBuHUhcAxJn1z\/HMA3KUSg+NDa65I\/119I96xphKzdPfqQyNb0N76V1jVXGL\/sgOq0nLrm0f89zDy\/6X+P1JM8\/c+\/ke959Z+p2dLZ3oKXf2PgsvO\/2Fvtn3X1o+6K3Gq+lcZ46Yd\/cbfYdfuXoPSDqAVRwbq2SfB+pXxqq9ND4rmteqaV3Lza04cR1pirfj8+EWxta\/1kQ9+Cy65Z+\/4frjZk0JUyVMHZ\/1WrlxwBgoFZJwywY6qcldDdZHZ1xtFpGt1011VfriDPURKFQ\/Hqa3WRqhA2tP7rZVNVHQNQsIQsPf7VQUBtf2DmIIXX2jxs2HllRraqdeNctd0k7bajCt8d3L93uSkssmjhhq+5+471T5879CJVc69TCMN7BsPmBD61esmPPl4yKk94Dkdt\/bhb\/tv\/YJnx2PIjPjktFZAD5VP+cOd84sO2q\/0paEmGihK3ceHxhpVr+LcjijIQ+MKB4qV8ZXz6wa+BNO6kng1UbJq6cUuaTGJhcLxUAmJPFQulzh3YuPilpcYeFuAuU8oZHji8vV8tjdWSpwrZl1w2s7HWyWEfWgXVBd7hN6sy6ss6su6TFHSbSwm4YOXpTpWo+5eoyMKpSXxvfNbg37gpkobyhDUfWoaX9BLJYo150+cWCsfaF0aXPxy1f7ISRrGrV\/LXM++EB\/8FM+i3jowNjcQufpfKGRiaGsSLwDFrZZZSL85OFgvHFuEmLlTB2BRi2\/77WsoxTfar0+YO7rzmSJXCTkuXG9ScGZ1T5WQz9MV+Jg4OrQvHTY6OLX43rmbERxgEG+28ItsASzjhVKPWvHNux8C9xCdsL5QxvOvnRannqkEOaUqdLhdJwXAORWAYdHLpzNChksRtky7rYyOIPinVm3YmB\/QNbQGyIkX3eURALYfZ3lgzdz\/KddbF0g63Q13UHBrimVxI4eiRGrfKGTeuYMGsGo\/ZRrEeDF\/gAIwjIHGQRC8kL0tYSKzmPGnb0DtNzg5UK+mtrugkjo8fGdw18K6owF+J9QxsmHsWIeYtdt+lCsbiyk7nHyC2Ms+56ItchS72E2et7L0TQO6kTMeHsjl3GLGJG7KKWGZkwLpE4s+4YvnK6Ke2lhqiVTvM+YkJsOMTXz8VKhcYuohCRCOPio72epR\/Lidwo003D64+MDK2feDyi7KnfRlkpc9gHExtiJPcRO2Io52HCSIRxpRgP0dMweAm+yln3MA9lXla8qtQOLMdvWrHhaOj7wz6v0\/yUkbJS5iikESNiZcsx18YwtFihCdM6GM6yPhYfsZ4VZYkEy8uDjrRmdSTLpGnZIKPIWye7JPqExIhYYfoDA0Z8VgNDYulzW9Pl0IRRYUZK4Upx1MXH8d0DdyqjMCplqYyS1kgWZdayO4IHjxArYiZ3uLGUNL8wFGFaFU1rN7FYw+Syvt8DvK6\/uGvppiyT1oosLbNXpXyuWZhJKzPWEFOfW+ouhyKMeoOOTgMUZuLQwcgqaUmQReQ1ZsDOYsE0LEzrOPE8CUwYNXKp5CmlUbtJ4p2GWSMtKbIEJzd2xJTYyjW\/MDBhVJ\/GIp3WyMWH4MG4VdGyQlrSZJEQYkcMGSemxJbxIEdgwrSuu10ilTyDFB42T7dJS4MswcSNoRtbud4uDEQY9fLwU9AbE6g+TY3cdgV2mt4t0tIkixgRQ62KzhNgqzFm3OcIRNhMpXK7Uw50zJNWn06btLTJIpYaQ2ApuFrbquSsfRiIMKhQr5YisORtj3AkJZkwLdK6QZYghpkPl1KS3gMnl9qGvoTpnY\/YTCclzO7rOyDxpMOkSesmWcSOO3JcGK6wsXYlNUd9CdPbVO2dj\/hFvJbUlp9m0ayUpEjrNlmsHbEkpoxjqqqfWDPudfgSxj3FUoDeTCcnKYZxk5YFsgQ+N6ZurOV6Y+hLGL4XalMn3PnYpSMu0rJElobShWkd1m1w9iUMOxKXOPdim6oT70KkU9IyRxYxdGPqxroNvp6E0Q4G1oBsbSjD5J7iNuWklhyVtEySBdQsTO3JYGBNzL3A9CSMRktws6V\/gN36YTeAez24k2thScsqWcRAY0pLCNbRZ2NunzYHnoRpCzNyj2VaQc66HgYlLctkOSC6sK3D3MlQi3gSRnNAtazqbVc8E1E\/0nqCLAvJGrb1mDfh7Nlf0naT3IERjGWsRBIyEo7vXHLn0MZj+JCxl\/CtlWtLOknjGVaKNcEZkdstBrHFrL0+3Ji780jckzC8CufZ5TB\/JgmD8ipFpCJPHWlSQR1mmCxbTgdbYl4ne8OJd5fovjmjLUzq09Q9yoXsk4XW72oMbsylDq7QmzBXxjyaDQS8CQvBfLer0zTAEIEyqo0l4unQ3arcmNdlsk48CcOqqNO3Irtn39qi7NSSmshCN5hlbawWwDjYNmDelNWTMG3J074Foxin0KZSupjQiiy+z5reaRluaW5s3Zi3gtWTMJpddd003xXPRLQdWSJcD5FWw7Yec6mKE3oSRhu5Tk4ah8zQ4UeWiNoTpLmwrcNcKuEKPQmjQWPktayVwZInjUO67u1aNChZImCWSdOYaiupWtoZG3MRvSn0JIzWp7HANmndZRrakmdTEekmhCVLpMsqaRamGGrgINZ+Fr89CdOVhfVpqbQ2u+qcpB+JSpZImknSaMpWDjfWktYQ+hKGEcxh5x7YyHXiKUc6JUvEzRxpLkzrsBaBG0JfwrRdd\/smLGaubrg\/ldO4yBJhs0SaG1M31iJrY+hLGI3w024Sb8Qs67XDG16\/vLGQJM\/jJktkzQJpNA5NTCmTxhhYi3ztQl\/CbI8JjsVQo1C5qV1hcacnRZbI2W3SaMlbZEH4YhDvFL6E6QJNtV8KhtmCWyWeZJg0WSJ7N0lD61oncqD\/2leLt48FIqyvWKxtfsAOTJoKb19k51fSIksk7QZpGkNnNysUZ+BCROTxCgMRZu0aNF5mQXhJzqZdd69CO7mWNlkia9qkEUNiqZ8P1yFBd7MGIoyF0heJVA6rondIPM6wW2RJHdIkzY2hG1uRpV0YmDA6joHuAXyRoJXBYwKN8LcrNEp6t8kSmdMgTTswsL1OEFNiK8\/3CwMTRi8\/sE\/h9LPaY4Jf6QGvZ4UsETdp0uqxM\/aE8aAUmDBWxiip7+I\/Bjc44N4i6K5Bnb\/Nv6yRJWImRZq1m5WuQXgAS3hOsuLB\/ocijC6Z6OXHKto06N4i2GNa58oqWSJtEqRZmNmTvcAyrJurUISxInTJJBWiLxK6t5DzMKE2CtYDeoPUe2xUN4hq0Ey7AtH+Wyyk3FgGxS40YTTOiGkUe6unadAXCd1bBH2g5IN9ipql7QyrolHvsbGl1ckuFfIJiRGxwrvEWkoBhlEMXYYmjHLRfxYCsWe7nL5IfORtujy2e3AUD9+ENaAdGpCmHNlKoIyUlTJT9rDSESO8\/Jfb9521MQxbDNbMIh4wjXoftnlaL0wYb8QX4Mej2EyM+Pieuo1+Ws4r9Wd8D11KwWHV7b6xnYMPR6lEpBbGB9HZGei2vLFCEDqO6cQ0ahThe+EeYkJshCxi9rHlA49GlT0yYTSNSmdnePA0H46P6ethGjXSryaq8L1w3+E\/HXuE2NiyThOzTkztRiaMAugBCJydCXDoIrfQcYycX+yhdqKjqnzf64OO4aIMNOR+hpHfYe5ChtYf2YsX6lo77axRND57oTvHcde\/VZzOc8yK+TtcE1O7T43vHuz4x9xRCxNB6ZkOzNvaVRAQXn7oOEauX2yhrnvV\/JWLrEliFAcOsRBGN4L0TAeBTlMotLbL6OWHjmPiELKXymCdWXe8t+bbcp8mNnG5WoyFMApG7z2FYukLjn12uGSil5+LqaWxrnWejeiOCpjE5dmIOMdGGAujnyx6phOlHbS1K8pq5qB2hsYMF\/DBOrKurDOrSQyIRZy+w1hurISxQHqko2c6aWnsHvnyvZBHj7puVfUc60oMWPckvPPpovUDEvinvfVVyr9B0bYDOP2re4y+SDr5DklA1MhF8qOY3578nHEVcprdYNwtS8qPZVgvhTWGw3edWGROzzyLX55tTYek5W6BG3EKc54oYRQkd7wdhg7\/vIkTJiLkru0Fic7C1AijmNpBHPxn4UNtoCY2\/LfAvQU9JgRV9ardm06My\/pcKeaCLUaBNcwwkcu5wU6nm8LUovbwMHd1kNd+Ud+DFzXdM7k2CEK\/AR4TaIQ\/bpv4UcXV2k2qfD\/1V+qIwloghu0PcsUi7QFU6oQJePSfRZdMIK5pfg0Dk4P4HT9BU+FJW\/AWeSSkRi6VPKk3SHU+SZcQRO3l4uOh7YvekrQ0w64RJpXU7q3Q3ZhabdnV3SADVnjPQ7HoaVrypnHopOwNcxcJNyZgNLsOPd4aRyNXhIQQVD6iDkaa3Z\/zeFek64SJLNpzEpzx0BcJftktbWBB2NdA4n7gN0ZLnjQOGdaGI\/cU622q3PmIzXTcnwWi9JYfkUVCKnlSF5PqfWG1m6SMuMPMECYVo+MY+iLR7i1sbxRyrTnkew\/GIS17g28DYJqpOIOmaZmrsGyLzMMPgDZG5iPv1ciLqaP6ltxULnTdqT5NjdwwSp5N5SSQkDnC3HXk6Ex7pbAcHazA+67ffT2uuD33iT1w5j7uIsnqaJX1zTRhbkK0EX7YdaepcLSkZWgkS9CdcQbFMnHrzuwdn0G3OonWdgwt77Depoqdj0E203kXm87VniGsFRw0aEwbudrsKix50jgkOsl5GIZbZpbQNaLzO6PNAcHCDI2W0A6Gn2mFVs\/K03IEcgRyBHIEcgRyBHIEcgRyBHIEcgRiQuD\/rqrd4YrlnTIAAAAASUVORK5CYII=\""
-    },
-    {
-      "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/ReleaseNotesController.swift",
-      "kind": "StringLiteral",
-      "offset": 9677,
-      "length": 39,
-      "value": "\"init(coder:) has not been implemented\""
     },
     {
       "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/ReleaseNotesController.swift",
@@ -3299,123 +2592,11 @@
     {
       "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/ReleaseNotesController.swift",
       "kind": "StringLiteral",
-      "offset": 11489,
-      "length": 39,
-      "value": "\"init(coder:) has not been implemented\""
-    },
-    {
-      "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/ReleaseNotesController.swift",
-      "kind": "BooleanLiteral",
-      "offset": 11730,
-      "length": 5,
-      "value": "false"
-    },
-    {
-      "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/ReleaseNotesController.swift",
-      "kind": "StringLiteral",
-      "offset": 11738,
-      "length": 17,
-      "value": "\"ver.\""
-    },
-    {
-      "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/ReleaseNotesController.swift",
-      "kind": "StringLiteral",
-      "offset": 11754,
-      "length": 5,
-      "value": "\"\""
-    },
-    {
-      "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/ReleaseNotesController.swift",
-      "kind": "StringLiteral",
-      "offset": 11758,
-      "length": 2,
-      "value": "\"\""
-    },
-    {
-      "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/ReleaseNotesController.swift",
-      "kind": "IntegerLiteral",
-      "offset": 11836,
-      "length": 2,
-      "value": "10"
-    },
-    {
-      "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/ReleaseNotesController.swift",
-      "kind": "IntegerLiteral",
-      "offset": 12616,
-      "length": 2,
-      "value": "24"
-    },
-    {
-      "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/ReleaseNotesController.swift",
-      "kind": "IntegerLiteral",
-      "offset": 12623,
-      "length": 2,
-      "value": "56"
-    },
-    {
-      "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/ReleaseNotesController.swift",
-      "kind": "IntegerLiteral",
-      "offset": 12674,
-      "length": 2,
-      "value": "24"
-    },
-    {
-      "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/ReleaseNotesController.swift",
-      "kind": "IntegerLiteral",
-      "offset": 12705,
-      "length": 2,
-      "value": "16"
-    },
-    {
-      "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/ReleaseNotesController.swift",
-      "kind": "IntegerLiteral",
-      "offset": 12849,
-      "length": 1,
-      "value": "2"
-    },
-    {
-      "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/ReleaseNotesController.swift",
-      "kind": "IntegerLiteral",
-      "offset": 12853,
-      "length": 2,
-      "value": "44"
-    },
-    {
-      "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/ReleaseNotesController.swift",
-      "kind": "IntegerLiteral",
-      "offset": 12892,
-      "length": 1,
-      "value": "0"
-    },
-    {
-      "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/ReleaseNotesController.swift",
-      "kind": "IntegerLiteral",
-      "offset": 12956,
-      "length": 1,
-      "value": "8"
-    },
-    {
-      "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/ReleaseNotesController.swift",
-      "kind": "IntegerLiteral",
-      "offset": 13101,
-      "length": 1,
-      "value": "8"
-    },
-    {
-      "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/ReleaseNotesController.swift",
-      "kind": "StringLiteral",
       "offset": 9733,
       "length": 22,
       "value": "\"SwiftyUpdateKit.ReleaseNotesController\""
     },
     {
-      "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/ReleaseNotesController.swift",
-      "kind": "BooleanLiteral",
-      "offset": 13400,
-      "length": 4,
-      "value": "true"
-    },
-    {
       "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/Alert.swift",
       "kind": "StringLiteral",
       "offset": 2126,
@@ -3498,27 +2679,6 @@
       "offset": 2445,
       "length": 3,
       "value": "\"c\""
-    },
-    {
-      "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/Alert.swift",
-      "kind": "BooleanLiteral",
-      "offset": 5647,
-      "length": 4,
-      "value": "true"
-    },
-    {
-      "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/DateUtils.swift",
-      "kind": "StringLiteral",
-      "offset": 631,
-      "length": 10,
-      "value": "\"yyyyMMdd\""
-    },
-    {
-      "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/DateUtils.swift",
-      "kind": "StringLiteral",
-      "offset": 1168,
-      "length": 13,
-      "value": "\"en_US_POSIX\""
     },
     {
       "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/RequestReviewCondition.swift",
@@ -3526,48 +2686,6 @@
       "offset": 350,
       "length": 52,
       "value": "\"jp.hituzi.SwiftyUpdateKit.lastRequireReviewDateKey\""
-    },
-    {
-      "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/RequestReviewCondition.swift",
-      "kind": "BooleanLiteral",
-      "offset": 740,
-      "length": 4,
-      "value": "true"
-    },
-    {
-      "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/RequestReviewCondition.swift",
-      "kind": "BooleanLiteral",
-      "offset": 950,
-      "length": 5,
-      "value": "false"
-    },
-    {
-      "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/RequestReviewCondition.swift",
-      "kind": "BooleanLiteral",
-      "offset": 1347,
-      "length": 5,
-      "value": "false"
-    },
-    {
-      "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/RequestReviewCondition.swift",
-      "kind": "BooleanLiteral",
-      "offset": 1465,
-      "length": 4,
-      "value": "true"
-    },
-    {
-      "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/RequestReviewCondition.swift",
-      "kind": "IntegerLiteral",
-      "offset": 1903,
-      "length": 1,
-      "value": "0"
-    },
-    {
-      "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/RequestReviewCondition.swift",
-      "kind": "BooleanLiteral",
-      "offset": 2072,
-      "length": 5,
-      "value": "false"
     }
   ]
 }
