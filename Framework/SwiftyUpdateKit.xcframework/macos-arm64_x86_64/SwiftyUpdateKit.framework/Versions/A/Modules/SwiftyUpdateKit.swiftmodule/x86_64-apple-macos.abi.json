@@ -2643,7 +2643,7 @@
       "kind": "StringLiteral",
       "offset": 904,
       "length": 7,
-      "value": "\"1.3.0\""
+      "value": "\"1.3.1\""
     },
     {
       "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/SUK.swift",

@@ -33,7 +33,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			EtxjNIgxbrJTeYFD0JZLM3v10uNQPOkxszQ3SniSr6M=
+			yRPernC8omwANldllmVIXBh7LV6hT3auCSTDdAPPEEA=
 			</data>
 		</dict>
 		<key>Modules/SwiftyUpdateKit.swiftmodule/arm64-apple-macos.private.swiftinterface</key>
@@ -61,14 +61,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			nXYJvK9lSk9LzkQXhfAcEEB89xq+i/M18dDWvr6t+Sk=
+			AUCpiwTBX2CzE8ezQP56v8/BkailBvdmmt2T3ae7fK8=
 			</data>
 		</dict>
 		<key>Modules/SwiftyUpdateKit.swiftmodule/x86_64-apple-macos.abi.json</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			EtxjNIgxbrJTeYFD0JZLM3v10uNQPOkxszQ3SniSr6M=
+			yRPernC8omwANldllmVIXBh7LV6hT3auCSTDdAPPEEA=
 			</data>
 		</dict>
 		<key>Modules/SwiftyUpdateKit.swiftmodule/x86_64-apple-macos.private.swiftinterface</key>
@@ -96,7 +96,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			aXhzYitvbozt3AIdrFrA4VwY6WnmJQ+YLW7uTi/h870=
+			RUmpHM8gyegxXAtd7tJuyOv+5Eyn5C+0RoFb2l0qyIQ=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>

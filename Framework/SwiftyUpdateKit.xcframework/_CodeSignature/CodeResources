@@ -18,7 +18,7 @@
 		</data>
 		<key>ios-arm64/SwiftyUpdateKit.framework/Modules/SwiftyUpdateKit.swiftmodule/arm64-apple-ios.abi.json</key>
 		<data>
-		0mWhTm8DqrtfEAK8OgqSg69DS7w=
+		xULakfNmxfieTEkTNSmHmV4S3rU=
 		</data>
 		<key>ios-arm64/SwiftyUpdateKit.framework/Modules/SwiftyUpdateKit.swiftmodule/arm64-apple-ios.private.swiftinterface</key>
 		<data>
@@ -42,7 +42,7 @@
 		</data>
 		<key>ios-arm64/SwiftyUpdateKit.framework/SwiftyUpdateKit</key>
 		<data>
-		lOoAALn46gqlggEE6ibO8pEhZqM=
+		AI6yS8t1CDAetfrCFvIgx8Mha1w=
 		</data>
 		<key>ios-arm64_x86_64-maccatalyst/SwiftyUpdateKit.framework/Versions/A/Headers/SwiftyUpdateKit-Swift.h</key>
 		<data>
@@ -54,7 +54,7 @@
 		</data>
 		<key>ios-arm64_x86_64-maccatalyst/SwiftyUpdateKit.framework/Versions/A/Modules/SwiftyUpdateKit.swiftmodule/arm64-apple-ios-macabi.abi.json</key>
 		<data>
-		0mWhTm8DqrtfEAK8OgqSg69DS7w=
+		xULakfNmxfieTEkTNSmHmV4S3rU=
 		</data>
 		<key>ios-arm64_x86_64-maccatalyst/SwiftyUpdateKit.framework/Versions/A/Modules/SwiftyUpdateKit.swiftmodule/arm64-apple-ios-macabi.private.swiftinterface</key>
 		<data>
@@ -70,7 +70,7 @@
 		</data>
 		<key>ios-arm64_x86_64-maccatalyst/SwiftyUpdateKit.framework/Versions/A/Modules/SwiftyUpdateKit.swiftmodule/x86_64-apple-ios-macabi.abi.json</key>
 		<data>
-		0mWhTm8DqrtfEAK8OgqSg69DS7w=
+		xULakfNmxfieTEkTNSmHmV4S3rU=
 		</data>
 		<key>ios-arm64_x86_64-maccatalyst/SwiftyUpdateKit.framework/Versions/A/Modules/SwiftyUpdateKit.swiftmodule/x86_64-apple-ios-macabi.private.swiftinterface</key>
 		<data>
@@ -98,7 +98,7 @@
 		</data>
 		<key>ios-arm64_x86_64-maccatalyst/SwiftyUpdateKit.framework/Versions/A/SwiftyUpdateKit</key>
 		<data>
-		PrNpNAkaxE/DIZpnFoCNWbs1FaI=
+		2/ba/pYwQz9SWR14nnWFLSf0Cm0=
 		</data>
 		<key>ios-arm64_x86_64-simulator/SwiftyUpdateKit.framework/Headers/SwiftyUpdateKit-Swift.h</key>
 		<data>
@@ -114,7 +114,7 @@
 		</data>
 		<key>ios-arm64_x86_64-simulator/SwiftyUpdateKit.framework/Modules/SwiftyUpdateKit.swiftmodule/arm64-apple-ios-simulator.abi.json</key>
 		<data>
-		0mWhTm8DqrtfEAK8OgqSg69DS7w=
+		xULakfNmxfieTEkTNSmHmV4S3rU=
 		</data>
 		<key>ios-arm64_x86_64-simulator/SwiftyUpdateKit.framework/Modules/SwiftyUpdateKit.swiftmodule/arm64-apple-ios-simulator.private.swiftinterface</key>
 		<data>
@@ -130,7 +130,7 @@
 		</data>
 		<key>ios-arm64_x86_64-simulator/SwiftyUpdateKit.framework/Modules/SwiftyUpdateKit.swiftmodule/x86_64-apple-ios-simulator.abi.json</key>
 		<data>
-		0mWhTm8DqrtfEAK8OgqSg69DS7w=
+		xULakfNmxfieTEkTNSmHmV4S3rU=
 		</data>
 		<key>ios-arm64_x86_64-simulator/SwiftyUpdateKit.framework/Modules/SwiftyUpdateKit.swiftmodule/x86_64-apple-ios-simulator.private.swiftinterface</key>
 		<data>
@@ -154,11 +154,11 @@
 		</data>
 		<key>ios-arm64_x86_64-simulator/SwiftyUpdateKit.framework/SwiftyUpdateKit</key>
 		<data>
-		wz9PubgdqI6Mg26MszshtSqc7i4=
+		FQI9xmHroyxvRX+iAcnSV6r/cr8=
 		</data>
 		<key>ios-arm64_x86_64-simulator/SwiftyUpdateKit.framework/_CodeSignature/CodeResources</key>
 		<data>
-		O3gvb1k7YUE+T6TgXygWaB0nkV0=
+		TBCRx0llLH2dajjYbgJmQvhvINg=
 		</data>
 		<key>macos-arm64_x86_64/SwiftyUpdateKit.framework/Versions/A/Headers/SwiftyUpdateKit-Swift.h</key>
 		<data>
@@ -170,7 +170,7 @@
 		</data>
 		<key>macos-arm64_x86_64/SwiftyUpdateKit.framework/Versions/A/Modules/SwiftyUpdateKit.swiftmodule/arm64-apple-macos.abi.json</key>
 		<data>
-		IIYualZoX5Op504gj5ymzP+r29k=
+		Tcw3P7XzsoLjbObYRN8kuIA3zvA=
 		</data>
 		<key>macos-arm64_x86_64/SwiftyUpdateKit.framework/Versions/A/Modules/SwiftyUpdateKit.swiftmodule/arm64-apple-macos.private.swiftinterface</key>
 		<data>
@@ -186,7 +186,7 @@
 		</data>
 		<key>macos-arm64_x86_64/SwiftyUpdateKit.framework/Versions/A/Modules/SwiftyUpdateKit.swiftmodule/x86_64-apple-macos.abi.json</key>
 		<data>
-		IIYualZoX5Op504gj5ymzP+r29k=
+		Tcw3P7XzsoLjbObYRN8kuIA3zvA=
 		</data>
 		<key>macos-arm64_x86_64/SwiftyUpdateKit.framework/Versions/A/Modules/SwiftyUpdateKit.swiftmodule/x86_64-apple-macos.private.swiftinterface</key>
 		<data>
@@ -214,11 +214,11 @@
 		</data>
 		<key>macos-arm64_x86_64/SwiftyUpdateKit.framework/Versions/A/SwiftyUpdateKit</key>
 		<data>
-		jMwtmaya/RPeVaAuA7XiSlL9mG8=
+		9NzkJY3Jqk6S9/2B8lW+Dr3oh4A=
 		</data>
 		<key>macos-arm64_x86_64/SwiftyUpdateKit.framework/Versions/A/_CodeSignature/CodeResources</key>
 		<data>
-		WUmlNov4JLCIjvje6TNcFkZykqk=
+		GRTbNGFPY8a6oKw8Davv6zlu2vs=
 		</data>
 	</dict>
 	<key>files2</key>
@@ -260,11 +260,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			0mWhTm8DqrtfEAK8OgqSg69DS7w=
+			xULakfNmxfieTEkTNSmHmV4S3rU=
 			</data>
 			<key>hash2</key>
 			<data>
-			YngTOpKZuvts4H5tFl+/Vc+HdxPQVG6Te05bI83VZA4=
+			6kU/JJlPy6XosPAV75xL4u7PTx744YeBNUj4CYgt0qs=
 			</data>
 		</dict>
 		<key>ios-arm64/SwiftyUpdateKit.framework/Modules/SwiftyUpdateKit.swiftmodule/arm64-apple-ios.private.swiftinterface</key>
@@ -326,11 +326,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			lOoAALn46gqlggEE6ibO8pEhZqM=
+			AI6yS8t1CDAetfrCFvIgx8Mha1w=
 			</data>
 			<key>hash2</key>
 			<data>
-			6TaB8bbuDVDLofcdq1An9l3kWDGODiyoGjeaylCY/EA=
+			gMNktpd09rRWRRuwFg0GRgdRGtcyBbXjr+FOIsMmYf8=
 			</data>
 		</dict>
 		<key>ios-arm64_x86_64-maccatalyst/SwiftyUpdateKit.framework/Headers</key>
@@ -379,11 +379,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			0mWhTm8DqrtfEAK8OgqSg69DS7w=
+			xULakfNmxfieTEkTNSmHmV4S3rU=
 			</data>
 			<key>hash2</key>
 			<data>
-			YngTOpKZuvts4H5tFl+/Vc+HdxPQVG6Te05bI83VZA4=
+			6kU/JJlPy6XosPAV75xL4u7PTx744YeBNUj4CYgt0qs=
 			</data>
 		</dict>
 		<key>ios-arm64_x86_64-maccatalyst/SwiftyUpdateKit.framework/Versions/A/Modules/SwiftyUpdateKit.swiftmodule/arm64-apple-ios-macabi.private.swiftinterface</key>
@@ -423,11 +423,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			0mWhTm8DqrtfEAK8OgqSg69DS7w=
+			xULakfNmxfieTEkTNSmHmV4S3rU=
 			</data>
 			<key>hash2</key>
 			<data>
-			YngTOpKZuvts4H5tFl+/Vc+HdxPQVG6Te05bI83VZA4=
+			6kU/JJlPy6XosPAV75xL4u7PTx744YeBNUj4CYgt0qs=
 			</data>
 		</dict>
 		<key>ios-arm64_x86_64-maccatalyst/SwiftyUpdateKit.framework/Versions/A/Modules/SwiftyUpdateKit.swiftmodule/x86_64-apple-ios-macabi.private.swiftinterface</key>
@@ -500,11 +500,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			PrNpNAkaxE/DIZpnFoCNWbs1FaI=
+			2/ba/pYwQz9SWR14nnWFLSf0Cm0=
 			</data>
 			<key>hash2</key>
 			<data>
-			BCeZtY7xGaoEjQpPZzmDrsX0meHZGpMnNJSh9O1/auQ=
+			HQ5Kus6wSVP8Y5GJC9Ud38dOey1QuVkZx1lH3zeVmO4=
 			</data>
 		</dict>
 		<key>ios-arm64_x86_64-maccatalyst/SwiftyUpdateKit.framework/Versions/Current</key>
@@ -549,11 +549,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			0mWhTm8DqrtfEAK8OgqSg69DS7w=
+			xULakfNmxfieTEkTNSmHmV4S3rU=
 			</data>
 			<key>hash2</key>
 			<data>
-			YngTOpKZuvts4H5tFl+/Vc+HdxPQVG6Te05bI83VZA4=
+			6kU/JJlPy6XosPAV75xL4u7PTx744YeBNUj4CYgt0qs=
 			</data>
 		</dict>
 		<key>ios-arm64_x86_64-simulator/SwiftyUpdateKit.framework/Modules/SwiftyUpdateKit.swiftmodule/arm64-apple-ios-simulator.private.swiftinterface</key>
@@ -593,11 +593,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			0mWhTm8DqrtfEAK8OgqSg69DS7w=
+			xULakfNmxfieTEkTNSmHmV4S3rU=
 			</data>
 			<key>hash2</key>
 			<data>
-			YngTOpKZuvts4H5tFl+/Vc+HdxPQVG6Te05bI83VZA4=
+			6kU/JJlPy6XosPAV75xL4u7PTx744YeBNUj4CYgt0qs=
 			</data>
 		</dict>
 		<key>ios-arm64_x86_64-simulator/SwiftyUpdateKit.framework/Modules/SwiftyUpdateKit.swiftmodule/x86_64-apple-ios-simulator.private.swiftinterface</key>
@@ -659,22 +659,22 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			wz9PubgdqI6Mg26MszshtSqc7i4=
+			FQI9xmHroyxvRX+iAcnSV6r/cr8=
 			</data>
 			<key>hash2</key>
 			<data>
-			7c9LJ3Jhf5Sj8AtGp/4Tg8v/GQ79UtSqnVT4Q/T2E5s=
+			2avYhLzwAI9wRusH5Y65Ni48pE8NTlqnuHOZAF0hVdw=
 			</data>
 		</dict>
 		<key>ios-arm64_x86_64-simulator/SwiftyUpdateKit.framework/_CodeSignature/CodeResources</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			O3gvb1k7YUE+T6TgXygWaB0nkV0=
+			TBCRx0llLH2dajjYbgJmQvhvINg=
 			</data>
 			<key>hash2</key>
 			<data>
-			hLZGgpjXGCJBrT50PhQj0zvVmJ/ExCbFAywo8Zfwffs=
+			90klUb4E7mlJF1xBoClm8WWCCuG1fRiepm/OA9EBumk=
 			</data>
 		</dict>
 		<key>macos-arm64_x86_64/SwiftyUpdateKit.framework/Headers</key>
@@ -723,11 +723,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			IIYualZoX5Op504gj5ymzP+r29k=
+			Tcw3P7XzsoLjbObYRN8kuIA3zvA=
 			</data>
 			<key>hash2</key>
 			<data>
-			EtxjNIgxbrJTeYFD0JZLM3v10uNQPOkxszQ3SniSr6M=
+			yRPernC8omwANldllmVIXBh7LV6hT3auCSTDdAPPEEA=
 			</data>
 		</dict>
 		<key>macos-arm64_x86_64/SwiftyUpdateKit.framework/Versions/A/Modules/SwiftyUpdateKit.swiftmodule/arm64-apple-macos.private.swiftinterface</key>
@@ -767,11 +767,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			IIYualZoX5Op504gj5ymzP+r29k=
+			Tcw3P7XzsoLjbObYRN8kuIA3zvA=
 			</data>
 			<key>hash2</key>
 			<data>
-			EtxjNIgxbrJTeYFD0JZLM3v10uNQPOkxszQ3SniSr6M=
+			yRPernC8omwANldllmVIXBh7LV6hT3auCSTDdAPPEEA=
 			</data>
 		</dict>
 		<key>macos-arm64_x86_64/SwiftyUpdateKit.framework/Versions/A/Modules/SwiftyUpdateKit.swiftmodule/x86_64-apple-macos.private.swiftinterface</key>
@@ -844,22 +844,22 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			jMwtmaya/RPeVaAuA7XiSlL9mG8=
+			9NzkJY3Jqk6S9/2B8lW+Dr3oh4A=
 			</data>
 			<key>hash2</key>
 			<data>
-			hgsZTxjeJbm6ih9GyxtBwdgRI7hR0voeLrFNMnuaryY=
+			nz55ZZxW5a62xk0h9T9tA5JtdcoYIibwJUCqZY0hOQU=
 			</data>
 		</dict>
 		<key>macos-arm64_x86_64/SwiftyUpdateKit.framework/Versions/A/_CodeSignature/CodeResources</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			WUmlNov4JLCIjvje6TNcFkZykqk=
+			GRTbNGFPY8a6oKw8Davv6zlu2vs=
 			</data>
 			<key>hash2</key>
 			<data>
-			M42JIR7VJ6c4WOnuGrIFeWaT/9sdt8NGSxoeU5XhU84=
+			pnCyJ5L2Bkvl416H9muQOA7fpN9lM20Eq2HsMZnjras=
 			</data>
 		</dict>
 		<key>macos-arm64_x86_64/SwiftyUpdateKit.framework/Versions/Current</key>
