@@ -122,6 +122,7 @@
 		5E56B67623ED10B2007AA082 = {
 			isa = PBXGroup;
 			children = (
+				5E165E372ADE18690004FD00 /* PrivacyInfo.xcprivacy */,
 				5E56B68123ED10B2007AA082 /* Products */,
 				5E56B69B23ED1173007AA082 /* Sources */,
 				5E56B68223ED10B2007AA082 /* SwiftyUpdateKit */,
@@ -168,7 +169,6 @@
 				5EC35DA9271092AD00CAC3C9 /* DateUtils.swift */,
 				5E1AF2752710279700240C38 /* ITunesSearchAPI.swift */,
 				5EC35DA02710802E00CAC3C9 /* Log.swift */,
-				5E165E372ADE18690004FD00 /* PrivacyInfo.xcprivacy */,
 				5ED8531E2711DF6300CC0699 /* ReleaseNotes.swift */,
 				5ED85324271327F500CC0699 /* ReleaseNotesController.swift */,
 				5EC35DAC271096CA00CAC3C9 /* RequestReviewCondition.swift */,
