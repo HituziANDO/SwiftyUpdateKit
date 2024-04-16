@@ -39,6 +39,8 @@ public class SUK {
                                   log: Log? = nil) {
         self.config = config
         self.log = log
+        
+        SUKUserDefaults.setEnvironment(config.isDevelopment ? .development : .production)
     }
 
     /// Initializes SwiftyUpdateKit.

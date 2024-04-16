@@ -37,4 +37,23 @@ class SwiftyUpdateKitTests: XCTestCase {
         XCTAssertEqual(0, ud.integer(forKey: SwiftyUpdateKitLastRequireReviewDateKey))
         XCTAssertNil(ud.string(forKey: SwiftyUpdateKitLatestAppVersionKey))
     }
+    
+    func testUse_Development_DB() throws {
+        let config = SwiftyUpdateKitConfig(version: "1.2.3",
+                              iTunesID: "1491913803",
+                              storeURL: "https://apps.apple.com/app/blue-sketch/id1491913803",
+        development: true)
+        SUK.initialize(withConfig: config)
+        
+        XCTAssertTrue(SUKUserDefaults.standard.env == .development)
+    }
+    
+    func testUse_Production_DB_By_Default() throws {
+        let config = SwiftyUpdateKitConfig(version: "1.2.3",
+                              iTunesID: "1491913803",
+                              storeURL: "https://apps.apple.com/app/blue-sketch/id1491913803")
+        SUK.initialize(withConfig: config)
+        
+        XCTAssertTrue(SUKUserDefaults.standard.env == .production)
+    }
 }
