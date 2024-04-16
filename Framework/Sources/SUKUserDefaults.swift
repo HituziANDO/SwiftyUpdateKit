@@ -15,7 +15,7 @@ class SUKUserDefaults {
         case test
     }
 
-    private let env: Environment
+    let env: Environment
 
     private init(env: Environment) {
         self.env = env
