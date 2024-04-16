@@ -36,6 +36,8 @@
 		5E5B66B4296FA1E900EEE370 /* SwiftyUpdateKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 5E56B6A023ED118A007AA082 /* SwiftyUpdateKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5E5B66B6296FC6F100EEE370 /* SUKUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E5B66B5296FC6F100EEE370 /* SUKUserDefaults.swift */; };
 		5E5B66B7296FC6F100EEE370 /* SUKUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E5B66B5296FC6F100EEE370 /* SUKUserDefaults.swift */; };
+		5E71EE722BCE564A0093E9FE /* AtomicDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E71EE712BCE564A0093E9FE /* AtomicDictionary.swift */; };
+		5E71EE732BCE564A0093E9FE /* AtomicDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E71EE712BCE564A0093E9FE /* AtomicDictionary.swift */; };
 		5EC35D9E271064D900CAC3C9 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC35D9D271064D800CAC3C9 /* Alert.swift */; };
 		5EC35D9F271064D900CAC3C9 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC35D9D271064D800CAC3C9 /* Alert.swift */; };
 		5EC35DA12710802E00CAC3C9 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC35DA02710802E00CAC3C9 /* Log.swift */; };
@@ -81,6 +83,7 @@
 		5E56B6B223ED12AC007AA082 /* SwiftyUpdateKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftyUpdateKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E56B6B523ED12AC007AA082 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5E5B66B5296FC6F100EEE370 /* SUKUserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SUKUserDefaults.swift; sourceTree = "<group>"; };
+		5E71EE712BCE564A0093E9FE /* AtomicDictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AtomicDictionary.swift; sourceTree = "<group>"; };
 		5EC35D9D271064D800CAC3C9 /* Alert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		5EC35DA02710802E00CAC3C9 /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 		5EC35DA327108A7800CAC3C9 /* VersionCompare.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionCompare.swift; sourceTree = "<group>"; };
@@ -166,6 +169,7 @@
 			isa = PBXGroup;
 			children = (
 				5EC35D9D271064D800CAC3C9 /* Alert.swift */,
+				5E71EE712BCE564A0093E9FE /* AtomicDictionary.swift */,
 				5EC35DA9271092AD00CAC3C9 /* DateUtils.swift */,
 				5E1AF2752710279700240C38 /* ITunesSearchAPI.swift */,
 				5EC35DA02710802E00CAC3C9 /* Log.swift */,
@@ -365,6 +369,7 @@
 				5E1AF2762710279700240C38 /* ITunesSearchAPI.swift in Sources */,
 				5EC35DA7271091BD00CAC3C9 /* VersionCheckCondition.swift in Sources */,
 				5E1AF26A2710257B00240C38 /* SwiftyUpdateKitConfig.swift in Sources */,
+				5E71EE722BCE564A0093E9FE /* AtomicDictionary.swift in Sources */,
 				5EC35DA427108A7800CAC3C9 /* VersionCompare.swift in Sources */,
 				5EC35DA12710802E00CAC3C9 /* Log.swift in Sources */,
 				5ED8531F2711DF6300CC0699 /* ReleaseNotes.swift in Sources */,
@@ -395,6 +400,7 @@
 				5E1AF27F27102B2B00240C38 /* ITunesSearchAPI.swift in Sources */,
 				5EC35DA8271091BD00CAC3C9 /* VersionCheckCondition.swift in Sources */,
 				5E1AF26F271025CF00240C38 /* SwiftyUpdateKitConfig.swift in Sources */,
+				5E71EE732BCE564A0093E9FE /* AtomicDictionary.swift in Sources */,
 				5EC35DA527108A7800CAC3C9 /* VersionCompare.swift in Sources */,
 				5EC35DA22710802E00CAC3C9 /* Log.swift in Sources */,
 				5ED853202711DF6300CC0699 /* ReleaseNotes.swift in Sources */,
