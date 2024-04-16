@@ -12,21 +12,21 @@ import SwiftyUpdateKit
 class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
-    }
 
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-
-        SUK.checkVersion(VersionCheckConditionAlways(),
-                         newRelease: { [weak self] newVersion, releaseNotes, _ in
-                             guard let self else { return }
-                             SUK.showReleaseNotes(from: self, text: releaseNotes,
-                                                  version: newVersion)
-                             {
-                                 print("Release Notes has been closed.")
-                             }
-                         }) {
-            SUK.requestReview(RequestReviewConditionAlways())
+        NotificationCenter.default.addObserver(forName: UIApplication.didBecomeActiveNotification,
+                                               object: nil, queue: .main)
+        { _ in
+            SUK.checkVersion(VersionCheckConditionLaunchingAndDaily(),
+                             newRelease: { [weak self] newVersion, releaseNotes, _ in
+                                 guard let self else { return }
+                                 SUK.showReleaseNotes(from: self, text: releaseNotes,
+                                                      version: newVersion)
+                                 {
+                                     print("Release Notes has been closed.")
+                                 }
+                             }) {
+                SUK.requestReview(RequestReviewConditionLaunchingAndDaily())
+            }
         }
     }
 }
