@@ -36,7 +36,7 @@ open class VersionCheckConditionDisable: VersionCheckCondition {
     }
 }
 
-/// Checks the app version one time by a day.
+/// Checks the app version once a day.
 open class VersionCheckConditionDaily: VersionCheckCondition {
     public init() {}
 
@@ -48,6 +48,23 @@ open class VersionCheckConditionDaily: VersionCheckCondition {
         guard lastDate < today else { return false }
 
         SUKUserDefaults.standard.set(today, forKey: SwiftyUpdateKitLastVersionCheckDateKey)
+
+        return true
+    }
+}
+
+/// Checks the app version when the app is launched and once a day.
+open class VersionCheckConditionLaunchingAndDaily: VersionCheckCondition {
+    public init() {}
+
+    open func shouldCheckVersion() -> Bool {
+        let lastDate = sharedDictionary
+            .value(forKey: SwiftyUpdateKitLastVersionCheckDateKey) as? Int ?? 0
+        let today = DateUtils.currentDate()
+
+        guard lastDate < today else { return false }
+
+        sharedDictionary.setValue(today, forKey: SwiftyUpdateKitLastVersionCheckDateKey)
 
         return true
     }
