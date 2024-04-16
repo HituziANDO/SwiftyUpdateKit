@@ -316,6 +316,74 @@
         ]
       },
       {
+        "kind": "TypeDecl",
+        "name": "VersionCheckConditionLaunchingAndDaily",
+        "printedName": "VersionCheckConditionLaunchingAndDaily",
+        "children": [
+          {
+            "kind": "Constructor",
+            "name": "init",
+            "printedName": "init()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "VersionCheckConditionLaunchingAndDaily",
+                "printedName": "SwiftyUpdateKit.VersionCheckConditionLaunchingAndDaily",
+                "usr": "s:15SwiftyUpdateKit38VersionCheckConditionLaunchingAndDailyC"
+              }
+            ],
+            "declKind": "Constructor",
+            "usr": "s:15SwiftyUpdateKit38VersionCheckConditionLaunchingAndDailyCACycfc",
+            "mangledName": "$s15SwiftyUpdateKit38VersionCheckConditionLaunchingAndDailyCACycfc",
+            "moduleName": "SwiftyUpdateKit",
+            "declAttributes": [
+              "AccessControl"
+            ],
+            "init_kind": "Designated"
+          },
+          {
+            "kind": "Function",
+            "name": "shouldCheckVersion",
+            "printedName": "shouldCheckVersion()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Bool",
+                "printedName": "Swift.Bool",
+                "usr": "s:Sb"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:15SwiftyUpdateKit38VersionCheckConditionLaunchingAndDailyC06shouldeD0SbyF",
+            "mangledName": "$s15SwiftyUpdateKit38VersionCheckConditionLaunchingAndDailyC06shouldeD0SbyF",
+            "moduleName": "SwiftyUpdateKit",
+            "isOpen": true,
+            "declAttributes": [
+              "AccessControl"
+            ],
+            "funcSelfKind": "NonMutating"
+          }
+        ],
+        "declKind": "Class",
+        "usr": "s:15SwiftyUpdateKit38VersionCheckConditionLaunchingAndDailyC",
+        "mangledName": "$s15SwiftyUpdateKit38VersionCheckConditionLaunchingAndDailyC",
+        "moduleName": "SwiftyUpdateKit",
+        "isOpen": true,
+        "declAttributes": [
+          "AccessControl",
+          "RawDocComment"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "VersionCheckCondition",
+            "printedName": "VersionCheckCondition",
+            "usr": "s:15SwiftyUpdateKit21VersionCheckConditionP",
+            "mangledName": "$s15SwiftyUpdateKit21VersionCheckConditionP"
+          }
+        ]
+      },
+      {
         "kind": "Import",
         "name": "Foundation",
         "printedName": "Foundation",
@@ -1224,6 +1292,16 @@
         "moduleName": "SwiftyUpdateKit",
         "declAttributes": [
           "AccessControl"
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "SwiftyUpdateKit",
+        "declAttributes": [
+          "RawDocComment"
         ]
       },
       {
@@ -2416,6 +2494,142 @@
             "mangledName": "$s15SwiftyUpdateKit22RequestReviewConditionP"
           }
         ]
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "RequestReviewConditionLaunchingAndDaily",
+        "printedName": "RequestReviewConditionLaunchingAndDaily",
+        "children": [
+          {
+            "kind": "Constructor",
+            "name": "init",
+            "printedName": "init()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "RequestReviewConditionLaunchingAndDaily",
+                "printedName": "SwiftyUpdateKit.RequestReviewConditionLaunchingAndDaily",
+                "usr": "s:15SwiftyUpdateKit39RequestReviewConditionLaunchingAndDailyC"
+              }
+            ],
+            "declKind": "Constructor",
+            "usr": "s:15SwiftyUpdateKit39RequestReviewConditionLaunchingAndDailyCACycfc",
+            "mangledName": "$s15SwiftyUpdateKit39RequestReviewConditionLaunchingAndDailyCACycfc",
+            "moduleName": "SwiftyUpdateKit",
+            "declAttributes": [
+              "AccessControl"
+            ],
+            "init_kind": "Designated"
+          },
+          {
+            "kind": "Function",
+            "name": "shouldRequestReview",
+            "printedName": "shouldRequestReview()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Bool",
+                "printedName": "Swift.Bool",
+                "usr": "s:Sb"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:15SwiftyUpdateKit39RequestReviewConditionLaunchingAndDailyC06shoulddE0SbyF",
+            "mangledName": "$s15SwiftyUpdateKit39RequestReviewConditionLaunchingAndDailyC06shoulddE0SbyF",
+            "moduleName": "SwiftyUpdateKit",
+            "isOpen": true,
+            "declAttributes": [
+              "AccessControl"
+            ],
+            "funcSelfKind": "NonMutating"
+          }
+        ],
+        "declKind": "Class",
+        "usr": "s:15SwiftyUpdateKit39RequestReviewConditionLaunchingAndDailyC",
+        "mangledName": "$s15SwiftyUpdateKit39RequestReviewConditionLaunchingAndDailyC",
+        "moduleName": "SwiftyUpdateKit",
+        "isOpen": true,
+        "declAttributes": [
+          "AccessControl",
+          "RawDocComment"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "RequestReviewCondition",
+            "printedName": "RequestReviewCondition",
+            "usr": "s:15SwiftyUpdateKit22RequestReviewConditionP",
+            "mangledName": "$s15SwiftyUpdateKit22RequestReviewConditionP"
+          }
+        ]
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "RequestReviewConditionLaunchingAndDailySkipFirstDay",
+        "printedName": "RequestReviewConditionLaunchingAndDailySkipFirstDay",
+        "children": [
+          {
+            "kind": "Constructor",
+            "name": "init",
+            "printedName": "init()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "RequestReviewConditionLaunchingAndDailySkipFirstDay",
+                "printedName": "SwiftyUpdateKit.RequestReviewConditionLaunchingAndDailySkipFirstDay",
+                "usr": "s:15SwiftyUpdateKit51RequestReviewConditionLaunchingAndDailySkipFirstDayC"
+              }
+            ],
+            "declKind": "Constructor",
+            "usr": "s:15SwiftyUpdateKit51RequestReviewConditionLaunchingAndDailySkipFirstDayCACycfc",
+            "mangledName": "$s15SwiftyUpdateKit51RequestReviewConditionLaunchingAndDailySkipFirstDayCACycfc",
+            "moduleName": "SwiftyUpdateKit",
+            "declAttributes": [
+              "AccessControl"
+            ],
+            "init_kind": "Designated"
+          },
+          {
+            "kind": "Function",
+            "name": "shouldRequestReview",
+            "printedName": "shouldRequestReview()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Bool",
+                "printedName": "Swift.Bool",
+                "usr": "s:Sb"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:15SwiftyUpdateKit51RequestReviewConditionLaunchingAndDailySkipFirstDayC06shoulddE0SbyF",
+            "mangledName": "$s15SwiftyUpdateKit51RequestReviewConditionLaunchingAndDailySkipFirstDayC06shoulddE0SbyF",
+            "moduleName": "SwiftyUpdateKit",
+            "isOpen": true,
+            "declAttributes": [
+              "AccessControl"
+            ],
+            "funcSelfKind": "NonMutating"
+          }
+        ],
+        "declKind": "Class",
+        "usr": "s:15SwiftyUpdateKit51RequestReviewConditionLaunchingAndDailySkipFirstDayC",
+        "mangledName": "$s15SwiftyUpdateKit51RequestReviewConditionLaunchingAndDailySkipFirstDayC",
+        "moduleName": "SwiftyUpdateKit",
+        "isOpen": true,
+        "declAttributes": [
+          "AccessControl",
+          "RawDocComment"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "RequestReviewCondition",
+            "printedName": "RequestReviewCondition",
+            "usr": "s:15SwiftyUpdateKit22RequestReviewConditionP",
+            "mangledName": "$s15SwiftyUpdateKit22RequestReviewConditionP"
+          }
+        ]
       }
     ],
     "json_format_version": 8
@@ -2424,7 +2638,7 @@
     {
       "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/VersionCheckCondition.swift",
       "kind": "StringLiteral",
-      "offset": 348,
+      "offset": 352,
       "length": 51,
       "value": "\"jp.hituzi.SwiftyUpdateKit.lastVersionCheckDateKey\""
     },
@@ -2438,44 +2652,65 @@
     {
       "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/SwiftyUpdateKitConfig.swift",
       "kind": "StringLiteral",
-      "offset": 339,
+      "offset": 347,
       "length": 90,
       "value": "\"Please update the app. Please refer to the App Store for details of the update contents.\""
     },
     {
       "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/SwiftyUpdateKitConfig.swift",
       "kind": "StringLiteral",
-      "offset": 479,
+      "offset": 487,
       "length": 8,
       "value": "\"Update\""
     },
     {
       "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/SwiftyUpdateKitConfig.swift",
       "kind": "StringLiteral",
-      "offset": 544,
+      "offset": 552,
       "length": 17,
       "value": "\"Remind me later\""
     },
     {
       "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/SwiftyUpdateKitConfig.swift",
       "kind": "IntegerLiteral",
-      "offset": 3217,
+      "offset": 3262,
       "length": 1,
       "value": "2"
     },
     {
       "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/SwiftyUpdateKitConfig.swift",
       "kind": "IntegerLiteral",
-      "offset": 3263,
+      "offset": 3308,
       "length": 1,
       "value": "1"
     },
     {
       "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/SwiftyUpdateKitConfig.swift",
       "kind": "BooleanLiteral",
-      "offset": 3302,
+      "offset": 3347,
       "length": 5,
       "value": "false"
+    },
+    {
+      "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/AtomicDictionary.swift",
+      "kind": "Dictionary",
+      "offset": 264,
+      "length": 3,
+      "value": "[]"
+    },
+    {
+      "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/AtomicDictionary.swift",
+      "kind": "StringLiteral",
+      "offset": 313,
+      "length": 38,
+      "value": "\"SwiftyUpdateKit.\""
+    },
+    {
+      "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/AtomicDictionary.swift",
+      "kind": "StringLiteral",
+      "offset": 350,
+      "length": 2,
+      "value": "\"\""
     },
     {
       "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/ReleaseNotes.swift",
@@ -2487,196 +2722,140 @@
     {
       "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/Alert.swift",
       "kind": "StringLiteral",
-      "offset": 2126,
+      "offset": 2134,
       "length": 4,
       "value": "\"\r\""
     },
     {
       "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/Alert.swift",
       "kind": "StringLiteral",
-      "offset": 2175,
+      "offset": 2183,
       "length": 8,
       "value": "\"\u001B\""
     },
     {
       "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/Alert.swift",
       "kind": "StringLiteral",
-      "offset": 2246,
-      "length": 3,
-      "value": "\"y\""
-    },
-    {
-      "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/Alert.swift",
-      "kind": "StringLiteral",
-      "offset": 2311,
-      "length": 3,
-      "value": "\"n\""
-    },
-    {
-      "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/Alert.swift",
-      "kind": "StringLiteral",
-      "offset": 2376,
-      "length": 3,
-      "value": "\"o\""
-    },
-    {
-      "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/Alert.swift",
-      "kind": "StringLiteral",
-      "offset": 2445,
-      "length": 3,
-      "value": "\"c\""
-    },
-    {
-      "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/Alert.swift",
-      "kind": "StringLiteral",
-      "offset": 2126,
+      "offset": 2134,
       "length": 4,
       "value": "\"\r\""
     },
     {
       "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/Alert.swift",
       "kind": "StringLiteral",
-      "offset": 2175,
+      "offset": 2183,
       "length": 8,
       "value": "\"\u001B\""
-    },
-    {
-      "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/Alert.swift",
-      "kind": "StringLiteral",
-      "offset": 2246,
-      "length": 3,
-      "value": "\"y\""
-    },
-    {
-      "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/Alert.swift",
-      "kind": "StringLiteral",
-      "offset": 2311,
-      "length": 3,
-      "value": "\"n\""
-    },
-    {
-      "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/Alert.swift",
-      "kind": "StringLiteral",
-      "offset": 2376,
-      "length": 3,
-      "value": "\"o\""
-    },
-    {
-      "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/Alert.swift",
-      "kind": "StringLiteral",
-      "offset": 2445,
-      "length": 3,
-      "value": "\"c\""
     },
     {
       "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/Alert.swift",
       "kind": "IntegerLiteral",
-      "offset": 2687,
+      "offset": 2671,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/ReleaseNotesController.swift",
       "kind": "BooleanLiteral",
-      "offset": 581,
+      "offset": 579,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/ReleaseNotesController.swift",
       "kind": "BooleanLiteral",
-      "offset": 615,
+      "offset": 613,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/ReleaseNotesController.swift",
       "kind": "IntegerLiteral",
-      "offset": 743,
+      "offset": 741,
       "length": 2,
       "value": "48"
     },
     {
       "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/ReleaseNotesController.swift",
       "kind": "IntegerLiteral",
-      "offset": 755,
+      "offset": 753,
       "length": 1,
       "value": "8"
     },
     {
       "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/ReleaseNotesController.swift",
       "kind": "StringLiteral",
-      "offset": 884,
+      "offset": 882,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/ReleaseNotesController.swift",
       "kind": "IntegerLiteral",
-      "offset": 928,
+      "offset": 926,
       "length": 2,
       "value": "24"
     },
     {
       "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/ReleaseNotesController.swift",
       "kind": "StringLiteral",
-      "offset": 1111,
+      "offset": 1109,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/ReleaseNotesController.swift",
       "kind": "IntegerLiteral",
-      "offset": 1155,
+      "offset": 1153,
       "length": 2,
       "value": "16"
     },
     {
       "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/ReleaseNotesController.swift",
       "kind": "StringLiteral",
-      "offset": 345,
+      "offset": 344,
       "length": 22,
       "value": "\"SwiftyUpdateKit.ReleaseNotesController\""
     },
     {
       "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/SUK.swift",
       "kind": "StringLiteral",
-      "offset": 904,
+      "offset": 950,
       "length": 7,
-      "value": "\"1.3.2\""
+      "value": "\"1.4.0\""
     },
     {
       "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/SUK.swift",
       "kind": "StringLiteral",
-      "offset": 2863,
+      "offset": 3040,
       "length": 21,
       "value": "\"SwiftyUpdateKitUser\""
     },
     {
       "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/SUK.swift",
       "kind": "StringLiteral",
-      "offset": 6751,
+      "offset": 6886,
       "length": 15,
       "value": "\"Release Notes\""
     },
     {
       "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/SUK.swift",
       "kind": "IntegerLiteral",
-      "offset": 6907,
+      "offset": 7042,
       "length": 3,
       "value": "480"
     },
     {
       "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/SUK.swift",
       "kind": "IntegerLiteral",
-      "offset": 6920,
+      "offset": 7055,
       "length": 3,
       "value": "320"
     },
     {
       "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/RequestReviewCondition.swift",
       "kind": "StringLiteral",
-      "offset": 350,
+      "offset": 354,
       "length": 52,
       "value": "\"jp.hituzi.SwiftyUpdateKit.lastRequireReviewDateKey\""
     }

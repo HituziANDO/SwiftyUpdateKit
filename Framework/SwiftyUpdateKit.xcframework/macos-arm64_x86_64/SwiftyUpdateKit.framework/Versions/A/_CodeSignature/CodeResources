@@ -6,7 +6,7 @@
 	<dict>
 		<key>Resources/Info.plist</key>
 		<data>
-		lJdwYXj1v4U8RPS1Ni4VR5nqdBA=
+		c6t3/IVCs1B9dOScbvUQKqyJbT0=
 		</data>
 		<key>Resources/PrivacyInfo.xcprivacy</key>
 		<data>
@@ -26,77 +26,77 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			AIYxIEPufldAjH+21BeE5zW6fsc4Xv5FWuSEfzopzOQ=
+			ZERZXr6/4u9gEoipKZTOIKs0834PpYIGGc3FudzX+jA=
 			</data>
 		</dict>
 		<key>Modules/SwiftyUpdateKit.swiftmodule/arm64-apple-macos.abi.json</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			FC+yVUfOy2brPbpQyBZ6RdYP/N2jdDg4xb73rJAQc2U=
+			cDYkR2HU7KuXLd+4kE1WoMvW5gZdgfjDXOPAyBQvOQE=
 			</data>
 		</dict>
 		<key>Modules/SwiftyUpdateKit.swiftmodule/arm64-apple-macos.private.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			akzXASO6EYGaV5FDKsXJW58iw7yov/1PwGClB5vmVuk=
+			34RQDKGSmSCTkdBtjl5T+Wobmin8qfLeb9jvzdYpxto=
 			</data>
 		</dict>
 		<key>Modules/SwiftyUpdateKit.swiftmodule/arm64-apple-macos.swiftdoc</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			BaaGKmps1m7xn0DiHIfIqK3sNrvbg/wR2RmZIgLEqVY=
+			nphTrfG7Smvca0QxlvYW/6n5Mzw5oUk29tvtO7p8ihE=
 			</data>
 		</dict>
 		<key>Modules/SwiftyUpdateKit.swiftmodule/arm64-apple-macos.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			akzXASO6EYGaV5FDKsXJW58iw7yov/1PwGClB5vmVuk=
+			34RQDKGSmSCTkdBtjl5T+Wobmin8qfLeb9jvzdYpxto=
 			</data>
 		</dict>
 		<key>Modules/SwiftyUpdateKit.swiftmodule/arm64-apple-macos.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			W+wPQt5yKDZkipv6zGf2jkFrlr5GVZQcBTZE06rpRrw=
+			eb3iRb74RBLaVe+FBtftbcNrfUSTWiU8Mwxn4zcr/X0=
 			</data>
 		</dict>
 		<key>Modules/SwiftyUpdateKit.swiftmodule/x86_64-apple-macos.abi.json</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			FC+yVUfOy2brPbpQyBZ6RdYP/N2jdDg4xb73rJAQc2U=
+			cDYkR2HU7KuXLd+4kE1WoMvW5gZdgfjDXOPAyBQvOQE=
 			</data>
 		</dict>
 		<key>Modules/SwiftyUpdateKit.swiftmodule/x86_64-apple-macos.private.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			4F7rIyagz5R/H7taguTJ12yzHBEIr5A/XKCkoW8hsz0=
+			6Kt8pAugeLAcHAMpVT8auhfXHxPzYWsB4w0O0YNhqlk=
 			</data>
 		</dict>
 		<key>Modules/SwiftyUpdateKit.swiftmodule/x86_64-apple-macos.swiftdoc</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			ZMkvqv/137rTqYjFZdhFFc943jHvn+WgEZYy6kgEU2Y=
+			/xCPlndEkEBzFxK858r8HEwfucb42ADtL7nyNo+czOs=
 			</data>
 		</dict>
 		<key>Modules/SwiftyUpdateKit.swiftmodule/x86_64-apple-macos.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			4F7rIyagz5R/H7taguTJ12yzHBEIr5A/XKCkoW8hsz0=
+			6Kt8pAugeLAcHAMpVT8auhfXHxPzYWsB4w0O0YNhqlk=
 			</data>
 		</dict>
 		<key>Modules/SwiftyUpdateKit.swiftmodule/x86_64-apple-macos.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			a6L7AGkGQVUDXWhWs2YStDHWR2whcRmrU0X7uYzNwSo=
+			2gthlpwhiQCNWnOqEUPjPb+x88wQxlBG43Sx+nw16JQ=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>
@@ -110,7 +110,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			h3ntxnM5Lhj5nHBMD1Rw53YJxqQCsS4PzAdPk2/trTk=
+			KCzKfFf3jKF7H254QwUe2SdRrFsnmRiMR1zAGRyIs7k=
 			</data>
 		</dict>
 		<key>Resources/PrivacyInfo.xcprivacy</key>
