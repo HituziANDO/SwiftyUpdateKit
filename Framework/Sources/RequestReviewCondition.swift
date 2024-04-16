@@ -36,7 +36,7 @@ open class RequestReviewConditionDisable: RequestReviewCondition {
     }
 }
 
-/// Asks a user for a review one time by a day.
+/// Asks a user for a review once a day.
 open class RequestReviewConditionDaily: RequestReviewCondition {
     public init() {}
 
@@ -53,7 +53,7 @@ open class RequestReviewConditionDaily: RequestReviewCondition {
     }
 }
 
-/// Asks a user for a review one time by a day, but skips first day.
+/// Asks a user for a review once a day, but skips first day.
 open class RequestReviewConditionDailySkipFirstDay: RequestReviewCondition {
     public init() {}
 
@@ -70,5 +70,42 @@ open class RequestReviewConditionDailySkipFirstDay: RequestReviewCondition {
         }
 
         return RequestReviewConditionDaily().shouldRequestReview()
+    }
+}
+
+/// Asks a user for a review when the app is launched and once a day.
+open class RequestReviewConditionLaunchingAndDaily: RequestReviewCondition {
+    public init() {}
+
+    open func shouldRequestReview() -> Bool {
+        let lastDate = sharedDictionary
+            .value(forKey: SwiftyUpdateKitLastRequireReviewDateKey) as? Int ?? 0
+        let today = DateUtils.currentDate()
+
+        guard lastDate < today else { return false }
+
+        sharedDictionary.setValue(today, forKey: SwiftyUpdateKitLastRequireReviewDateKey)
+
+        return true
+    }
+}
+
+/// Asks a user for a review when the app is launched and once a day, but skips first day.
+open class RequestReviewConditionLaunchingAndDailySkipFirstDay: RequestReviewCondition {
+    public init() {}
+
+    open func shouldRequestReview() -> Bool {
+        let lastDate = sharedDictionary
+            .value(forKey: SwiftyUpdateKitLastRequireReviewDateKey) as? Int ?? 0
+
+        // lastDate is 0 means the first day because the value is not set.
+        if lastDate == 0 {
+            let today = DateUtils.currentDate()
+            sharedDictionary.setValue(today, forKey: SwiftyUpdateKitLastRequireReviewDateKey)
+
+            return false
+        }
+
+        return RequestReviewConditionLaunchingAndDaily().shouldRequestReview()
     }
 }
