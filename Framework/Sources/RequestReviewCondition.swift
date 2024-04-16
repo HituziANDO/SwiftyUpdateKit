@@ -10,7 +10,8 @@ import Foundation
 
 /// The key of UserDefaults.standard.
 /// The value retrieved with this key is Int value as yyyyMMdd representation.
-public let SwiftyUpdateKitLastRequireReviewDateKey = "jp.hituzi.SwiftyUpdateKit.lastRequireReviewDateKey"
+public let SwiftyUpdateKitLastRequireReviewDateKey =
+    "jp.hituzi.SwiftyUpdateKit.lastRequireReviewDateKey"
 
 public protocol RequestReviewCondition: AnyObject {
     /// If returns true, requests the review of the app.
@@ -19,9 +20,7 @@ public protocol RequestReviewCondition: AnyObject {
 
 /// Always asks a user for a review.
 open class RequestReviewConditionAlways: RequestReviewCondition {
-
-    public init() {
-    }
+    public init() {}
 
     open func shouldRequestReview() -> Bool {
         true
@@ -30,9 +29,7 @@ open class RequestReviewConditionAlways: RequestReviewCondition {
 
 /// Does not ask a user for a review whenever.
 open class RequestReviewConditionDisable: RequestReviewCondition {
-
-    public init() {
-    }
+    public init() {}
 
     open func shouldRequestReview() -> Bool {
         false
@@ -41,12 +38,11 @@ open class RequestReviewConditionDisable: RequestReviewCondition {
 
 /// Asks a user for a review one time by a day.
 open class RequestReviewConditionDaily: RequestReviewCondition {
-
-    public init() {
-    }
+    public init() {}
 
     open func shouldRequestReview() -> Bool {
-        let lastDate = SUKUserDefaults.standard.integer(forKey: SwiftyUpdateKitLastRequireReviewDateKey)
+        let lastDate = SUKUserDefaults.standard
+            .integer(forKey: SwiftyUpdateKitLastRequireReviewDateKey)
         let today = DateUtils.currentDate()
 
         guard lastDate < today else { return false }
@@ -59,12 +55,11 @@ open class RequestReviewConditionDaily: RequestReviewCondition {
 
 /// Asks a user for a review one time by a day, but skips first day.
 open class RequestReviewConditionDailySkipFirstDay: RequestReviewCondition {
-
-    public init() {
-    }
+    public init() {}
 
     open func shouldRequestReview() -> Bool {
-        let lastDate = SUKUserDefaults.standard.integer(forKey: SwiftyUpdateKitLastRequireReviewDateKey)
+        let lastDate = SUKUserDefaults.standard
+            .integer(forKey: SwiftyUpdateKitLastRequireReviewDateKey)
 
         // lastDate is 0 means the first day because the value is not set.
         if lastDate == 0 {

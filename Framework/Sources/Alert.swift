@@ -16,9 +16,8 @@ import UIKit
 
 #if os(iOS)
 extension UIApplication {
-
     static var keyWindow: UIWindow? {
-        UIApplication.shared.windows.filter { $0.isKeyWindow }.first
+        UIApplication.shared.windows.filter(\.isKeyWindow).first
     }
 }
 
@@ -35,15 +34,15 @@ extension UIViewController {
 #endif
 
 class Alert {
-
     /// The button click event handler.
-    public typealias ActionHandler = () -> ()
+    public typealias ActionHandler = () -> Void
 
     /// Styles to apply to action buttons in an alert.
     public enum ActionStyle {
         /// Apply the default style to the action’s button.
         case `default`
-        /// Apply a style that indicates the action cancels the operation and leaves things unchanged.
+        /// Apply a style that indicates the action cancels the operation and leaves things
+        /// unchanged.
         case cancel
         /// Apply a style that indicates the action might change or delete data.
         case destructive
@@ -88,13 +87,13 @@ class Alert {
         /// The esc key.
         case esc = "\u{1b}"
         /// The y key. Maybe it means "yes".
-        case y = "y"
+        case y
         /// The n key. Maybe it means "no".
-        case n = "n"
+        case n
         /// The o key. Maybe it means "ok".
-        case o = "o"
+        case o
         /// The c key. Maybe it means "cancel".
-        case c = "c"
+        case c
     }
 
     #if os(OSX)
@@ -134,7 +133,8 @@ class Alert {
     open func addAction(_ title: String,
                         style: ActionStyle? = .default,
                         shortcutKey: ShortcutKey? = nil,
-                        handler: ActionHandler? = nil) -> Self {
+                        handler: ActionHandler? = nil) -> Self
+    {
         #if os(OSX)
         if buttonIndex == 0 {
             alert.addButton(withTitle: title)
@@ -143,30 +143,30 @@ class Alert {
                 alert.buttons[0].keyEquivalent = key.rawValue
             }
             buttonIndex += 1
-        }
-        else if buttonIndex == 1 {
+        } else if buttonIndex == 1 {
             alert.addButton(withTitle: title)
             secondButtonHandler = handler
             if let key = shortcutKey {
                 alert.buttons[1].keyEquivalent = key.rawValue
             }
             buttonIndex += 1
-        }
-        else if buttonIndex == 2 {
+        } else if buttonIndex == 2 {
             alert.addButton(withTitle: title)
             thirdButtonHandler = handler
             if let key = shortcutKey {
                 alert.buttons[2].keyEquivalent = key.rawValue
             }
             buttonIndex += 1
-        }
-        else {
+        } else {
             fatalError("The alert can have up to 3 buttons.")
         }
         #elseif os(iOS)
-        alert.addAction(UIAlertAction(title: title, style: style?.uiAlertActionStyle ?? .default) { _ in
-            handler?()
-        })
+        alert
+            .addAction(UIAlertAction(title: title,
+                                     style: style?.uiAlertActionStyle ?? .default)
+                { _ in
+                    handler?()
+                })
         #endif
         return self
     }
@@ -177,13 +177,13 @@ class Alert {
         let response = alert.runModal()
         switch response {
             case .alertFirstButtonReturn:
-                firstButtonHandler?()
+            firstButtonHandler?()
             case .alertSecondButtonReturn:
-                secondButtonHandler?()
+            secondButtonHandler?()
             case .alertThirdButtonReturn:
-                thirdButtonHandler?()
+            thirdButtonHandler?()
             default:
-                break
+            break
         }
         #elseif os(iOS)
         UIApplication.keyWindow?

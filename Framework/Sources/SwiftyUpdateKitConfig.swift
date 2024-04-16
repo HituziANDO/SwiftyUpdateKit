@@ -10,7 +10,8 @@ import Foundation
 
 public struct SwiftyUpdateKitConfig {
     public static let defaultUpdateAlertTitle = "Released new version!"
-    public static let defaultUpdateAlertMessage = "Please update the app. Please refer to the App Store for details of the update contents."
+    public static let defaultUpdateAlertMessage =
+        "Please update the app. Please refer to the App Store for details of the update contents."
     public static let defaultUpdateButtonTitle = "Update"
     public static let defaultRemindMeLaterButtonTitle = "Remind me later"
 
@@ -21,7 +22,8 @@ public struct SwiftyUpdateKitConfig {
     /// ```
     public let version: String
     /// iTunes ID.
-    /// e.g.) The App Store URL: "https://apps.apple.com/app/sampleapp/id1234567890" -> iTunesID is 1234567890
+    /// e.g.) The App Store URL: "https://apps.apple.com/app/sampleapp/id1234567890" -> iTunesID is
+    /// 1234567890
     public let iTunesID: String
     /// The App Store URL of your app.
     public let storeURL: String
@@ -60,7 +62,8 @@ public struct SwiftyUpdateKitConfig {
     ///   - remindMeLaterButtonTitle:
     ///   - retryCount:
     ///   - retryDelay:
-    ///   - development: If true, the database is in development environment. Otherwise it is for production environment.
+    ///   - development: If true, the database is in development environment. Otherwise it is for
+    /// production environment.
     /// Must set false when release your app.
     public init(version: String,
                 iTunesID: String,
@@ -70,21 +73,26 @@ public struct SwiftyUpdateKitConfig {
                 updateAlertTitle: String = SwiftyUpdateKitConfig.defaultUpdateAlertTitle,
                 updateAlertMessage: String = SwiftyUpdateKitConfig.defaultUpdateAlertMessage,
                 updateButtonTitle: String = SwiftyUpdateKitConfig.defaultUpdateButtonTitle,
-                remindMeLaterButtonTitle: String? = SwiftyUpdateKitConfig.defaultRemindMeLaterButtonTitle,
+                remindMeLaterButtonTitle: String? = SwiftyUpdateKitConfig
+                    .defaultRemindMeLaterButtonTitle,
                 retryCount: Int = 2,
                 retryDelay: TimeInterval = 1,
-                development: Bool = false) {
+                development: Bool = false)
+    {
         self.version = version
         self.iTunesID = iTunesID
         self.storeURL = storeURL
         self.country = country
         self.versionCompare = versionCompare ?? VersionCompare()
-        self.updateAlertTitle = updateAlertTitle.isEmpty ? SwiftyUpdateKitConfig.defaultUpdateAlertTitle : updateAlertTitle
-        self.updateAlertMessage = updateAlertMessage.isEmpty ? SwiftyUpdateKitConfig.defaultUpdateAlertMessage : updateAlertMessage
-        self.updateButtonTitle = updateButtonTitle.isEmpty ? SwiftyUpdateKitConfig.defaultUpdateButtonTitle : updateButtonTitle
+        self.updateAlertTitle = updateAlertTitle.isEmpty ? SwiftyUpdateKitConfig
+            .defaultUpdateAlertTitle : updateAlertTitle
+        self.updateAlertMessage = updateAlertMessage.isEmpty ? SwiftyUpdateKitConfig
+            .defaultUpdateAlertMessage : updateAlertMessage
+        self.updateButtonTitle = updateButtonTitle.isEmpty ? SwiftyUpdateKitConfig
+            .defaultUpdateButtonTitle : updateButtonTitle
         self.remindMeLaterButtonTitle = remindMeLaterButtonTitle
         self.retryCount = retryCount
         self.retryDelay = retryDelay
-        self.isDevelopment = development
+        isDevelopment = development
     }
 }

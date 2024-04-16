@@ -56,7 +56,6 @@ class SUKUserDefaults {
 }
 
 private extension SUKUserDefaults {
-
     /// Returns a key for current environment.
     func forEnv(_ key: String) -> String {
         switch env {

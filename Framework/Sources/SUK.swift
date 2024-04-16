@@ -16,11 +16,13 @@ public typealias SUKViewController = UIViewController
 #endif
 
 /// The closure is called when new app version is released on the App Store.
-public typealias UpdateHandler = (_ newVersion: String?, _ releaseNotes: String?) -> ()
+public typealias UpdateHandler = (_ newVersion: String?, _ releaseNotes: String?) -> Void
 
 /// The closure is called when new app version is installed.
-/// If a user has updated or installed firstly since the introduction of SwiftyUpdateKit, `firstUpdated` flag is true, otherwise false.
-public typealias NewReleaseHandler = (_ newVersion: String?, _ releaseNotes: String?, _ firstUpdated: Bool) -> ()
+/// If a user has updated or installed firstly since the introduction of SwiftyUpdateKit,
+/// `firstUpdated` flag is true, otherwise false.
+public typealias NewReleaseHandler = (_ newVersion: String?, _ releaseNotes: String?,
+                                      _ firstUpdated: Bool) -> Void
 
 /// SwiftyUpdateKit.
 public class SUK {
@@ -36,10 +38,11 @@ public class SUK {
     ///   - config: A configuration.
     ///   - log: The closure outputs logs.
     public static func initialize(withConfig config: SwiftyUpdateKitConfig,
-                                  log: Log? = nil) {
+                                  log: Log? = nil)
+    {
         self.config = config
         self.log = log
-        
+
         SUKUserDefaults.setEnvironment(config.isDevelopment ? .development : .production)
     }
 
@@ -51,26 +54,32 @@ public class SUK {
     @available(*, deprecated, renamed: "initialize(withConfig:log:)")
     @inlinable
     public static func applicationDidFinishLaunching(withConfig config: SwiftyUpdateKitConfig,
-                                                     log: Log? = nil) {
+                                                     log: Log? = nil)
+    {
         initialize(withConfig: config, log: log)
     }
 
-    /// If specified condition returns true, this method checks the app version whether new version is released.
+    /// If specified condition returns true, this method checks the app version whether new version
+    /// is released.
     /// And when new app version is installed, this method can show the release notes to a user.
     ///
     /// - Parameters:
     ///   - condition: If the condition returns true, checks the app version.
-    ///   - update: The closure is called when current app version is old. If nil is specified, default alert is shown.
-    ///   - newRelease: The closure is called when new app version is installed. If nil is specified, to show the release notes to a user is ignored.
-    ///   - userID: A user's ID to show the release notes when new app version is installed. Default value of this argument is "SwiftyUpdateKitUser".
+    ///   - update: The closure is called when current app version is old. If nil is specified,
+    /// default alert is shown.
+    ///   - newRelease: The closure is called when new app version is installed. If nil is
+    /// specified, to show the release notes to a user is ignored.
+    ///   - userID: A user's ID to show the release notes when new app version is installed. Default
+    /// value of this argument is "SwiftyUpdateKitUser".
     ///   - noop: The closure is called when no operation.
     public static func checkVersion(_ condition: VersionCheckCondition,
                                     update: UpdateHandler? = nil,
                                     newRelease: NewReleaseHandler? = nil,
                                     forUserID userID: String = "SwiftyUpdateKitUser",
-                                    noop: (() -> ())? = nil) {
+                                    noop: (() -> Void)? = nil)
+    {
         checkVersion(condition, update: update) { lookUpResult in
-            guard let newRelease = newRelease else {
+            guard let newRelease else {
                 // Not need to show the new release.
                 noop?()
                 return
@@ -79,19 +88,18 @@ public class SUK {
             if let result = lookUpResult {
                 // Use fetched lookUpResult.
                 checkNewRelease(result, newRelease: newRelease, forUserID: userID, noop: noop)
-            }
-            else {
-                guard let config = config else { return }
+            } else {
+                guard let config else { return }
 
                 ITunesSearchAPI.lookUp(with: config) { result in
                     switch result {
-                        case .failure(let error):
+                        case let .failure(error):
                             // Ignore an error.
                             logf(error.localizedDescription, log)
                             DispatchQueue.main.async {
                                 noop?()
                             }
-                        case .success(let lookUpResults):
+                        case let .success(lookUpResults):
                             guard let lookUpResult = lookUpResults.first else {
                                 // Ignore an error.
                                 logf("lookUpResult does not exist in the response data.", log)
@@ -114,7 +122,7 @@ public class SUK {
     /// Opens the App Store.
     public static func openAppStore() {
         DispatchQueue.main.async {
-            guard let config = config else {
+            guard let config else {
                 logf("`applicationDidFinishLaunching(withConfig:)` method is not called yet.", log)
                 return
             }
@@ -134,14 +142,14 @@ public class SUK {
     /// Shows the update alert for a user to install new app version.
     public static func showUpdateAlert() {
         DispatchQueue.main.async {
-            guard let config = config else {
+            guard let config else {
                 logf("`applicationDidFinishLaunching(withConfig:)` method is not called yet.", log)
                 return
             }
 
             let alert = Alert(title: config.updateAlertTitle,
                               message: config.updateAlertMessage)
-                    .addAction(config.updateButtonTitle) { Self.openAppStore() }
+                .addAction(config.updateButtonTitle) { Self.openAppStore() }
 
             if let title = config.remindMeLaterButtonTitle, !title.isEmpty {
                 alert.addAction(title)
@@ -158,14 +166,16 @@ public class SUK {
     ///   - text: Release notes.
     ///   - title: A title. Default value of this argument is "Release Notes".
     ///   - version: new app version.
-    ///   - windowSize: A window size. Default value of this argument is (480, 320). This value is used on macOS only.
+    ///   - windowSize: A window size. Default value of this argument is (480, 320). This value is
+    /// used on macOS only.
     ///   - dismissHandler: A handler called when the release notes has been disappeared.
     public static func showReleaseNotes(from rootViewController: SUKViewController,
                                         text: String?,
                                         title: String = "Release Notes",
                                         version: String? = nil,
                                         windowSize: CGSize = CGSize(width: 480, height: 320),
-                                        dismissHandler: (() -> ())? = nil) {
+                                        dismissHandler: (() -> Void)? = nil)
+    {
         #if os(OSX)
         let viewController = ReleaseNotesController(windowSize: windowSize,
                                                     title: title,
@@ -193,7 +203,8 @@ public class SUK {
         }
     }
 
-    /// Resets the status: stored date of version check condition, stored date of request review condition,
+    /// Resets the status: stored date of version check condition, stored date of request review
+    /// condition,
     /// and stored app version for the release notes.
     /// For example, you may use this method during testing and development.
     public static func reset() {
@@ -205,12 +216,12 @@ public class SUK {
 }
 
 private extension SUK {
-
     static func checkVersion(_ condition: VersionCheckCondition,
                              update: UpdateHandler?,
-                             next: @escaping (LookUpResult?) -> ()) {
+                             next: @escaping (LookUpResult?) -> Void)
+    {
         DispatchQueue.main.async {
-            guard let config = config else {
+            guard let config else {
                 logf("`applicationDidFinishLaunching(withConfig:)` method is not called yet.", log)
                 return
             }
@@ -225,10 +236,10 @@ private extension SUK {
 
             ITunesSearchAPI.lookUp(with: config) { result in
                 switch result {
-                    case .failure(let error):
+                    case let .failure(error):
                         // Ignore an error.
                         logf(error.localizedDescription, log)
-                    case .success(let lookUpResults):
+                    case let .success(lookUpResults):
                         logf(lookUpResults.description, log)
                         guard let lookUpResult = lookUpResults.first,
                               let storeVersion = lookUpResult.version
@@ -238,21 +249,20 @@ private extension SUK {
                             return
                         }
 
-                        let isOld = config.versionCompare.compare(storeVersion, with: config.version)
+                        let isOld = config.versionCompare.compare(storeVersion,
+                                                                  with: config.version)
 
                         if isOld {
                             logf("This app version is old.", log)
                             if update == nil {
                                 // Use default update alert.
                                 Self.showUpdateAlert()
-                            }
-                            else {
+                            } else {
                                 DispatchQueue.main.async {
                                     update?(lookUpResult.version, lookUpResult.releaseNotes)
                                 }
                             }
-                        }
-                        else {
+                        } else {
                             // Latest
                             logf("This app version is already latest.", log)
                             DispatchQueue.main.async {
@@ -267,8 +277,9 @@ private extension SUK {
     static func checkNewRelease(_ lookUpResult: LookUpResult,
                                 newRelease: @escaping NewReleaseHandler,
                                 forUserID userID: String,
-                                noop: (() -> ())?) {
-        guard let config = config else { return }
+                                noop: (() -> Void)?)
+    {
+        guard let config else { return }
 
         guard let storeVersion = lookUpResult.version else {
             logf("version does not exist in the response data.", log)

@@ -21,8 +21,7 @@ struct ReleaseNotes: Codable {
         let dict = dictionary()
         if let releaseNotes = dict[userID] {
             return releaseNotes
-        }
-        else {
+        } else {
             return ReleaseNotes(latest: nil, userID: userID)
         }
     }
@@ -37,10 +36,10 @@ struct ReleaseNotes: Codable {
     private static func dictionary() -> [String: ReleaseNotes] {
         if let string = SUKUserDefaults.standard.string(forKey: SwiftyUpdateKitLatestAppVersionKey),
            let data = Data(base64Encoded: string),
-           let dictionary = try? JSONDecoder().decode([String: ReleaseNotes].self, from: data) {
+           let dictionary = try? JSONDecoder().decode([String: ReleaseNotes].self, from: data)
+        {
             return dictionary
-        }
-        else {
+        } else {
             return [:]
         }
     }

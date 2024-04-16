@@ -11,17 +11,19 @@ import SwiftyUpdateKit
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+    func application(_ application: UIApplication,
+                     didFinishLaunchingWithOptions launchOptions: [UIApplication
+                         .LaunchOptionsKey: Any]?) -> Bool
+    {
         print("SwiftyUpdateKit.version: \(SUK.version)")
 
 //        SUK.reset()
 
-        let config = SwiftyUpdateKitConfig(
-            // Current app version.
+        let config = SwiftyUpdateKitConfig(// Current app version.
             version: Bundle.main.infoDictionary!["CFBundleShortVersionString"] as! String,
             // iTunes ID.
-            // e.g.) The App Store URL: "https://apps.apple.com/app/sampleapp/id1234567890" -> iTunesID is 1234567890
+            // e.g.) The App Store URL: "https://apps.apple.com/app/sampleapp/id1234567890" ->
+            // iTunesID is 1234567890
             iTunesID: "1491913803",
             // The App Store URL of your app.
             storeURL: "https://apps.apple.com/app/blue-sketch/id1491913803",
@@ -38,8 +40,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             updateButtonTitle: "Update",
             // The remind-me-later button's label. If nil is specified, the button is hidden.
             // That is, you can force a user to update because it cannot be canceled.
-            remindMeLaterButtonTitle: "Remind me later"
-        )
+            remindMeLaterButtonTitle: "Remind me later")
         SUK.initialize(withConfig: config) { print($0) }
 
         return true
@@ -47,15 +48,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     // MARK: UISceneSession Lifecycle
 
-    func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
+    func application(_ application: UIApplication,
+                     configurationForConnecting connectingSceneSession: UISceneSession,
+                     options: UIScene.ConnectionOptions) -> UISceneConfiguration
+    {
         // Called when a new scene session is being created.
         // Use this method to select a configuration to create the new scene with.
-        return UISceneConfiguration(name: "Default Configuration", sessionRole: connectingSceneSession.role)
+        UISceneConfiguration(name: "Default Configuration",
+                             sessionRole: connectingSceneSession.role)
     }
 
-    func application(_ application: UIApplication, didDiscardSceneSessions sceneSessions: Set<UISceneSession>) {
+    func application(_ application: UIApplication,
+                     didDiscardSceneSessions sceneSessions: Set<UISceneSession>)
+    {
         // Called when the user discards a scene session.
-        // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
-        // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
+        // If any sessions were discarded while the application was not running, this will be called
+        // shortly after application:didFinishLaunchingWithOptions.
+        // Use this method to release any resources that were specific to the discarded scenes, as
+        // they will not return.
     }
 }

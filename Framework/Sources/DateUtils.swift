@@ -22,8 +22,7 @@ struct DateUtils {
         let str = formatter.string(from: Date())
         if let dateInt = Int(str) {
             return dateInt
-        }
-        else {
+        } else {
             // Unsupported locale.
             // print(locale.identifier)
             return currentDate()

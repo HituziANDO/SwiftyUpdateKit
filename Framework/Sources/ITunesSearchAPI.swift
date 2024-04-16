@@ -57,14 +57,14 @@ enum ITunesSearchAPIError: Error {
 }
 
 struct ITunesSearchAPI {
-
     public static func lookUp(with config: SwiftyUpdateKitConfig,
-                              completion: @escaping (Result<[LookUpResult], Error>) -> ()) {
+                              completion: @escaping (Result<[LookUpResult], Error>) -> Void)
+    {
         let url: URL
         if let country = config.country, !country.isEmpty {
-            url = URL(string: "https://itunes.apple.com/lookup?id=\(config.iTunesID)&country=\(country)")!
-        }
-        else {
+            url =
+                URL(string: "https://itunes.apple.com/lookup?id=\(config.iTunesID)&country=\(country)")!
+        } else {
             url = URL(string: "https://itunes.apple.com/lookup?id=\(config.iTunesID)")!
         }
 
@@ -78,17 +78,17 @@ struct ITunesSearchAPI {
 }
 
 private extension ITunesSearchAPI {
-
     static func resumeTask(_ url: URL,
                            tryCount: Int,
                            maxCount: Int,
                            delay: TimeInterval,
-                           completion: @escaping (Result<[LookUpResult], Error>) -> ()) {
+                           completion: @escaping (Result<[LookUpResult], Error>) -> Void)
+    {
         fetch(url) { result in
             switch result {
-                case .success(let results):
+                case let .success(results):
                     completion(.success(results))
-                case .failure(let error):
+                case let .failure(error):
                     if tryCount <= maxCount {
                         // Retry
                         DispatchQueue.global().asyncAfter(deadline: .now() + delay) {
@@ -98,8 +98,7 @@ private extension ITunesSearchAPI {
                                        delay: delay,
                                        completion: completion)
                         }
-                    }
-                    else {
+                    } else {
                         // Failed
                         completion(.failure(error))
                     }
@@ -107,14 +106,14 @@ private extension ITunesSearchAPI {
         }
     }
 
-    static func fetch(_ url: URL, completion: @escaping (Result<[LookUpResult], Error>) -> ()) {
+    static func fetch(_ url: URL, completion: @escaping (Result<[LookUpResult], Error>) -> Void) {
         let task = URLSession.shared.dataTask(with: url) { data, response, error in
-            if let error = error {
+            if let error {
                 completion(.failure(error))
                 return
             }
 
-            guard let data = data, let response = response as? HTTPURLResponse else {
+            guard let data, let response = response as? HTTPURLResponse else {
                 completion(.failure(ITunesSearchAPIError.invalidResponseData))
                 return
             }
@@ -132,46 +131,44 @@ private extension ITunesSearchAPI {
             }
 
             let lookUpResults = results.map {
-                LookUpResult(
-                    artistId: $0["artistId"] as? UInt,
-                    artistName: $0["artistName"] as? String,
-                    artistViewUrl: $0["artistViewUrl"] as? String,
-                    artworkUrl100: $0["artworkUrl100"] as? String,
-                    artworkUrl512: $0["artworkUrl512"] as? String,
-                    artworkUrl60: $0["artworkUrl60"] as? String,
-                    averageUserRating: $0["averageUserRating"] as? Int,
-                    averageUserRatingForCurrentVersion: $0["averageUserRatingForCurrentVersion"] as? Int,
-                    bundleId: $0["bundleId"] as? String,
-                    contentAdvisoryRating: $0["contentAdvisoryRating"] as? String,
-                    currency: $0["currency"] as? String,
-                    currentVersionReleaseDate: $0["currentVersionReleaseDate"] as? String,
-                    description: $0["description"] as? String,
-                    fileSizeBytes: $0["fileSizeBytes"] as? UInt,
-                    formattedPrice: $0["formattedPrice"] as? String,
-                    genreIds: $0["genreIds"] as? [String],
-                    genres: $0["genres"] as? [String],
-                    isVppDeviceBasedLicensingEnabled: $0["isVppDeviceBasedLicensingEnabled"] as? Bool,
-                    kind: $0["kind"] as? String,
-                    languageCodesISO2A: $0["languageCodesISO2A"] as? [String],
-                    minimumOsVersion: $0["minimumOsVersion"] as? String,
-                    price: $0["price"] as? Int,
-                    primaryGenreId: $0["primaryGenreId"] as? Int,
-                    primaryGenreName: $0["primaryGenreName"] as? String,
-                    releaseDate: $0["releaseDate"] as? String,
-                    releaseNotes: $0["releaseNotes"] as? String,
-                    screenshotUrls: $0["screenshotUrls"] as? [String],
-                    sellerName: $0["sellerName"] as? String,
-                    sellerUrl: $0["sellerUrl"] as? String,
-                    trackCensoredName: $0["trackCensoredName"] as? String,
-                    trackContentRating: $0["trackContentRating"] as? String,
-                    trackId: $0["trackId"] as? UInt,
-                    trackName: $0["trackName"] as? String,
-                    trackViewUrl: $0["trackViewUrl"] as? String,
-                    userRatingCount: $0["userRatingCount"] as? Int,
-                    userRatingCountForCurrentVersion: $0["userRatingCountForCurrentVersion"] as? Int,
-                    version: $0["version"] as? String,
-                    wrapperType: $0["wrapperType"] as? String
-                )
+                LookUpResult(artistId: $0["artistId"] as? UInt,
+                             artistName: $0["artistName"] as? String,
+                             artistViewUrl: $0["artistViewUrl"] as? String,
+                             artworkUrl100: $0["artworkUrl100"] as? String,
+                             artworkUrl512: $0["artworkUrl512"] as? String,
+                             artworkUrl60: $0["artworkUrl60"] as? String,
+                             averageUserRating: $0["averageUserRating"] as? Int,
+                             averageUserRatingForCurrentVersion: $0["averageUserRatingForCurrentVersion"] as? Int,
+                             bundleId: $0["bundleId"] as? String,
+                             contentAdvisoryRating: $0["contentAdvisoryRating"] as? String,
+                             currency: $0["currency"] as? String,
+                             currentVersionReleaseDate: $0["currentVersionReleaseDate"] as? String,
+                             description: $0["description"] as? String,
+                             fileSizeBytes: $0["fileSizeBytes"] as? UInt,
+                             formattedPrice: $0["formattedPrice"] as? String,
+                             genreIds: $0["genreIds"] as? [String],
+                             genres: $0["genres"] as? [String],
+                             isVppDeviceBasedLicensingEnabled: $0["isVppDeviceBasedLicensingEnabled"] as? Bool,
+                             kind: $0["kind"] as? String,
+                             languageCodesISO2A: $0["languageCodesISO2A"] as? [String],
+                             minimumOsVersion: $0["minimumOsVersion"] as? String,
+                             price: $0["price"] as? Int,
+                             primaryGenreId: $0["primaryGenreId"] as? Int,
+                             primaryGenreName: $0["primaryGenreName"] as? String,
+                             releaseDate: $0["releaseDate"] as? String,
+                             releaseNotes: $0["releaseNotes"] as? String,
+                             screenshotUrls: $0["screenshotUrls"] as? [String],
+                             sellerName: $0["sellerName"] as? String,
+                             sellerUrl: $0["sellerUrl"] as? String,
+                             trackCensoredName: $0["trackCensoredName"] as? String,
+                             trackContentRating: $0["trackContentRating"] as? String,
+                             trackId: $0["trackId"] as? UInt,
+                             trackName: $0["trackName"] as? String,
+                             trackViewUrl: $0["trackViewUrl"] as? String,
+                             userRatingCount: $0["userRatingCount"] as? Int,
+                             userRatingCountForCurrentVersion: $0["userRatingCountForCurrentVersion"] as? Int,
+                             version: $0["version"] as? String,
+                             wrapperType: $0["wrapperType"] as? String)
             }
             completion(.success(lookUpResults))
         }

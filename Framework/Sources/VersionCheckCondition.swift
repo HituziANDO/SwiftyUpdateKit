@@ -10,7 +10,8 @@ import Foundation
 
 /// The key of UserDefaults.standard.
 /// The value retrieved with this key is Int value as yyyyMMdd representation.
-public let SwiftyUpdateKitLastVersionCheckDateKey = "jp.hituzi.SwiftyUpdateKit.lastVersionCheckDateKey"
+public let SwiftyUpdateKitLastVersionCheckDateKey =
+    "jp.hituzi.SwiftyUpdateKit.lastVersionCheckDateKey"
 
 public protocol VersionCheckCondition: AnyObject {
     /// If returns true, checks the app version.
@@ -19,9 +20,7 @@ public protocol VersionCheckCondition: AnyObject {
 
 /// Always checks the app version.
 open class VersionCheckConditionAlways: VersionCheckCondition {
-
-    public init() {
-    }
+    public init() {}
 
     open func shouldCheckVersion() -> Bool {
         true
@@ -30,9 +29,7 @@ open class VersionCheckConditionAlways: VersionCheckCondition {
 
 /// Does not check the app version whenever.
 open class VersionCheckConditionDisable: VersionCheckCondition {
-
-    public init() {
-    }
+    public init() {}
 
     open func shouldCheckVersion() -> Bool {
         false
@@ -41,12 +38,11 @@ open class VersionCheckConditionDisable: VersionCheckCondition {
 
 /// Checks the app version one time by a day.
 open class VersionCheckConditionDaily: VersionCheckCondition {
-
-    public init() {
-    }
+    public init() {}
 
     open func shouldCheckVersion() -> Bool {
-        let lastDate = SUKUserDefaults.standard.integer(forKey: SwiftyUpdateKitLastVersionCheckDateKey)
+        let lastDate = SUKUserDefaults.standard
+            .integer(forKey: SwiftyUpdateKitLastVersionCheckDateKey)
         let today = DateUtils.currentDate()
 
         guard lastDate < today else { return false }

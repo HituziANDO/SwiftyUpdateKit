@@ -5,19 +5,20 @@
 //  Copyright © 2021 Hituzi Ando. All rights reserved.
 //
 
-import XCTest
 @testable import SwiftyUpdateKit
+import XCTest
 
 class SwiftyUpdateKitTests: XCTestCase {
-
     override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        // Put setup code here. This method is called before the invocation of each test method in
+        // the class.
         SUKUserDefaults.setEnvironment(.test)
         SUK.reset()
     }
 
     override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+        // Put teardown code here. This method is called after the invocation of each test method in
+        // the class.
     }
 
     func testVersion() throws {
@@ -37,23 +38,23 @@ class SwiftyUpdateKitTests: XCTestCase {
         XCTAssertEqual(0, ud.integer(forKey: SwiftyUpdateKitLastRequireReviewDateKey))
         XCTAssertNil(ud.string(forKey: SwiftyUpdateKitLatestAppVersionKey))
     }
-    
+
     func testUse_Development_DB() throws {
         let config = SwiftyUpdateKitConfig(version: "1.2.3",
-                              iTunesID: "1491913803",
-                              storeURL: "https://apps.apple.com/app/blue-sketch/id1491913803",
-        development: true)
+                                           iTunesID: "1491913803",
+                                           storeURL: "https://apps.apple.com/app/blue-sketch/id1491913803",
+                                           development: true)
         SUK.initialize(withConfig: config)
-        
+
         XCTAssertTrue(SUKUserDefaults.standard.env == .development)
     }
-    
+
     func testUse_Production_DB_By_Default() throws {
         let config = SwiftyUpdateKitConfig(version: "1.2.3",
-                              iTunesID: "1491913803",
-                              storeURL: "https://apps.apple.com/app/blue-sketch/id1491913803")
+                                           iTunesID: "1491913803",
+                                           storeURL: "https://apps.apple.com/app/blue-sketch/id1491913803")
         SUK.initialize(withConfig: config)
-        
+
         XCTAssertTrue(SUKUserDefaults.standard.env == .production)
     }
 }

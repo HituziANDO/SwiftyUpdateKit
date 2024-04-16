@@ -16,7 +16,7 @@ import Foundation
 ///     print(message)
 /// }
 /// ```
-public typealias Log = (_ message: Any) -> ()
+public typealias Log = (_ message: Any) -> Void
 
 func logf(_ message: String, _ log: Log?) {
     log?("[SwiftyUpdateKit] \(message)")

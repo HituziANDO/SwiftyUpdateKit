@@ -11,17 +11,16 @@ import SwiftyUpdateKit
 
 @main
 class AppDelegate: NSObject, NSApplicationDelegate {
-
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         print("SwiftyUpdateKit.version: \(SUK.version)")
 
 //        SUK.reset()
 
-        let config = SwiftyUpdateKitConfig(
-            // Current app version.
+        let config = SwiftyUpdateKitConfig(// Current app version.
             version: Bundle.main.infoDictionary!["CFBundleShortVersionString"] as! String,
             // iTunes ID.
-            // e.g.) The App Store URL: "https://apps.apple.com/app/sampleapp/id1234567890" -> iTunesID is 1234567890
+            // e.g.) The App Store URL: "https://apps.apple.com/app/sampleapp/id1234567890" ->
+            // iTunesID is 1234567890
             iTunesID: "1492010457",
             // The App Store URL of your app.
             storeURL: "https://apps.apple.com/app/blue-sketch/id1492010457",
@@ -38,8 +37,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             updateButtonTitle: "Update",
             // The remind-me-later button's label. If nil is specified, the button is hidden.
             // That is, you can force a user to update because it cannot be canceled.
-            remindMeLaterButtonTitle: "Remind me later"
-        )
+            remindMeLaterButtonTitle: "Remind me later")
         SUK.initialize(withConfig: config) { print($0) }
     }
 

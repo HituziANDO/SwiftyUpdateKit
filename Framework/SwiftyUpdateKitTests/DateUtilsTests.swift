@@ -6,21 +6,22 @@
 //  Copyright © 2023 Hituzi Ando. All rights reserved.
 //
 
-import XCTest
 @testable import SwiftyUpdateKit
+import XCTest
 
 final class DateUtilsTests: XCTestCase {
-
     override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        // Put setup code here. This method is called before the invocation of each test method in
+        // the class.
     }
 
     override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+        // Put teardown code here. This method is called after the invocation of each test method in
+        // the class.
     }
 
     func testCurrentDate() throws {
-        Locale.availableIdentifiers.forEach { id in
+        for id in Locale.availableIdentifiers {
             let dateInt = DateUtils.currentDate(locale: Locale(identifier: id))
             XCTAssertNotNil(dateInt)
         }

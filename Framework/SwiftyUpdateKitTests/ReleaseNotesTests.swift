@@ -6,18 +6,18 @@
 //  Copyright © 2021 Hituzi Ando. All rights reserved.
 //
 
-import XCTest
 @testable import SwiftyUpdateKit
+import XCTest
 
 class ReleaseNotesTests: XCTestCase {
-
     override func setUpWithError() throws {
         SUKUserDefaults.setEnvironment(.test)
         SUK.reset()
     }
 
     override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+        // Put teardown code here. This method is called after the invocation of each test method in
+        // the class.
     }
 
     func testFirstUpdated() throws {

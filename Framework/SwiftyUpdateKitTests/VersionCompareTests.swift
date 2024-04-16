@@ -6,19 +6,20 @@
 //  Copyright © 2021 Hituzi Ando. All rights reserved.
 //
 
-import XCTest
 @testable import SwiftyUpdateKit
+import XCTest
 
 class VersionCompareTests: XCTestCase {
-
     override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        // Put setup code here. This method is called before the invocation of each test method in
+        // the class.
         SUKUserDefaults.setEnvironment(.test)
         SUK.reset()
     }
 
     override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+        // Put teardown code here. This method is called after the invocation of each test method in
+        // the class.
     }
 
     func testCompare_1_3_2_vs_1_3_1() throws {

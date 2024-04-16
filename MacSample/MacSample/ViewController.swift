@@ -10,7 +10,6 @@ import Cocoa
 import SwiftyUpdateKit
 
 class ViewController: NSViewController {
-
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -18,12 +17,15 @@ class ViewController: NSViewController {
     override func viewDidAppear() {
         super.viewDidAppear()
 
-        SUK.checkVersion(VersionCheckConditionAlways(), newRelease: { [weak self] newVersion, releaseNotes, firstUpdated in
-            guard let self = self else { return }
-            SUK.showReleaseNotes(from: self, text: releaseNotes, version: newVersion) {
-                print("Release Notes has been closed.")
-            }
-        }) {
+        SUK.checkVersion(VersionCheckConditionAlways(),
+                         newRelease: { [weak self] newVersion, releaseNotes, _ in
+                             guard let self else { return }
+                             SUK.showReleaseNotes(from: self, text: releaseNotes,
+                                                  version: newVersion)
+                             {
+                                 print("Release Notes has been closed.")
+                             }
+                         }) {
             SUK.requestReview(RequestReviewConditionAlways())
         }
     }
