@@ -1,0 +1,25 @@
+{
+  "name": "SwiftyUpdateKit",
+  "private": true,
+  "scripts": {
+    "prepare": "./prepare.sh",
+    "fmt:install": "./codeformat.sh --install",
+    "fmt:fix": "./codeformat.sh --fix"
+  },
+  "volta": {
+    "node": "18.14.2",
+    "npm": "9.5.1"
+  },
+  "devDependencies": {
+    "husky": "^8.0.3",
+    "lint-staged": "^13.1.2"
+  },
+  "lint-staged": {
+    "./**/*.swift": [
+      "./.codeformat/swiftformat"
+    ],
+    "./**/*.{m,h}": [
+      "./.codeformat/uncrustify -c uncrustify-objc.cfg --no-backup -l OC"
+    ]
+  }
+}

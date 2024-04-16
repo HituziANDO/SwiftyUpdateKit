@@ -1,0 +1,23 @@
+--swiftversion 5.7
+
+--disable andOperator
+--disable enumNamespaces
+--disable numberFormatting
+#--disable unusedArguments # Disable unused args -> `_`
+
+# `#if` indent
+--ifdef noindent
+
+# `switch case` indent
+--indentcase true
+
+# Strip unused args: unused args -> `_`
+--stripunusedargs closure-only
+
+# Wrap
+--maxwidth 100
+--wraparguments after-first
+--wrapparameters after-first
+--wrapcollections after-first
+
+--someAny false
