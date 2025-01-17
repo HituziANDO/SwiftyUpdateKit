@@ -1,8 +1,8 @@
 {
   "ABIRoot": {
     "kind": "Root",
-    "name": "TopLevel",
-    "printedName": "TopLevel",
+    "name": "SwiftyUpdateKit",
+    "printedName": "SwiftyUpdateKit",
     "children": [
       {
         "kind": "Import",
@@ -109,6 +109,22 @@
         "sugared_genericSig": "<Self : AnyObject>",
         "declAttributes": [
           "AccessControl"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          }
         ]
       },
       {
@@ -170,6 +186,20 @@
           "RawDocComment"
         ],
         "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
           {
             "kind": "Conformance",
             "name": "VersionCheckCondition",
@@ -240,6 +270,20 @@
         "conformances": [
           {
             "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
             "name": "VersionCheckCondition",
             "printedName": "VersionCheckCondition",
             "usr": "s:15SwiftyUpdateKit21VersionCheckConditionP",
@@ -308,6 +352,20 @@
         "conformances": [
           {
             "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
             "name": "VersionCheckCondition",
             "printedName": "VersionCheckCondition",
             "usr": "s:15SwiftyUpdateKit21VersionCheckConditionP",
@@ -374,6 +432,20 @@
           "RawDocComment"
         ],
         "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
           {
             "kind": "Conformance",
             "name": "VersionCheckCondition",
@@ -1292,6 +1364,22 @@
         "moduleName": "SwiftyUpdateKit",
         "declAttributes": [
           "AccessControl"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          }
         ]
       },
       {
@@ -1363,6 +1451,22 @@
         "moduleName": "SwiftyUpdateKit",
         "declAttributes": [
           "AccessControl"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          }
         ]
       },
       {
@@ -1433,6 +1537,20 @@
           "AccessControl"
         ],
         "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
           {
             "kind": "Conformance",
             "name": "VersionComparable",
@@ -2078,6 +2196,45 @@
             "declAttributes": [
               "Final",
               "AccessControl",
+              "Available",
+              "Available",
+              "RawDocComment"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "requestReview",
+            "printedName": "requestReview(_:in:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "RequestReviewCondition",
+                "printedName": "any SwiftyUpdateKit.RequestReviewCondition",
+                "usr": "s:15SwiftyUpdateKit22RequestReviewConditionP"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "NSViewController",
+                "printedName": "AppKit.NSViewController",
+                "usr": "c:objc(cs)NSViewController"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:15SwiftyUpdateKit3SUKC13requestReview_2inyAA07RequestF9Condition_p_So16NSViewControllerCtFZ",
+            "mangledName": "$s15SwiftyUpdateKit3SUKC13requestReview_2inyAA07RequestF9Condition_p_So16NSViewControllerCtFZ",
+            "moduleName": "SwiftyUpdateKit",
+            "static": true,
+            "intro_Macosx": "13.0",
+            "declAttributes": [
+              "Final",
+              "AccessControl",
+              "Available",
               "RawDocComment"
             ],
             "funcSelfKind": "NonMutating"
@@ -2114,7 +2271,23 @@
           "AccessControl",
           "RawDocComment"
         ],
-        "hasMissingDesignatedInitializers": true
+        "hasMissingDesignatedInitializers": true,
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          }
+        ]
       },
       {
         "kind": "Import",
@@ -2221,6 +2394,22 @@
         "sugared_genericSig": "<Self : AnyObject>",
         "declAttributes": [
           "AccessControl"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          }
         ]
       },
       {
@@ -2282,6 +2471,20 @@
           "RawDocComment"
         ],
         "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
           {
             "kind": "Conformance",
             "name": "RequestReviewCondition",
@@ -2352,6 +2555,20 @@
         "conformances": [
           {
             "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
             "name": "RequestReviewCondition",
             "printedName": "RequestReviewCondition",
             "usr": "s:15SwiftyUpdateKit22RequestReviewConditionP",
@@ -2418,6 +2635,20 @@
           "RawDocComment"
         ],
         "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
           {
             "kind": "Conformance",
             "name": "RequestReviewCondition",
@@ -2488,6 +2719,20 @@
         "conformances": [
           {
             "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
             "name": "RequestReviewCondition",
             "printedName": "RequestReviewCondition",
             "usr": "s:15SwiftyUpdateKit22RequestReviewConditionP",
@@ -2556,6 +2801,20 @@
         "conformances": [
           {
             "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
             "name": "RequestReviewCondition",
             "printedName": "RequestReviewCondition",
             "usr": "s:15SwiftyUpdateKit22RequestReviewConditionP",
@@ -2622,6 +2881,20 @@
           "RawDocComment"
         ],
         "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
           {
             "kind": "Conformance",
             "name": "RequestReviewCondition",
@@ -2735,24 +3008,17 @@
     },
     {
       "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/Alert.swift",
-      "kind": "StringLiteral",
-      "offset": 2134,
-      "length": 4,
-      "value": "\"\r\""
-    },
-    {
-      "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/Alert.swift",
-      "kind": "StringLiteral",
-      "offset": 2183,
-      "length": 8,
-      "value": "\"\u001B\""
-    },
-    {
-      "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/Alert.swift",
       "kind": "IntegerLiteral",
       "offset": 2671,
       "length": 1,
       "value": "0"
+    },
+    {
+      "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/ReleaseNotesController.swift",
+      "kind": "BooleanLiteral",
+      "offset": 324,
+      "length": 4,
+      "value": "true"
     },
     {
       "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/ReleaseNotesController.swift",
@@ -2811,18 +3077,11 @@
       "value": "16"
     },
     {
-      "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/ReleaseNotesController.swift",
-      "kind": "StringLiteral",
-      "offset": 344,
-      "length": 22,
-      "value": "\"SwiftyUpdateKit.ReleaseNotesController\""
-    },
-    {
       "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/SUK.swift",
       "kind": "StringLiteral",
       "offset": 950,
       "length": 7,
-      "value": "\"1.4.0\""
+      "value": "\"1.5.0\""
     },
     {
       "filePath": "\/Users\/masakiando\/Dropbox\/dev\/repo\/libs\/SwiftyUpdateKit\/Framework\/Sources\/SUK.swift",

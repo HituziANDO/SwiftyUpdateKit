@@ -27,7 +27,7 @@ public typealias NewReleaseHandler = (_ newVersion: String?, _ releaseNotes: Str
 /// SwiftyUpdateKit.
 public class SUK {
     /// SwiftyUpdateKit version.
-    public static let version = "1.4.0"
+    public static let version = "1.5.0"
 
     private static var config: SwiftyUpdateKitConfig?
     private static var log: Log?
