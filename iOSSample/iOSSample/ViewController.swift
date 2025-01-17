@@ -25,7 +25,12 @@ class ViewController: UIViewController {
                                      print("Release Notes has been closed.")
                                  }
                              }) {
-                SUK.requestReview(RequestReviewConditionLaunchingAndDaily())
+                if #available(iOS 16.0, *) {
+                    SUK.requestReview(RequestReviewConditionLaunchingAndDaily(),
+                                      in: self.view)
+                } else {
+                    SUK.requestReview(RequestReviewConditionLaunchingAndDaily())
+                }
             }
         }
     }

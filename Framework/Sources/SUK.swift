@@ -194,7 +194,11 @@ public class SUK {
         #endif
     }
 
-    /// Asks a user for a review of the app if specified condition returns true.
+    /// Asks a user for the review of the app if specified condition returns true.
+    ///
+    /// - Parameter condition: The condition to request the review.
+    @available(iOS, deprecated: 16.0, message: "Use `requestReview(_:, in:)` instead.")
+    @available(macOS, deprecated: 13.0, message: "Use `requestReview(_:, in:)` instead.")
     public static func requestReview(_ condition: RequestReviewCondition) {
         DispatchQueue.main.async {
             if condition.shouldRequestReview() {
@@ -202,6 +206,62 @@ public class SUK {
             }
         }
     }
+
+    #if os(OSX)
+    /// Asks a user for the review of the app if specified condition returns true.
+    ///
+    /// https://developer.apple.com/documentation/storekit/appstore/requestreview(in:)-4r0y9#Discussion
+    ///
+    /// - Parameters:
+    ///  - condition: The condition to request the review.
+    ///  - controller: The controller that StoreKit uses to present the rating and review request
+    /// interface.
+    @available(macOS 13.0, *)
+    public static func requestReview(_ condition: RequestReviewCondition,
+                                     in controller: NSViewController)
+    {
+        DispatchQueue.main.async {
+            if condition.shouldRequestReview() {
+                AppStore.requestReview(in: controller)
+            }
+        }
+    }
+    #endif
+
+    #if os(iOS)
+    /// Asks a user for the review of the app if specified condition returns true.
+    ///
+    /// https://developer.apple.com/documentation/storekit/appstore/requestreview(in:)-1q8qs#Discussion
+    ///
+    /// - Parameters:
+    ///   - condition: The condition to request the review.
+    ///   - scene: The window scene that StoreKit uses to present the rating and review request
+    /// interface.
+    @available(iOS 16.0, *)
+    public static func requestReview(_ condition: RequestReviewCondition, in scene: UIWindowScene) {
+        DispatchQueue.main.async {
+            if condition.shouldRequestReview() {
+                AppStore.requestReview(in: scene)
+            }
+        }
+    }
+
+    /// Asks a user for the review of the app if specified condition returns true.
+    ///
+    /// https://developer.apple.com/documentation/storekit/appstore/requestreview(in:)-1q8qs#Discussion
+    ///
+    /// - Parameters:
+    ///   - condition: The condition to request the review.
+    ///   - view: The view that StoreKit uses to present the rating and review request interface.
+    @available(iOS 16.0, *)
+    public static func requestReview(_ condition: RequestReviewCondition, in view: UIView) {
+        DispatchQueue.main.async {
+            if let scene = view.window?.windowScene, condition.shouldRequestReview() {
+                AppStore.requestReview(in: scene)
+            }
+        }
+    }
+    #endif
 
     /// Resets the status: stored date of version check condition, stored date of request review
     /// condition,
