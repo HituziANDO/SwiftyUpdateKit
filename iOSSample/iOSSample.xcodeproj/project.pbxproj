@@ -122,8 +122,8 @@
 			isa = PBXGroup;
 			children = (
 				5E1AF22D27101F2400240C38 /* SwiftyUpdateKit.framework */,
-				5E1AF22F27101F2400240C38 /* SwiftyUpdateKitTests.xctest */,
 				5E1AF23127101F2400240C38 /* SwiftyUpdateKit.framework */,
+				5E1AF22F27101F2400240C38 /* SwiftyUpdateKitTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
