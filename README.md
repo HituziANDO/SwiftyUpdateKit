@@ -104,14 +104,31 @@ SUK.initialize(withConfig: config)
 
 To check whether new version is released, you use `SUK.checkVersion` method in `viewDidAppear` method of the view controller. See following:
 
+**iOS**
+
 ```swift
 SUK.checkVersion(VersionCheckConditionAlways(), newRelease: { [weak self] newVersion, releaseNotes, firstUpdated in
     guard let self = self else { return }
     SUK.showReleaseNotes(from: self, text: releaseNotes, version: newVersion) {
         // Release Notes has been closed.
     }
-}) {
-    SUK.requestReview(RequestReviewConditionAlways())
+}) { [weak self] in
+    guard let self = self else { return }
+    SUK.requestReview(RequestReviewConditionAlways(), in: self.view)
+}
+```
+
+**macOS**
+
+```swift
+SUK.checkVersion(VersionCheckConditionAlways(), newRelease: { [weak self] newVersion, releaseNotes, firstUpdated in
+    guard let self = self else { return }
+    SUK.showReleaseNotes(from: self, text: releaseNotes, version: newVersion) {
+        // Release Notes has been closed.
+    }
+}) { [weak self] in
+    guard let self = self else { return }
+    SUK.requestReview(RequestReviewConditionAlways(), in: self)
 }
 ```
 
