@@ -24,7 +24,8 @@ class ViewController: NSViewController {
                                  {
                                      print("Release Notes has been closed.")
                                  }
-                             }) {
+                             }) { [weak self] in
+                guard let self else { return }
                 if #available(macOS 13.0, *) {
                     SUK.requestReview(RequestReviewConditionLaunchingAndDaily(),
                                       in: self)
