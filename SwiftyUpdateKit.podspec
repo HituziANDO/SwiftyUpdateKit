@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name = "SwiftyUpdateKit"
-  s.version = "1.4.0"
+  s.version = "1.5.0"
   s.summary = "SwiftyUpdateKit supports for a user to update your app when new app version is released on the App Store."
   s.description = <<-DESC
   SwiftyUpdateKit is a framework for iOS and macOS. This framework supports for a user to update your app when new app version is released on the App Store.
