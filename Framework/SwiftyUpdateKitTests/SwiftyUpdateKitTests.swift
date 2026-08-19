@@ -181,13 +181,17 @@ final class SchedulingConditionTests: XCTestCase {
                                                                      stateStore: stateStore,
                                                                      executionGate: executionGate)
         let lookup = ControlledAppStoreLookup()
+        var noopCallCount = 0
         initializeSUKForSchedulingTests()
 
         checkVersion(firstCondition, lookup: lookup)
-        checkVersion(secondCondition, lookup: lookup)
+        checkVersion(secondCondition, lookup: lookup) {
+            noopCallCount += 1
+        }
         waitForMainQueue()
 
         XCTAssertEqual(lookup.requestCount, 1)
+        XCTAssertEqual(noopCallCount, 0)
         XCTAssertEqual(stateStore.writeCount, 0)
 
         lookup.completeNext(with: .failure(TestLookupError.failed))
@@ -339,13 +343,14 @@ private func initializeSUKForSchedulingTests() {
 }
 
 private func checkVersion(_ condition: VersionCheckCondition,
-                          lookup: AppStoreLookup)
+                          lookup: AppStoreLookup,
+                          noop: (() -> Void)? = nil)
 {
     SUK.checkVersion(condition,
                      update: nil,
                      newRelease: { _, _, _ in },
                      forUserID: "Test",
-                     noop: nil,
+                     noop: noop,
                      lookup: lookup)
 }
 

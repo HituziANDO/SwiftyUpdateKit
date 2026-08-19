@@ -252,12 +252,7 @@ extension SUK {
                              noop: (() -> Void)?,
                              lookup: AppStoreLookup)
     {
-        checkVersion(condition,
-                     update: update,
-                     lookup: lookup,
-                     inProgress: {
-                         noop?()
-                     }) { lookUpResult in
+        checkVersion(condition, update: update, lookup: lookup) { lookUpResult in
             guard let newRelease else {
                 // Not need to show the new release.
                 noop?()
@@ -301,7 +296,6 @@ extension SUK {
     private static func checkVersion(_ condition: VersionCheckCondition,
                                      update: UpdateHandler?,
                                      lookup: AppStoreLookup,
-                                     inProgress: @escaping () -> Void,
                                      next: @escaping (LookUpResult?) -> Void)
     {
         DispatchQueue.main.async {
@@ -318,7 +312,6 @@ extension SUK {
                     case .inProgress:
                         logf("Skips the version check because a lookup is already in progress.",
                              log)
-                        inProgress()
                         return
                     case .notEligible:
                         logf("Skips the version check.", log)
