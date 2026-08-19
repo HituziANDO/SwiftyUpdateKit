@@ -56,6 +56,19 @@ enum ITunesSearchAPIError: Error {
     case invalidResponseData
 }
 
+protocol AppStoreLookup {
+    func lookUp(with config: SwiftyUpdateKitConfig,
+                completion: @escaping (Result<[LookUpResult], Error>) -> Void)
+}
+
+struct ITunesAppStoreLookup: AppStoreLookup {
+    func lookUp(with config: SwiftyUpdateKitConfig,
+                completion: @escaping (Result<[LookUpResult], Error>) -> Void)
+    {
+        ITunesSearchAPI.lookUp(with: config, completion: completion)
+    }
+}
+
 struct ITunesSearchAPI {
     public static func lookUp(with config: SwiftyUpdateKitConfig,
                               completion: @escaping (Result<[LookUpResult], Error>) -> Void)

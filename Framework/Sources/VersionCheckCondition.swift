@@ -9,13 +9,31 @@
 import Foundation
 
 /// The key of UserDefaults.standard.
-/// The value retrieved with this key is Int value as yyyyMMdd representation.
+/// The value retrieved with this key is the last successful check date as an Int in yyyyMMdd
+/// representation.
 public let SwiftyUpdateKitLastVersionCheckDateKey =
     "jp.hituzi.SwiftyUpdateKit.lastVersionCheckDateKey"
 
 public protocol VersionCheckCondition: AnyObject {
     /// If returns true, checks the app version.
     func shouldCheckVersion() -> Bool
+}
+
+/// Records a successful version check for a condition that maintains scheduling state.
+public protocol VersionCheckSuccessRecording: AnyObject {
+    /// Records that the App Store returned a valid version for the current app.
+    func recordSuccessfulVersionCheck()
+}
+
+enum VersionCheckExecutionDecision {
+    case started
+    case inProgress
+    case notEligible
+}
+
+protocol VersionCheckExecutionControlling: AnyObject {
+    func beginVersionCheck() -> VersionCheckExecutionDecision
+    func finishVersionCheck()
 }
 
 /// Always checks the app version.
@@ -37,35 +55,83 @@ open class VersionCheckConditionDisable: VersionCheckCondition {
 }
 
 /// Checks the app version once a day.
-open class VersionCheckConditionDaily: VersionCheckCondition {
+open class VersionCheckConditionDaily: VersionCheckCondition, VersionCheckSuccessRecording {
+    private var schedule = DailySchedule(clock: SystemSUKClock(),
+                                         stateStore: UserDefaultsSchedulingStateStore(),
+                                         key: SwiftyUpdateKitLastVersionCheckDateKey)
+
     public init() {}
 
+    init(clock: SUKClock,
+         stateStore: SUKSchedulingStateStore,
+         executionGate: SchedulingExecutionGating = SchedulingExecutionGate())
+    {
+        schedule = DailySchedule(clock: clock,
+                                 stateStore: stateStore,
+                                 executionGate: executionGate,
+                                 key: SwiftyUpdateKitLastVersionCheckDateKey)
+    }
+
     open func shouldCheckVersion() -> Bool {
-        let lastDate = SUKUserDefaults.standard
-            .integer(forKey: SwiftyUpdateKitLastVersionCheckDateKey)
-        let today = DateUtils.currentDate()
+        schedule.shouldRun()
+    }
 
-        guard lastDate < today else { return false }
-
-        SUKUserDefaults.standard.set(today, forKey: SwiftyUpdateKitLastVersionCheckDateKey)
-
-        return true
+    open func recordSuccessfulVersionCheck() {
+        schedule.recordCurrentDate()
     }
 }
 
 /// Checks the app version when the app is launched and once a day.
-open class VersionCheckConditionLaunchingAndDaily: VersionCheckCondition {
+open class VersionCheckConditionLaunchingAndDaily: VersionCheckCondition,
+    VersionCheckSuccessRecording
+{
+    private var schedule = DailySchedule(clock: SystemSUKClock(),
+                                         stateStore: InMemorySchedulingStateStore(),
+                                         key: SwiftyUpdateKitLastVersionCheckDateKey)
+
     public init() {}
 
+    init(clock: SUKClock,
+         stateStore: SUKSchedulingStateStore,
+         executionGate: SchedulingExecutionGating = SchedulingExecutionGate())
+    {
+        schedule = DailySchedule(clock: clock,
+                                 stateStore: stateStore,
+                                 executionGate: executionGate,
+                                 key: SwiftyUpdateKitLastVersionCheckDateKey)
+    }
+
     open func shouldCheckVersion() -> Bool {
-        let lastDate = sharedDictionary
-            .value(forKey: SwiftyUpdateKitLastVersionCheckDateKey) as? Int ?? 0
-        let today = DateUtils.currentDate()
+        schedule.shouldRun()
+    }
 
-        guard lastDate < today else { return false }
+    open func recordSuccessfulVersionCheck() {
+        schedule.recordCurrentDate()
+    }
+}
 
-        sharedDictionary.setValue(today, forKey: SwiftyUpdateKitLastVersionCheckDateKey)
+extension VersionCheckConditionDaily: VersionCheckExecutionControlling {
+    func beginVersionCheck() -> VersionCheckExecutionDecision {
+        guard shouldCheckVersion() else { return .notEligible }
+        guard schedule.beginExecution() else { return .inProgress }
 
-        return true
+        return .started
+    }
+
+    func finishVersionCheck() {
+        schedule.finishExecution()
+    }
+}
+
+extension VersionCheckConditionLaunchingAndDaily: VersionCheckExecutionControlling {
+    func beginVersionCheck() -> VersionCheckExecutionDecision {
+        guard shouldCheckVersion() else { return .notEligible }
+        guard schedule.beginExecution() else { return .inProgress }
+
+        return .started
+    }
+
+    func finishVersionCheck() {
+        schedule.finishExecution()
     }
 }
