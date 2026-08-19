@@ -9,13 +9,23 @@
 import Foundation
 
 /// The key of UserDefaults.standard.
-/// The value retrieved with this key is Int value as yyyyMMdd representation.
+/// The value retrieved with this key is the last review request attempt date as an Int in yyyyMMdd
+/// representation. Skip-first-day conditions initially store the first evaluation date.
 public let SwiftyUpdateKitLastRequireReviewDateKey =
     "jp.hituzi.SwiftyUpdateKit.lastRequireReviewDateKey"
 
 public protocol RequestReviewCondition: AnyObject {
     /// If returns true, requests the review of the app.
     func shouldRequestReview() -> Bool
+}
+
+/// Records a review request attempt for a condition that maintains scheduling state.
+///
+/// StoreKit does not report whether the system displayed the review interface, so the stored value
+/// represents an attempt rather than a confirmed presentation.
+public protocol ReviewRequestAttemptRecording: AnyObject {
+    /// Records that the app called the StoreKit review request API.
+    func recordReviewRequestAttempt()
 }
 
 /// Always asks a user for a review.
@@ -37,75 +47,109 @@ open class RequestReviewConditionDisable: RequestReviewCondition {
 }
 
 /// Asks a user for a review once a day.
-open class RequestReviewConditionDaily: RequestReviewCondition {
+open class RequestReviewConditionDaily: RequestReviewCondition, ReviewRequestAttemptRecording {
+    private var schedule = DailySchedule(clock: SystemSUKClock(),
+                                         stateStore: UserDefaultsSchedulingStateStore(),
+                                         key: SwiftyUpdateKitLastRequireReviewDateKey)
+
     public init() {}
 
+    init(clock: SUKClock, stateStore: SUKSchedulingStateStore) {
+        schedule = DailySchedule(clock: clock,
+                                 stateStore: stateStore,
+                                 key: SwiftyUpdateKitLastRequireReviewDateKey)
+    }
+
     open func shouldRequestReview() -> Bool {
-        let lastDate = SUKUserDefaults.standard
-            .integer(forKey: SwiftyUpdateKitLastRequireReviewDateKey)
-        let today = DateUtils.currentDate()
+        schedule.shouldRun()
+    }
 
-        guard lastDate < today else { return false }
-
-        SUKUserDefaults.standard.set(today, forKey: SwiftyUpdateKitLastRequireReviewDateKey)
-
-        return true
+    open func recordReviewRequestAttempt() {
+        schedule.recordCurrentDate()
     }
 }
 
 /// Asks a user for a review once a day, but skips first day.
-open class RequestReviewConditionDailySkipFirstDay: RequestReviewCondition {
+open class RequestReviewConditionDailySkipFirstDay: RequestReviewCondition,
+    ReviewRequestAttemptRecording
+{
+    private var schedule = DailySchedule(clock: SystemSUKClock(),
+                                         stateStore: UserDefaultsSchedulingStateStore(),
+                                         key: SwiftyUpdateKitLastRequireReviewDateKey)
+
     public init() {}
 
+    init(clock: SUKClock, stateStore: SUKSchedulingStateStore) {
+        schedule = DailySchedule(clock: clock,
+                                 stateStore: stateStore,
+                                 key: SwiftyUpdateKitLastRequireReviewDateKey)
+    }
+
     open func shouldRequestReview() -> Bool {
-        let lastDate = SUKUserDefaults.standard
-            .integer(forKey: SwiftyUpdateKitLastRequireReviewDateKey)
-
-        // lastDate is 0 means the first day because the value is not set.
-        if lastDate == 0 {
-            let today = DateUtils.currentDate()
-            SUKUserDefaults.standard.set(today, forKey: SwiftyUpdateKitLastRequireReviewDateKey)
-
+        if !schedule.hasRecordedDate() {
+            schedule.recordCurrentDate()
             return false
         }
 
-        return RequestReviewConditionDaily().shouldRequestReview()
+        return schedule.shouldRun()
+    }
+
+    open func recordReviewRequestAttempt() {
+        schedule.recordCurrentDate()
     }
 }
 
 /// Asks a user for a review when the app is launched and once a day.
-open class RequestReviewConditionLaunchingAndDaily: RequestReviewCondition {
+open class RequestReviewConditionLaunchingAndDaily: RequestReviewCondition,
+    ReviewRequestAttemptRecording
+{
+    private var schedule = DailySchedule(clock: SystemSUKClock(),
+                                         stateStore: InMemorySchedulingStateStore(),
+                                         key: SwiftyUpdateKitLastRequireReviewDateKey)
+
     public init() {}
 
+    init(clock: SUKClock, stateStore: SUKSchedulingStateStore) {
+        schedule = DailySchedule(clock: clock,
+                                 stateStore: stateStore,
+                                 key: SwiftyUpdateKitLastRequireReviewDateKey)
+    }
+
     open func shouldRequestReview() -> Bool {
-        let lastDate = sharedDictionary
-            .value(forKey: SwiftyUpdateKitLastRequireReviewDateKey) as? Int ?? 0
-        let today = DateUtils.currentDate()
+        schedule.shouldRun()
+    }
 
-        guard lastDate < today else { return false }
-
-        sharedDictionary.setValue(today, forKey: SwiftyUpdateKitLastRequireReviewDateKey)
-
-        return true
+    open func recordReviewRequestAttempt() {
+        schedule.recordCurrentDate()
     }
 }
 
 /// Asks a user for a review when the app is launched and once a day, but skips first day.
-open class RequestReviewConditionLaunchingAndDailySkipFirstDay: RequestReviewCondition {
+open class RequestReviewConditionLaunchingAndDailySkipFirstDay: RequestReviewCondition,
+    ReviewRequestAttemptRecording
+{
+    private var schedule = DailySchedule(clock: SystemSUKClock(),
+                                         stateStore: InMemorySchedulingStateStore(),
+                                         key: SwiftyUpdateKitLastRequireReviewDateKey)
+
     public init() {}
 
+    init(clock: SUKClock, stateStore: SUKSchedulingStateStore) {
+        schedule = DailySchedule(clock: clock,
+                                 stateStore: stateStore,
+                                 key: SwiftyUpdateKitLastRequireReviewDateKey)
+    }
+
     open func shouldRequestReview() -> Bool {
-        let lastDate = sharedDictionary
-            .value(forKey: SwiftyUpdateKitLastRequireReviewDateKey) as? Int ?? 0
-
-        // lastDate is 0 means the first day because the value is not set.
-        if lastDate == 0 {
-            let today = DateUtils.currentDate()
-            sharedDictionary.setValue(today, forKey: SwiftyUpdateKitLastRequireReviewDateKey)
-
+        if !schedule.hasRecordedDate() {
+            schedule.recordCurrentDate()
             return false
         }
 
-        return RequestReviewConditionLaunchingAndDaily().shouldRequestReview()
+        return schedule.shouldRun()
+    }
+
+    open func recordReviewRequestAttempt() {
+        schedule.recordCurrentDate()
     }
 }

@@ -78,45 +78,12 @@ public class SUK {
                                     forUserID userID: String = "SwiftyUpdateKitUser",
                                     noop: (() -> Void)? = nil)
     {
-        checkVersion(condition, update: update) { lookUpResult in
-            guard let newRelease else {
-                // Not need to show the new release.
-                noop?()
-                return
-            }
-
-            if let result = lookUpResult {
-                // Use fetched lookUpResult.
-                checkNewRelease(result, newRelease: newRelease, forUserID: userID, noop: noop)
-            } else {
-                guard let config else { return }
-
-                ITunesSearchAPI.lookUp(with: config) { result in
-                    switch result {
-                        case let .failure(error):
-                            // Ignore an error.
-                            logf(error.localizedDescription, log)
-                            DispatchQueue.main.async {
-                                noop?()
-                            }
-                        case let .success(lookUpResults):
-                            guard let lookUpResult = lookUpResults.first else {
-                                // Ignore an error.
-                                logf("lookUpResult does not exist in the response data.", log)
-                                DispatchQueue.main.async {
-                                    noop?()
-                                }
-                                return
-                            }
-
-                            checkNewRelease(lookUpResult,
-                                            newRelease: newRelease,
-                                            forUserID: userID,
-                                            noop: noop)
-                    }
-                }
-            }
-        }
+        checkVersion(condition,
+                     update: update,
+                     newRelease: newRelease,
+                     forUserID: userID,
+                     noop: noop,
+                     lookup: ITunesAppStoreLookup())
     }
 
     /// Opens the App Store.
@@ -201,7 +168,7 @@ public class SUK {
     @available(macOS, deprecated: 13.0, message: "Use `requestReview(_:, in:)` instead.")
     public static func requestReview(_ condition: RequestReviewCondition) {
         DispatchQueue.main.async {
-            if condition.shouldRequestReview() {
+            requestReviewIfNeeded(condition) {
                 SKStoreReviewController.requestReview()
             }
         }
@@ -221,7 +188,7 @@ public class SUK {
                                      in controller: NSViewController)
     {
         DispatchQueue.main.async {
-            if condition.shouldRequestReview() {
+            requestReviewIfNeeded(condition) {
                 AppStore.requestReview(in: controller)
             }
         }
@@ -240,7 +207,7 @@ public class SUK {
     @available(iOS 16.0, *)
     public static func requestReview(_ condition: RequestReviewCondition, in scene: UIWindowScene) {
         DispatchQueue.main.async {
-            if condition.shouldRequestReview() {
+            requestReviewIfNeeded(condition) {
                 AppStore.requestReview(in: scene)
             }
         }
@@ -256,8 +223,10 @@ public class SUK {
     @available(iOS 16.0, *)
     public static func requestReview(_ condition: RequestReviewCondition, in view: UIView) {
         DispatchQueue.main.async {
-            if let scene = view.window?.windowScene, condition.shouldRequestReview() {
-                AppStore.requestReview(in: scene)
+            if let scene = view.window?.windowScene {
+                requestReviewIfNeeded(condition) {
+                    AppStore.requestReview(in: scene)
+                }
             }
         }
     }
@@ -275,10 +244,59 @@ public class SUK {
     }
 }
 
-private extension SUK {
+extension SUK {
     static func checkVersion(_ condition: VersionCheckCondition,
                              update: UpdateHandler?,
-                             next: @escaping (LookUpResult?) -> Void)
+                             newRelease: NewReleaseHandler?,
+                             forUserID userID: String,
+                             noop: (() -> Void)?,
+                             lookup: AppStoreLookup)
+    {
+        checkVersion(condition, update: update, lookup: lookup) { lookUpResult in
+            guard let newRelease else {
+                // Not need to show the new release.
+                noop?()
+                return
+            }
+
+            if let result = lookUpResult {
+                // Use fetched lookUpResult.
+                checkNewRelease(result, newRelease: newRelease, forUserID: userID, noop: noop)
+            } else {
+                guard let config else { return }
+
+                lookup.lookUp(with: config) { result in
+                    switch result {
+                        case let .failure(error):
+                            // Ignore an error.
+                            logf(error.localizedDescription, log)
+                            DispatchQueue.main.async {
+                                noop?()
+                            }
+                        case let .success(lookUpResults):
+                            guard let lookUpResult = lookUpResults.first else {
+                                // Ignore an error.
+                                logf("lookUpResult does not exist in the response data.", log)
+                                DispatchQueue.main.async {
+                                    noop?()
+                                }
+                                return
+                            }
+
+                            checkNewRelease(lookUpResult,
+                                            newRelease: newRelease,
+                                            forUserID: userID,
+                                            noop: noop)
+                    }
+                }
+            }
+        }
+    }
+
+    private static func checkVersion(_ condition: VersionCheckCondition,
+                                     update: UpdateHandler?,
+                                     lookup: AppStoreLookup,
+                                     next: @escaping (LookUpResult?) -> Void)
     {
         DispatchQueue.main.async {
             guard let config else {
@@ -294,7 +312,7 @@ private extension SUK {
                 return
             }
 
-            ITunesSearchAPI.lookUp(with: config) { result in
+            lookup.lookUp(with: config) { result in
                 switch result {
                     case let .failure(error):
                         // Ignore an error.
@@ -308,6 +326,9 @@ private extension SUK {
                             logf("version does not exist in the response data.", log)
                             return
                         }
+
+                        (condition as? VersionCheckSuccessRecording)?
+                            .recordSuccessfulVersionCheck()
 
                         let isOld = config.versionCompare.compare(storeVersion,
                                                                   with: config.version)
@@ -334,10 +355,19 @@ private extension SUK {
         }
     }
 
-    static func checkNewRelease(_ lookUpResult: LookUpResult,
-                                newRelease: @escaping NewReleaseHandler,
-                                forUserID userID: String,
-                                noop: (() -> Void)?)
+    static func requestReviewIfNeeded(_ condition: RequestReviewCondition,
+                                      request: () -> Void)
+    {
+        guard condition.shouldRequestReview() else { return }
+
+        (condition as? ReviewRequestAttemptRecording)?.recordReviewRequestAttempt()
+        request()
+    }
+
+    private static func checkNewRelease(_ lookUpResult: LookUpResult,
+                                        newRelease: @escaping NewReleaseHandler,
+                                        forUserID userID: String,
+                                        noop: (() -> Void)?)
     {
         guard let config else { return }
 

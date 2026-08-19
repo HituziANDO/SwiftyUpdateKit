@@ -144,6 +144,17 @@ Finally, if the app version is latest and the release notes have already shown, 
 
 <img src="./readme-images/request_review.png" width="200">
 
+### Daily scheduling
+
+`VersionCheckConditionDaily` and `VersionCheckConditionLaunchingAndDaily` record the current
+date only after the App Store returns a valid app version. A failed lookup does not consume that
+day's check, so the next call can try again.
+
+Daily review conditions record the date when SwiftyUpdateKit calls the StoreKit review request
+API. StoreKit does not report whether it displayed the review interface, so this date represents
+an attempt. Conditions that skip the first day initially record the first evaluation date and do
+not make a review request on that day.
+
 ### Use custom UI
 
 You can use custom UI to show the update alert and the release notes. See following:
@@ -191,4 +202,3 @@ jazzy version: 0.14.3
 
 ./make_docs.sh
 ```
-
