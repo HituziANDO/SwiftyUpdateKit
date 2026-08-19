@@ -170,6 +170,57 @@ final class SchedulingConditionTests: XCTestCase {
         XCTAssertTrue(condition.shouldCheckVersion())
     }
 
+    func testConcurrentLaunchingAndDailyChecksStartOneLookup() {
+        let clock = TestClock(currentDate: 20_260_819)
+        let stateStore = TestSchedulingStateStore()
+        let executionGate = SchedulingExecutionGate()
+        let firstCondition = VersionCheckConditionLaunchingAndDaily(clock: clock,
+                                                                    stateStore: stateStore,
+                                                                    executionGate: executionGate)
+        let secondCondition = VersionCheckConditionLaunchingAndDaily(clock: clock,
+                                                                     stateStore: stateStore,
+                                                                     executionGate: executionGate)
+        let lookup = ControlledAppStoreLookup()
+        initializeSUKForSchedulingTests()
+
+        checkVersion(firstCondition, lookup: lookup)
+        checkVersion(secondCondition, lookup: lookup)
+        waitForMainQueue()
+
+        XCTAssertEqual(lookup.requestCount, 1)
+        XCTAssertEqual(stateStore.writeCount, 0)
+
+        lookup.completeNext(with: .failure(TestLookupError.failed))
+    }
+
+    func testLaunchingAndDailyCheckCanRetryAfterFailure() {
+        let clock = TestClock(currentDate: 20_260_819)
+        let stateStore = TestSchedulingStateStore()
+        let executionGate = SchedulingExecutionGate()
+        let firstCondition = VersionCheckConditionLaunchingAndDaily(clock: clock,
+                                                                    stateStore: stateStore,
+                                                                    executionGate: executionGate)
+        let retryCondition = VersionCheckConditionLaunchingAndDaily(clock: clock,
+                                                                    stateStore: stateStore,
+                                                                    executionGate: executionGate)
+        let lookup = ControlledAppStoreLookup()
+        initializeSUKForSchedulingTests()
+
+        checkVersion(firstCondition, lookup: lookup)
+        waitForMainQueue()
+        XCTAssertEqual(lookup.requestCount, 1)
+
+        lookup.completeNext(with: .failure(TestLookupError.failed))
+
+        checkVersion(retryCondition, lookup: lookup)
+        waitForMainQueue()
+        XCTAssertEqual(lookup.requestCount, 2)
+
+        lookup.completeNext(with: .success([.stub(version: "1.0.0")]))
+        waitForMainQueue()
+        XCTAssertEqual(stateStore.writeCount, 1)
+    }
+
     func testDailyReviewConditionRecordsRequestAttempt() {
         let clock = TestClock(currentDate: 20_260_819)
         let stateStore = TestSchedulingStateStore()
@@ -261,6 +312,22 @@ private struct StubAppStoreLookup: AppStoreLookup {
     }
 }
 
+private final class ControlledAppStoreLookup: AppStoreLookup {
+    private var completions: [(Result<[LookUpResult], Error>) -> Void] = []
+    private(set) var requestCount = 0
+
+    func lookUp(with _: SwiftyUpdateKitConfig,
+                completion: @escaping (Result<[LookUpResult], Error>) -> Void)
+    {
+        requestCount += 1
+        completions.append(completion)
+    }
+
+    func completeNext(with result: Result<[LookUpResult], Error>) {
+        completions.removeFirst()(result)
+    }
+}
+
 private enum TestLookupError: Error {
     case failed
 }
@@ -269,6 +336,25 @@ private func initializeSUKForSchedulingTests() {
     SUK.initialize(withConfig: SwiftyUpdateKitConfig(version: "1.0.0",
                                                      iTunesID: "1234567890",
                                                      storeURL: "https://apps.apple.com/app/id1234567890"))
+}
+
+private func checkVersion(_ condition: VersionCheckCondition,
+                          lookup: AppStoreLookup)
+{
+    SUK.checkVersion(condition,
+                     update: nil,
+                     newRelease: { _, _, _ in },
+                     forUserID: "Test",
+                     noop: nil,
+                     lookup: lookup)
+}
+
+private func waitForMainQueue() {
+    let mainQueueProcessed = XCTestExpectation(description: "Main queue processed")
+    DispatchQueue.main.async {
+        mainQueueProcessed.fulfill()
+    }
+    XCTAssertEqual(XCTWaiter().wait(for: [mainQueueProcessed], timeout: 1), .completed)
 }
 
 private extension LookUpResult {

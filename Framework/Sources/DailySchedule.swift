@@ -42,14 +42,46 @@ struct InMemorySchedulingStateStore: SUKSchedulingStateStore {
     }
 }
 
+protocol SchedulingExecutionGating: AnyObject {
+    func beginExecution(forKey key: String) -> Bool
+    func finishExecution(forKey key: String)
+}
+
+final class SchedulingExecutionGate: SchedulingExecutionGating {
+    private let lock = NSLock()
+    private var runningKeys: Set<String> = []
+
+    func beginExecution(forKey key: String) -> Bool {
+        lock.lock()
+        defer { lock.unlock() }
+
+        return runningKeys.insert(key).inserted
+    }
+
+    func finishExecution(forKey key: String) {
+        lock.lock()
+        defer { lock.unlock() }
+
+        runningKeys.remove(key)
+    }
+}
+
+let sharedSchedulingExecutionGate = SchedulingExecutionGate()
+
 struct DailySchedule {
     private let clock: SUKClock
     private let stateStore: SUKSchedulingStateStore
+    private let executionGate: SchedulingExecutionGating
     private let key: String
 
-    init(clock: SUKClock, stateStore: SUKSchedulingStateStore, key: String) {
+    init(clock: SUKClock,
+         stateStore: SUKSchedulingStateStore,
+         executionGate: SchedulingExecutionGating = sharedSchedulingExecutionGate,
+         key: String)
+    {
         self.clock = clock
         self.stateStore = stateStore
+        self.executionGate = executionGate
         self.key = key
     }
 
@@ -66,5 +98,13 @@ struct DailySchedule {
         guard stateStore.integer(forKey: key) < currentDate else { return }
 
         stateStore.set(currentDate, forKey: key)
+    }
+
+    func beginExecution() -> Bool {
+        executionGate.beginExecution(forKey: key)
+    }
+
+    func finishExecution() {
+        executionGate.finishExecution(forKey: key)
     }
 }

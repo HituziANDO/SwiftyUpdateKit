@@ -25,6 +25,17 @@ public protocol VersionCheckSuccessRecording: AnyObject {
     func recordSuccessfulVersionCheck()
 }
 
+enum VersionCheckExecutionDecision {
+    case started
+    case inProgress
+    case notEligible
+}
+
+protocol VersionCheckExecutionControlling: AnyObject {
+    func beginVersionCheck() -> VersionCheckExecutionDecision
+    func finishVersionCheck()
+}
+
 /// Always checks the app version.
 open class VersionCheckConditionAlways: VersionCheckCondition {
     public init() {}
@@ -51,9 +62,13 @@ open class VersionCheckConditionDaily: VersionCheckCondition, VersionCheckSucces
 
     public init() {}
 
-    init(clock: SUKClock, stateStore: SUKSchedulingStateStore) {
+    init(clock: SUKClock,
+         stateStore: SUKSchedulingStateStore,
+         executionGate: SchedulingExecutionGating = SchedulingExecutionGate())
+    {
         schedule = DailySchedule(clock: clock,
                                  stateStore: stateStore,
+                                 executionGate: executionGate,
                                  key: SwiftyUpdateKitLastVersionCheckDateKey)
     }
 
@@ -76,9 +91,13 @@ open class VersionCheckConditionLaunchingAndDaily: VersionCheckCondition,
 
     public init() {}
 
-    init(clock: SUKClock, stateStore: SUKSchedulingStateStore) {
+    init(clock: SUKClock,
+         stateStore: SUKSchedulingStateStore,
+         executionGate: SchedulingExecutionGating = SchedulingExecutionGate())
+    {
         schedule = DailySchedule(clock: clock,
                                  stateStore: stateStore,
+                                 executionGate: executionGate,
                                  key: SwiftyUpdateKitLastVersionCheckDateKey)
     }
 
@@ -88,5 +107,31 @@ open class VersionCheckConditionLaunchingAndDaily: VersionCheckCondition,
 
     open func recordSuccessfulVersionCheck() {
         schedule.recordCurrentDate()
+    }
+}
+
+extension VersionCheckConditionDaily: VersionCheckExecutionControlling {
+    func beginVersionCheck() -> VersionCheckExecutionDecision {
+        guard shouldCheckVersion() else { return .notEligible }
+        guard schedule.beginExecution() else { return .inProgress }
+
+        return .started
+    }
+
+    func finishVersionCheck() {
+        schedule.finishExecution()
+    }
+}
+
+extension VersionCheckConditionLaunchingAndDaily: VersionCheckExecutionControlling {
+    func beginVersionCheck() -> VersionCheckExecutionDecision {
+        guard shouldCheckVersion() else { return .notEligible }
+        guard schedule.beginExecution() else { return .inProgress }
+
+        return .started
+    }
+
+    func finishVersionCheck() {
+        schedule.finishExecution()
     }
 }

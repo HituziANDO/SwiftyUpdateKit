@@ -252,7 +252,12 @@ extension SUK {
                              noop: (() -> Void)?,
                              lookup: AppStoreLookup)
     {
-        checkVersion(condition, update: update, lookup: lookup) { lookUpResult in
+        checkVersion(condition,
+                     update: update,
+                     lookup: lookup,
+                     inProgress: {
+                         noop?()
+                     }) { lookUpResult in
             guard let newRelease else {
                 // Not need to show the new release.
                 noop?()
@@ -296,6 +301,7 @@ extension SUK {
     private static func checkVersion(_ condition: VersionCheckCondition,
                                      update: UpdateHandler?,
                                      lookup: AppStoreLookup,
+                                     inProgress: @escaping () -> Void,
                                      next: @escaping (LookUpResult?) -> Void)
     {
         DispatchQueue.main.async {
@@ -304,12 +310,31 @@ extension SUK {
                 return
             }
 
-            guard condition.shouldCheckVersion() else {
-                logf("Skips the version check.", log)
-                DispatchQueue.main.async {
-                    next(nil)
+            let executionController = condition as? VersionCheckExecutionControlling
+            if let executionController {
+                switch executionController.beginVersionCheck() {
+                    case .started:
+                        break
+                    case .inProgress:
+                        logf("Skips the version check because a lookup is already in progress.",
+                             log)
+                        inProgress()
+                        return
+                    case .notEligible:
+                        logf("Skips the version check.", log)
+                        DispatchQueue.main.async {
+                            next(nil)
+                        }
+                        return
                 }
-                return
+            } else {
+                guard condition.shouldCheckVersion() else {
+                    logf("Skips the version check.", log)
+                    DispatchQueue.main.async {
+                        next(nil)
+                    }
+                    return
+                }
             }
 
             lookup.lookUp(with: config) { result in
@@ -317,6 +342,7 @@ extension SUK {
                     case let .failure(error):
                         // Ignore an error.
                         logf(error.localizedDescription, log)
+                        executionController?.finishVersionCheck()
                     case let .success(lookUpResults):
                         logf(lookUpResults.description, log)
                         guard let lookUpResult = lookUpResults.first,
@@ -324,11 +350,13 @@ extension SUK {
                         else {
                             // Ignore an error.
                             logf("version does not exist in the response data.", log)
+                            executionController?.finishVersionCheck()
                             return
                         }
 
                         (condition as? VersionCheckSuccessRecording)?
                             .recordSuccessfulVersionCheck()
+                        executionController?.finishVersionCheck()
 
                         let isOld = config.versionCompare.compare(storeVersion,
                                                                   with: config.version)
