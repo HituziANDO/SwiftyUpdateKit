@@ -28,6 +28,14 @@ public protocol ReviewRequestAttemptRecording: AnyObject {
     func recordReviewRequestAttempt()
 }
 
+protocol ReviewRequestExecutionControlling: AnyObject {
+    func reviewRequestPreflightToken(in userDefaults: SUKUserDefaults) -> SchedulingExecutionToken
+    func beginReviewRequest(in userDefaults: SUKUserDefaults,
+                            preflightToken: SchedulingExecutionToken) -> SchedulingExecutionDecision
+    func isCurrentReviewRequest(_ token: SchedulingExecutionToken) -> Bool
+    func finishReviewRequest(_ token: SchedulingExecutionToken)
+}
+
 /// Always asks a user for a review.
 open class RequestReviewConditionAlways: RequestReviewCondition {
     public init() {}
@@ -151,5 +159,87 @@ open class RequestReviewConditionLaunchingAndDailySkipFirstDay: RequestReviewCon
 
     open func recordReviewRequestAttempt() {
         schedule.recordCurrentDate()
+    }
+}
+
+extension RequestReviewConditionDaily: ReviewRequestExecutionControlling {
+    func reviewRequestPreflightToken(in userDefaults: SUKUserDefaults) -> SchedulingExecutionToken {
+        schedule.executionToken(in: userDefaults)
+    }
+
+    func beginReviewRequest(in userDefaults: SUKUserDefaults,
+                            preflightToken: SchedulingExecutionToken) -> SchedulingExecutionDecision
+    {
+        schedule.beginExecution(in: userDefaults, preflightToken: preflightToken)
+    }
+
+    func isCurrentReviewRequest(_ token: SchedulingExecutionToken) -> Bool {
+        schedule.isCurrent(token)
+    }
+
+    func finishReviewRequest(_ token: SchedulingExecutionToken) {
+        schedule.finishExecution(token)
+    }
+}
+
+extension RequestReviewConditionDailySkipFirstDay: ReviewRequestExecutionControlling {
+    func reviewRequestPreflightToken(in userDefaults: SUKUserDefaults) -> SchedulingExecutionToken {
+        schedule.executionToken(in: userDefaults)
+    }
+
+    func beginReviewRequest(in userDefaults: SUKUserDefaults,
+                            preflightToken: SchedulingExecutionToken) -> SchedulingExecutionDecision
+    {
+        schedule.beginExecution(in: userDefaults, preflightToken: preflightToken)
+    }
+
+    func isCurrentReviewRequest(_ token: SchedulingExecutionToken) -> Bool {
+        schedule.isCurrent(token)
+    }
+
+    func finishReviewRequest(_ token: SchedulingExecutionToken) {
+        schedule.finishExecution(token)
+    }
+}
+
+extension RequestReviewConditionLaunchingAndDaily: ReviewRequestExecutionControlling {
+    func reviewRequestPreflightToken(in userDefaults: SUKUserDefaults) -> SchedulingExecutionToken {
+        schedule.executionToken(in: userDefaults)
+    }
+
+    func beginReviewRequest(in userDefaults: SUKUserDefaults,
+                            preflightToken: SchedulingExecutionToken) -> SchedulingExecutionDecision
+    {
+        schedule.beginExecution(in: userDefaults, preflightToken: preflightToken)
+    }
+
+    func isCurrentReviewRequest(_ token: SchedulingExecutionToken) -> Bool {
+        schedule.isCurrent(token)
+    }
+
+    func finishReviewRequest(_ token: SchedulingExecutionToken) {
+        schedule.finishExecution(token)
+    }
+}
+
+extension RequestReviewConditionLaunchingAndDailySkipFirstDay:
+    ReviewRequestExecutionControlling
+{
+    func reviewRequestPreflightToken(in userDefaults: SUKUserDefaults) -> SchedulingExecutionToken {
+        schedule.executionToken(in: userDefaults)
+    }
+
+    func beginReviewRequest(in userDefaults: SUKUserDefaults,
+                            preflightToken: SchedulingExecutionToken) -> SchedulingExecutionDecision
+    {
+        schedule.beginExecution(in: userDefaults, preflightToken: preflightToken)
+    }
+
+    func isCurrentReviewRequest(_ token: SchedulingExecutionToken) -> Bool {
+        schedule.isCurrent(token)
+    }
+
+    func finishReviewRequest(_ token: SchedulingExecutionToken) {
+        schedule.finishExecution(token)
     }
 }

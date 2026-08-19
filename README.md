@@ -180,7 +180,8 @@ SUK.openAppStore()
 
 ### Reset the status
 
-Resets the status: stored date of version check condition, stored date of request review condition, and stored app version for the release notes.
+Resets the status for the current environment: stored dates of version check and request review
+conditions in persistent and in-memory storage, and the stored app version for the release notes.
 
 For example, you may use `SUK.reset` method during testing and development.
 

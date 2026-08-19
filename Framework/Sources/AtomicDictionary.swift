@@ -14,26 +14,22 @@ class AtomicDictionary<Key: Hashable, Value> {
                                       attributes: .concurrent)
 
     func setValue(_ value: Value, forKey key: Key) {
-        queue.async(flags: .barrier) {
-            self.dictionary[key] = value
+        queue.sync(flags: .barrier) {
+            dictionary[key] = value
         }
     }
 
     func value(forKey key: Key) -> Value? {
-        var result: Value?
         queue.sync {
-            result = dictionary[key]
+            dictionary[key]
         }
-        return result
     }
 
     @discardableResult
     func removeValue(forKey key: Key) -> Value? {
-        var result: Value?
-        queue.sync {
-            result = dictionary.removeValue(forKey: key)
+        queue.sync(flags: .barrier) {
+            dictionary.removeValue(forKey: key)
         }
-        return result
     }
 }
 

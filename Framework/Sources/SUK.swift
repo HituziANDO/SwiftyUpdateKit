@@ -24,13 +24,76 @@ public typealias UpdateHandler = (_ newVersion: String?, _ releaseNotes: String?
 public typealias NewReleaseHandler = (_ newVersion: String?, _ releaseNotes: String?,
                                       _ firstUpdated: Bool) -> Void
 
+typealias SUKUpdateAlertPresenter = (_ config: SwiftyUpdateKitConfig,
+                                     _ updateAction: @escaping () -> Void) -> Void
+typealias SUKAppStoreURLOpener = (_ url: URL) -> Void
+
+private struct VersionCheckOperationContext {
+    let config: SwiftyUpdateKitConfig
+    let logger: Log?
+    let userDefaults: SUKUserDefaults
+    let token: SchedulingExecutionToken
+    let executionController: VersionCheckExecutionControlling?
+
+    func recordSuccessfulVersionCheck(_ condition: VersionCheckCondition) -> Bool {
+        guard isCurrent() else { return false }
+
+        if let recordingCondition = condition as? VersionCheckSuccessRecording {
+            SchedulingExecutionScope.withToken(token) {
+                recordingCondition.recordSuccessfulVersionCheck()
+            }
+        }
+
+        return isCurrent()
+    }
+
+    func isCurrent() -> Bool {
+        if let executionController {
+            return executionController.isCurrentVersionCheck(token)
+        }
+
+        return sharedSchedulingExecutionGate.isCurrent(token)
+    }
+
+    func performStateAccessIfCurrent(_ action: () -> Void) -> Bool {
+        if let executionController {
+            return executionController.performVersionCheckStateAccessIfCurrent(token,
+                                                                               action: action)
+        }
+
+        return sharedSchedulingExecutionGate.performStateAccessIfCurrent(token, action: action)
+    }
+
+    func finish() {
+        executionController?.finishVersionCheck(token)
+    }
+
+    func writeLog(_ message: String) {
+        logf(message, logger)
+    }
+}
+
+private struct ReviewRequestOperationContext {
+    let token: SchedulingExecutionToken
+    let executionController: ReviewRequestExecutionControlling?
+
+    func isCurrent() -> Bool {
+        if let executionController {
+            return executionController.isCurrentReviewRequest(token)
+        }
+
+        return sharedSchedulingExecutionGate.isCurrent(token)
+    }
+
+    func finish() {
+        executionController?.finishReviewRequest(token)
+    }
+}
+
 /// SwiftyUpdateKit.
 public class SUK {
     /// SwiftyUpdateKit version.
     public static let version = "1.5.0"
-
-    private static var config: SwiftyUpdateKitConfig?
-    private static var log: Log?
 
     /// Initializes SwiftyUpdateKit.
     ///
@@ -40,10 +103,7 @@ public class SUK {
     public static func initialize(withConfig config: SwiftyUpdateKitConfig,
                                   log: Log? = nil)
     {
-        self.config = config
-        self.log = log
-
-        SUKUserDefaults.setEnvironment(config.isDevelopment ? .development : .production)
+        sharedSUKRuntimeState.initialize(config: config, log: log)
     }
 
     /// Initializes SwiftyUpdateKit.
@@ -89,41 +149,77 @@ public class SUK {
     /// Opens the App Store.
     public static func openAppStore() {
         DispatchQueue.main.async {
-            guard let config else {
-                logf("`applicationDidFinishLaunching(withConfig:)` method is not called yet.", log)
+            let runtimeContext = sharedSUKRuntimeState.snapshot()
+            guard let config = runtimeContext.config else {
+                logf("`applicationDidFinishLaunching(withConfig:)` method is not called yet.",
+                     runtimeContext.log)
                 return
             }
 
             let url = URL(string: config.storeURL)!
-            logf(url.absoluteString, log)
-            #if os(OSX)
-            NSWorkspace.shared.open(url)
-            #elseif os(iOS)
-            if UIApplication.shared.canOpenURL(url) {
-                UIApplication.shared.open(url)
-            }
-            #endif
+            logf(url.absoluteString, runtimeContext.log)
+            openAppStoreURL(url)
         }
     }
 
     /// Shows the update alert for a user to install new app version.
     public static func showUpdateAlert() {
         DispatchQueue.main.async {
-            guard let config else {
-                logf("`applicationDidFinishLaunching(withConfig:)` method is not called yet.", log)
+            let runtimeContext = sharedSUKRuntimeState.snapshot()
+            guard let config = runtimeContext.config else {
+                logf("`applicationDidFinishLaunching(withConfig:)` method is not called yet.",
+                     runtimeContext.log)
                 return
             }
 
-            let alert = Alert(title: config.updateAlertTitle,
-                              message: config.updateAlertMessage)
-                .addAction(config.updateButtonTitle) { Self.openAppStore() }
-
-            if let title = config.remindMeLaterButtonTitle, !title.isEmpty {
-                alert.addAction(title)
+            presentUpdateAlert(config) {
+                Self.openAppStore()
             }
-
-            alert.showAsModal()
         }
+    }
+
+    static func enqueueUpdateAlert(config: SwiftyUpdateKitConfig,
+                                   log: Log?,
+                                   isCurrent: @escaping () -> Bool,
+                                   presenter: @escaping SUKUpdateAlertPresenter,
+                                   openURL: @escaping SUKAppStoreURLOpener)
+    {
+        DispatchQueue.main.async {
+            guard isCurrent() else { return }
+
+            presenter(config) {
+                guard isCurrent() else { return }
+
+                let url = URL(string: config.storeURL)!
+                logf(url.absoluteString, log)
+                guard isCurrent() else { return }
+                openURL(url)
+            }
+        }
+    }
+
+    private static func presentUpdateAlert(_ config: SwiftyUpdateKitConfig,
+                                           updateAction: @escaping () -> Void)
+    {
+        let alert = Alert(title: config.updateAlertTitle,
+                          message: config.updateAlertMessage)
+            .addAction(config.updateButtonTitle, handler: updateAction)
+
+        if let title = config.remindMeLaterButtonTitle, !title.isEmpty {
+            alert.addAction(title)
+        }
+
+        alert.showAsModal()
+    }
+
+    private static func openAppStoreURL(_ url: URL) {
+        #if os(OSX)
+        NSWorkspace.shared.open(url)
+        #elseif os(iOS)
+        if UIApplication.shared.canOpenURL(url) {
+            UIApplication.shared.open(url)
+        }
+        #endif
     }
 
     /// Shows the release notes to a user when new app version is installed.
@@ -167,10 +263,8 @@ public class SUK {
     @available(iOS, deprecated: 16.0, message: "Use `requestReview(_:, in:)` instead.")
     @available(macOS, deprecated: 13.0, message: "Use `requestReview(_:, in:)` instead.")
     public static func requestReview(_ condition: RequestReviewCondition) {
-        DispatchQueue.main.async {
-            requestReviewIfNeeded(condition) {
-                SKStoreReviewController.requestReview()
-            }
+        enqueueReviewRequest(condition) {
+            SKStoreReviewController.requestReview()
         }
     }
 
@@ -187,10 +281,8 @@ public class SUK {
     public static func requestReview(_ condition: RequestReviewCondition,
                                      in controller: NSViewController)
     {
-        DispatchQueue.main.async {
-            requestReviewIfNeeded(condition) {
-                AppStore.requestReview(in: controller)
-            }
+        enqueueReviewRequest(condition) {
+            AppStore.requestReview(in: controller)
         }
     }
     #endif
@@ -206,10 +298,8 @@ public class SUK {
     /// interface.
     @available(iOS 16.0, *)
     public static func requestReview(_ condition: RequestReviewCondition, in scene: UIWindowScene) {
-        DispatchQueue.main.async {
-            requestReviewIfNeeded(condition) {
-                AppStore.requestReview(in: scene)
-            }
+        enqueueReviewRequest(condition) {
+            AppStore.requestReview(in: scene)
         }
     }
 
@@ -222,25 +312,46 @@ public class SUK {
     ///   - view: The view that StoreKit uses to present the rating and review request interface.
     @available(iOS 16.0, *)
     public static func requestReview(_ condition: RequestReviewCondition, in view: UIView) {
+        let runtimeContext = sharedSUKRuntimeState.snapshot()
+        let preflightToken = reviewRequestPreflightToken(condition,
+                                                         userDefaults: runtimeContext.userDefaults)
+
         DispatchQueue.main.async {
             if let scene = view.window?.windowScene {
-                requestReviewIfNeeded(condition) {
-                    AppStore.requestReview(in: scene)
-                }
+                guard let context = prepareReviewRequest(condition,
+                                                         preflightToken: preflightToken)
+                else { return }
+
+                defer { context.finish() }
+                guard context.isCurrent() else { return }
+                AppStore.requestReview(in: scene)
             }
         }
     }
     #endif
 
-    /// Resets the status: stored date of version check condition, stored date of request review
-    /// condition,
-    /// and stored app version for the release notes.
+    /// Resets the status for the current environment: stored dates of version check and request
+    /// review conditions in persistent and in-memory storage, and the stored app version for the
+    /// release notes.
     /// For example, you may use this method during testing and development.
     public static func reset() {
-        let ud = SUKUserDefaults.standard
-        ud.removeObject(forKey: SwiftyUpdateKitLastVersionCheckDateKey)
-        ud.removeObject(forKey: SwiftyUpdateKitLastRequireReviewDateKey)
-        ud.removeObject(forKey: SwiftyUpdateKitLatestAppVersionKey)
+        let userDefaults = SUKUserDefaults.standard
+        let schedulingKeys = [SwiftyUpdateKitLastVersionCheckDateKey,
+                              SwiftyUpdateKitLastRequireReviewDateKey]
+        let persistentStore = UserDefaultsSchedulingStateStore()
+        let inMemoryStore = InMemorySchedulingStateStore()
+        let contexts = schedulingKeys.map {
+            SchedulingStateContext(userDefaults: userDefaults, key: $0)
+        }
+
+        sharedSchedulingExecutionGate.reset(for: userDefaults) {
+            for context in contexts {
+                persistentStore.removeValue(for: context)
+                inMemoryStore.removeValue(for: context)
+            }
+
+            userDefaults.removeObject(forKey: SwiftyUpdateKitLatestAppVersionKey)
+        }
     }
 }
 
@@ -252,7 +363,9 @@ extension SUK {
                              noop: (() -> Void)?,
                              lookup: AppStoreLookup)
     {
-        checkVersion(condition, update: update, lookup: lookup) { lookUpResult in
+        checkVersion(condition, update: update, lookup: lookup) { lookUpResult, context in
+            guard context.isCurrent() else { return }
+
             guard let newRelease else {
                 // Not need to show the new release.
                 noop?()
@@ -261,29 +374,35 @@ extension SUK {
 
             if let result = lookUpResult {
                 // Use fetched lookUpResult.
-                checkNewRelease(result, newRelease: newRelease, forUserID: userID, noop: noop)
+                checkNewRelease(result,
+                                context: context,
+                                newRelease: newRelease,
+                                forUserID: userID,
+                                noop: noop)
             } else {
-                guard let config else { return }
-
-                lookup.lookUp(with: config) { result in
+                lookup.lookUp(with: context.config) { result in
                     switch result {
                         case let .failure(error):
                             // Ignore an error.
-                            logf(error.localizedDescription, log)
+                            context.writeLog(error.localizedDescription)
                             DispatchQueue.main.async {
+                                guard context.isCurrent() else { return }
                                 noop?()
                             }
                         case let .success(lookUpResults):
                             guard let lookUpResult = lookUpResults.first else {
                                 // Ignore an error.
-                                logf("lookUpResult does not exist in the response data.", log)
+                                context
+                                    .writeLog("lookUpResult does not exist in the response data.")
                                 DispatchQueue.main.async {
+                                    guard context.isCurrent() else { return }
                                     noop?()
                                 }
                                 return
                             }
 
                             checkNewRelease(lookUpResult,
+                                            context: context,
                                             newRelease: newRelease,
                                             forUserID: userID,
                                             noop: noop)
@@ -296,82 +415,150 @@ extension SUK {
     private static func checkVersion(_ condition: VersionCheckCondition,
                                      update: UpdateHandler?,
                                      lookup: AppStoreLookup,
-                                     next: @escaping (LookUpResult?) -> Void)
+                                     next: @escaping (LookUpResult?, VersionCheckOperationContext)
+                                         -> Void)
     {
+        let runtimeContext = sharedSUKRuntimeState.snapshot()
+        let executionController = condition as? VersionCheckExecutionControlling
+        let preflightToken = executionController?
+            .versionCheckPreflightToken(in: runtimeContext.userDefaults)
+            ?? sharedSchedulingExecutionGate.token(for: runtimeContext.userDefaults)
+
         DispatchQueue.main.async {
-            guard let config else {
-                logf("`applicationDidFinishLaunching(withConfig:)` method is not called yet.", log)
+            let isPreflightCurrent = executionController?
+                .isCurrentVersionCheck(preflightToken)
+                ?? sharedSchedulingExecutionGate.isCurrent(preflightToken)
+            guard isPreflightCurrent else { return }
+
+            guard let config = runtimeContext.config else {
+                logf("`applicationDidFinishLaunching(withConfig:)` method is not called yet.",
+                     runtimeContext.log)
                 return
             }
 
-            let executionController = condition as? VersionCheckExecutionControlling
+            let userDefaults = runtimeContext.userDefaults
+            let decision: SchedulingExecutionDecision
+
             if let executionController {
-                switch executionController.beginVersionCheck() {
-                    case .started:
-                        break
-                    case .inProgress:
-                        logf("Skips the version check because a lookup is already in progress.",
-                             log)
-                        return
-                    case .notEligible:
-                        logf("Skips the version check.", log)
-                        DispatchQueue.main.async {
-                            next(nil)
-                        }
-                        return
-                }
+                decision = executionController.beginVersionCheck(in: userDefaults,
+                                                                 preflightToken: preflightToken)
             } else {
-                guard condition.shouldCheckVersion() else {
-                    logf("Skips the version check.", log)
-                    DispatchQueue.main.async {
-                        next(nil)
-                    }
-                    return
-                }
+                decision = .started(preflightToken)
             }
 
-            lookup.lookUp(with: config) { result in
-                switch result {
-                    case let .failure(error):
-                        // Ignore an error.
-                        logf(error.localizedDescription, log)
-                        executionController?.finishVersionCheck()
-                    case let .success(lookUpResults):
-                        logf(lookUpResults.description, log)
-                        guard let lookUpResult = lookUpResults.first,
-                              let storeVersion = lookUpResult.version
-                        else {
-                            // Ignore an error.
-                            logf("version does not exist in the response data.", log)
-                            executionController?.finishVersionCheck()
-                            return
+            switch decision {
+                case let .started(token):
+                    let context = VersionCheckOperationContext(config: config,
+                                                               logger: runtimeContext.log,
+                                                               userDefaults: userDefaults,
+                                                               token: token,
+                                                               executionController: executionController)
+
+                    let isEligible = SchedulingExecutionScope.withToken(token) {
+                        condition.shouldCheckVersion()
+                    }
+
+                    guard context.isCurrent() else {
+                        context.finish()
+                        return
+                    }
+
+                    guard isEligible else {
+                        context.finish()
+                        context.writeLog("Skips the version check.")
+                        DispatchQueue.main.async {
+                            guard context.isCurrent() else { return }
+                            next(nil, context)
                         }
+                        return
+                    }
 
-                        (condition as? VersionCheckSuccessRecording)?
-                            .recordSuccessfulVersionCheck()
-                        executionController?.finishVersionCheck()
+                    performVersionLookup(condition,
+                                         update: update,
+                                         lookup: lookup,
+                                         context: context,
+                                         next: next)
+                case .inProgress:
+                    logf("Skips the version check because a lookup is already in progress.",
+                         runtimeContext.log)
+                case let .notEligible(token):
+                    let context = VersionCheckOperationContext(config: config,
+                                                               logger: runtimeContext.log,
+                                                               userDefaults: userDefaults,
+                                                               token: token,
+                                                               executionController: executionController)
+                    context.finish()
+                    context.writeLog("Skips the version check.")
+                    DispatchQueue.main.async {
+                        guard context.isCurrent() else { return }
+                        next(nil, context)
+                    }
+            }
+        }
+    }
 
-                        let isOld = config.versionCompare.compare(storeVersion,
-                                                                  with: config.version)
+    private static func performVersionLookup(_ condition: VersionCheckCondition,
+                                             update: UpdateHandler?,
+                                             lookup: AppStoreLookup,
+                                             context: VersionCheckOperationContext,
+                                             next: @escaping (LookUpResult?,
+                                                              VersionCheckOperationContext) -> Void)
+    {
+        lookup.lookUp(with: context.config) { result in
+            switch result {
+                case let .failure(error):
+                    // Ignore an error.
+                    context.writeLog(error.localizedDescription)
+                    context.finish()
+                case let .success(lookUpResults):
+                    context.writeLog(lookUpResults.description)
+                    guard let lookUpResult = lookUpResults.first,
+                          let storeVersion = lookUpResult.version
+                    else {
+                        // Ignore an error.
+                        context.writeLog("version does not exist in the response data.")
+                        context.finish()
+                        return
+                    }
 
-                        if isOld {
-                            logf("This app version is old.", log)
-                            if update == nil {
-                                // Use default update alert.
-                                Self.showUpdateAlert()
-                            } else {
-                                DispatchQueue.main.async {
-                                    update?(lookUpResult.version, lookUpResult.releaseNotes)
-                                }
+                    let didRecord = context.recordSuccessfulVersionCheck(condition)
+                    context.finish()
+                    guard didRecord else { return }
+
+                    guard context.isCurrent() else { return }
+                    let isOld = context.config.versionCompare.compare(storeVersion,
+                                                                      with: context.config.version)
+                    guard context.isCurrent() else { return }
+
+                    if isOld {
+                        context.writeLog("This app version is old.")
+                        guard context.isCurrent() else { return }
+
+                        if let update {
+                            DispatchQueue.main.async {
+                                guard context.isCurrent() else { return }
+                                update(lookUpResult.version, lookUpResult.releaseNotes)
                             }
                         } else {
-                            // Latest
-                            logf("This app version is already latest.", log)
-                            DispatchQueue.main.async {
-                                next(lookUpResult)
-                            }
+                            enqueueUpdateAlert(config: context.config,
+                                               log: context.logger,
+                                               isCurrent: { context.isCurrent() },
+                                               presenter: { config, updateAction in
+                                                   presentUpdateAlert(config,
+                                                                      updateAction: updateAction)
+                                               },
+                                               openURL: { url in
+                                                   openAppStoreURL(url)
+                                               })
                         }
-                }
+                    } else {
+                        // Latest
+                        context.writeLog("This app version is already latest.")
+                        DispatchQueue.main.async {
+                            guard context.isCurrent() else { return }
+                            next(lookUpResult, context)
+                        }
+                    }
             }
         }
     }
@@ -379,54 +566,155 @@ extension SUK {
     static func requestReviewIfNeeded(_ condition: RequestReviewCondition,
                                       request: () -> Void)
     {
-        guard condition.shouldRequestReview() else { return }
+        let runtimeContext = sharedSUKRuntimeState.snapshot()
+        let preflightToken = reviewRequestPreflightToken(condition,
+                                                         userDefaults: runtimeContext.userDefaults)
+        guard let context = prepareReviewRequest(condition, preflightToken: preflightToken)
+        else { return }
 
-        (condition as? ReviewRequestAttemptRecording)?.recordReviewRequestAttempt()
+        defer { context.finish() }
+        guard context.isCurrent() else { return }
         request()
     }
 
+    static func enqueueReviewRequest(_ condition: RequestReviewCondition,
+                                     request: @escaping @MainActor () -> Void)
+    {
+        let runtimeContext = sharedSUKRuntimeState.snapshot()
+        let preflightToken = reviewRequestPreflightToken(condition,
+                                                         userDefaults: runtimeContext.userDefaults)
+
+        DispatchQueue.main.async {
+            guard let context = prepareReviewRequest(condition,
+                                                     preflightToken: preflightToken)
+            else { return }
+
+            defer { context.finish() }
+            guard context.isCurrent() else { return }
+            request()
+        }
+    }
+
+    private static func prepareReviewRequest(_ condition: RequestReviewCondition,
+                                             preflightToken: SchedulingExecutionToken)
+        -> ReviewRequestOperationContext?
+    {
+        let userDefaults = preflightToken.userDefaults
+        let executionController = condition as? ReviewRequestExecutionControlling
+        let decision: SchedulingExecutionDecision
+
+        if let executionController {
+            decision = executionController.beginReviewRequest(in: userDefaults,
+                                                              preflightToken: preflightToken)
+        } else {
+            guard sharedSchedulingExecutionGate.isCurrent(preflightToken) else { return nil }
+            decision = .started(preflightToken)
+        }
+
+        guard case let .started(token) = decision else { return nil }
+
+        let context = ReviewRequestOperationContext(token: token,
+                                                    executionController: executionController)
+
+        let isEligible = SchedulingExecutionScope.withToken(token) {
+            condition.shouldRequestReview()
+        }
+
+        guard isEligible, context.isCurrent() else {
+            context.finish()
+            return nil
+        }
+
+        if let recordingCondition = condition as? ReviewRequestAttemptRecording {
+            SchedulingExecutionScope.withToken(token) {
+                recordingCondition.recordReviewRequestAttempt()
+            }
+        }
+
+        guard context.isCurrent() else {
+            context.finish()
+            return nil
+        }
+
+        return context
+    }
+
+    private static func reviewRequestPreflightToken(_ condition: RequestReviewCondition,
+                                                    userDefaults: SUKUserDefaults)
+        -> SchedulingExecutionToken
+    {
+        if let executionController = condition as? ReviewRequestExecutionControlling {
+            return executionController.reviewRequestPreflightToken(in: userDefaults)
+        }
+
+        return sharedSchedulingExecutionGate.token(for: userDefaults)
+    }
+
     private static func checkNewRelease(_ lookUpResult: LookUpResult,
+                                        context: VersionCheckOperationContext,
                                         newRelease: @escaping NewReleaseHandler,
                                         forUserID userID: String,
                                         noop: (() -> Void)?)
     {
-        guard let config else { return }
+        guard context.isCurrent() else { return }
 
         guard let storeVersion = lookUpResult.version else {
-            logf("version does not exist in the response data.", log)
+            context.writeLog("version does not exist in the response data.")
             return
         }
 
-        guard storeVersion == config.version else {
-            logf("Current app version is not equal to the version released on the App Store.", log)
+        guard storeVersion == context.config.version else {
+            context
+                .writeLog("Current app version is not equal to the version released on the App Store.")
             DispatchQueue.main.async {
+                guard context.isCurrent() else { return }
                 noop?()
             }
             return
         }
 
-        guard let savedVersion = ReleaseNotes.first(forUserID: userID).latest else {
+        var savedVersion: String?
+        guard context.performStateAccessIfCurrent({
+            savedVersion = ReleaseNotes.first(forUserID: userID,
+                                              userDefaults: context.userDefaults).latest
+        }) else { return }
+
+        guard let savedVersion else {
             // First updated.
-            logf("A user has installed the app firstly.", log)
-            ReleaseNotes.update(storeVersion, forUserID: userID)
+            context.writeLog("A user has installed the app firstly.")
+            guard context.performStateAccessIfCurrent({
+                ReleaseNotes.update(storeVersion,
+                                    forUserID: userID,
+                                    userDefaults: context.userDefaults)
+            }) else { return }
 
             DispatchQueue.main.async {
+                guard context.isCurrent() else { return }
                 newRelease(storeVersion, lookUpResult.releaseNotes, true)
             }
             return
         }
 
-        guard config.versionCompare.compare(storeVersion, with: savedVersion) else {
-            logf("Saved app version is already latest.", log)
+        let isNewRelease = context.config.versionCompare.compare(storeVersion, with: savedVersion)
+        guard context.isCurrent() else { return }
+
+        guard isNewRelease else {
+            context.writeLog("Saved app version is already latest.")
             DispatchQueue.main.async {
+                guard context.isCurrent() else { return }
                 noop?()
             }
             return
         }
 
-        ReleaseNotes.update(storeVersion, forUserID: userID)
+        guard context.performStateAccessIfCurrent({
+            ReleaseNotes.update(storeVersion,
+                                forUserID: userID,
+                                userDefaults: context.userDefaults)
+        }) else { return }
 
         DispatchQueue.main.async {
+            guard context.isCurrent() else { return }
             newRelease(storeVersion, lookUpResult.releaseNotes, false)
         }
     }
