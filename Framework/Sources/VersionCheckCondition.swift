@@ -25,15 +25,14 @@ public protocol VersionCheckSuccessRecording: AnyObject {
     func recordSuccessfulVersionCheck()
 }
 
-enum VersionCheckExecutionDecision {
-    case started
-    case inProgress
-    case notEligible
-}
-
 protocol VersionCheckExecutionControlling: AnyObject {
-    func beginVersionCheck() -> VersionCheckExecutionDecision
-    func finishVersionCheck()
+    func versionCheckPreflightToken(in userDefaults: SUKUserDefaults) -> SchedulingExecutionToken
+    func beginVersionCheck(in userDefaults: SUKUserDefaults,
+                           preflightToken: SchedulingExecutionToken) -> SchedulingExecutionDecision
+    func isCurrentVersionCheck(_ token: SchedulingExecutionToken) -> Bool
+    func performVersionCheckStateAccessIfCurrent(_ token: SchedulingExecutionToken,
+                                                 action: () -> Void) -> Bool
+    func finishVersionCheck(_ token: SchedulingExecutionToken)
 }
 
 /// Always checks the app version.
@@ -110,28 +109,42 @@ open class VersionCheckConditionLaunchingAndDaily: VersionCheckCondition,
     }
 }
 
-extension VersionCheckConditionDaily: VersionCheckExecutionControlling {
-    func beginVersionCheck() -> VersionCheckExecutionDecision {
-        guard shouldCheckVersion() else { return .notEligible }
-        guard schedule.beginExecution() else { return .inProgress }
-
-        return .started
+extension VersionCheckExecutionControlling where Self: DailyScheduleBacked {
+    func versionCheckPreflightToken(in userDefaults: SUKUserDefaults) -> SchedulingExecutionToken {
+        dailySchedule.executionToken(in: userDefaults)
     }
 
-    func finishVersionCheck() {
-        schedule.finishExecution()
+    func beginVersionCheck(in userDefaults: SUKUserDefaults,
+                           preflightToken: SchedulingExecutionToken) -> SchedulingExecutionDecision
+    {
+        dailySchedule.beginExecution(in: userDefaults, preflightToken: preflightToken)
+    }
+
+    func isCurrentVersionCheck(_ token: SchedulingExecutionToken) -> Bool {
+        dailySchedule.isCurrent(token)
+    }
+
+    func performVersionCheckStateAccessIfCurrent(_ token: SchedulingExecutionToken,
+                                                 action: () -> Void) -> Bool
+    {
+        dailySchedule.performStateAccessIfCurrent(token, action: action)
+    }
+
+    func finishVersionCheck(_ token: SchedulingExecutionToken) {
+        dailySchedule.finishExecution(token)
     }
 }
 
-extension VersionCheckConditionLaunchingAndDaily: VersionCheckExecutionControlling {
-    func beginVersionCheck() -> VersionCheckExecutionDecision {
-        guard shouldCheckVersion() else { return .notEligible }
-        guard schedule.beginExecution() else { return .inProgress }
-
-        return .started
+extension VersionCheckConditionDaily: DailyScheduleBacked, VersionCheckExecutionControlling {
+    var dailySchedule: DailySchedule {
+        schedule
     }
+}
 
-    func finishVersionCheck() {
-        schedule.finishExecution()
+extension VersionCheckConditionLaunchingAndDaily: DailyScheduleBacked,
+    VersionCheckExecutionControlling
+{
+    var dailySchedule: DailySchedule {
+        schedule
     }
 }

@@ -17,8 +17,10 @@ struct ReleaseNotes: Codable {
     /// A user ID.
     let userID: String
 
-    static func first(forUserID userID: String) -> ReleaseNotes {
-        let dict = dictionary()
+    static func first(forUserID userID: String,
+                      userDefaults: SUKUserDefaults = SUKUserDefaults.standard) -> ReleaseNotes
+    {
+        let dict = dictionary(userDefaults: userDefaults)
         if let releaseNotes = dict[userID] {
             return releaseNotes
         } else {
@@ -26,15 +28,18 @@ struct ReleaseNotes: Codable {
         }
     }
 
-    static func update(_ appVersion: String, forUserID userID: String) {
-        var dict = dictionary()
+    static func update(_ appVersion: String,
+                       forUserID userID: String,
+                       userDefaults: SUKUserDefaults = SUKUserDefaults.standard)
+    {
+        var dict = dictionary(userDefaults: userDefaults)
         let releaseNotes = ReleaseNotes(latest: appVersion, userID: userID)
         dict[userID] = releaseNotes
-        setDictionary(dict)
+        setDictionary(dict, userDefaults: userDefaults)
     }
 
-    private static func dictionary() -> [String: ReleaseNotes] {
-        if let string = SUKUserDefaults.standard.string(forKey: SwiftyUpdateKitLatestAppVersionKey),
+    private static func dictionary(userDefaults: SUKUserDefaults) -> [String: ReleaseNotes] {
+        if let string = userDefaults.string(forKey: SwiftyUpdateKitLatestAppVersionKey),
            let data = Data(base64Encoded: string),
            let dictionary = try? JSONDecoder().decode([String: ReleaseNotes].self, from: data)
         {
@@ -44,10 +49,12 @@ struct ReleaseNotes: Codable {
         }
     }
 
-    private static func setDictionary(_ dictionary: [String: ReleaseNotes]) {
+    private static func setDictionary(_ dictionary: [String: ReleaseNotes],
+                                      userDefaults: SUKUserDefaults)
+    {
         if let data = try? JSONEncoder().encode(dictionary) {
             let string = data.base64EncodedString()
-            SUKUserDefaults.standard.set(string, forKey: SwiftyUpdateKitLatestAppVersionKey)
+            userDefaults.set(string, forKey: SwiftyUpdateKitLatestAppVersionKey)
         }
     }
 }

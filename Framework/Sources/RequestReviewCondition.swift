@@ -28,6 +28,14 @@ public protocol ReviewRequestAttemptRecording: AnyObject {
     func recordReviewRequestAttempt()
 }
 
+protocol ReviewRequestExecutionControlling: AnyObject {
+    func reviewRequestPreflightToken(in userDefaults: SUKUserDefaults) -> SchedulingExecutionToken
+    func beginReviewRequest(in userDefaults: SUKUserDefaults,
+                            preflightToken: SchedulingExecutionToken) -> SchedulingExecutionDecision
+    func isCurrentReviewRequest(_ token: SchedulingExecutionToken) -> Bool
+    func finishReviewRequest(_ token: SchedulingExecutionToken)
+}
+
 /// Always asks a user for a review.
 open class RequestReviewConditionAlways: RequestReviewCondition {
     public init() {}
@@ -151,5 +159,55 @@ open class RequestReviewConditionLaunchingAndDailySkipFirstDay: RequestReviewCon
 
     open func recordReviewRequestAttempt() {
         schedule.recordCurrentDate()
+    }
+}
+
+extension ReviewRequestExecutionControlling where Self: DailyScheduleBacked {
+    func reviewRequestPreflightToken(in userDefaults: SUKUserDefaults) -> SchedulingExecutionToken {
+        dailySchedule.executionToken(in: userDefaults)
+    }
+
+    func beginReviewRequest(in userDefaults: SUKUserDefaults,
+                            preflightToken: SchedulingExecutionToken) -> SchedulingExecutionDecision
+    {
+        dailySchedule.beginExecution(in: userDefaults, preflightToken: preflightToken)
+    }
+
+    func isCurrentReviewRequest(_ token: SchedulingExecutionToken) -> Bool {
+        dailySchedule.isCurrent(token)
+    }
+
+    func finishReviewRequest(_ token: SchedulingExecutionToken) {
+        dailySchedule.finishExecution(token)
+    }
+}
+
+extension RequestReviewConditionDaily: DailyScheduleBacked, ReviewRequestExecutionControlling {
+    var dailySchedule: DailySchedule {
+        schedule
+    }
+}
+
+extension RequestReviewConditionDailySkipFirstDay: DailyScheduleBacked,
+    ReviewRequestExecutionControlling
+{
+    var dailySchedule: DailySchedule {
+        schedule
+    }
+}
+
+extension RequestReviewConditionLaunchingAndDaily: DailyScheduleBacked,
+    ReviewRequestExecutionControlling
+{
+    var dailySchedule: DailySchedule {
+        schedule
+    }
+}
+
+extension RequestReviewConditionLaunchingAndDailySkipFirstDay: DailyScheduleBacked,
+    ReviewRequestExecutionControlling
+{
+    var dailySchedule: DailySchedule {
+        schedule
     }
 }

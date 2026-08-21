@@ -100,6 +100,10 @@ let config = SwiftyUpdateKitConfig(
 SUK.initialize(withConfig: config)
 ```
 
+Calling `initialize` again does not invalidate work that is already queued or in progress. Those
+operations continue with the configuration and environment captured when they started. Call
+`SUK.reset()` before reinitializing when the existing operations must be cancelled.
+
 ### Quick Usage
 
 To check whether new version is released, you use `SUK.checkVersion` method in `viewDidAppear` method of the view controller. See following:
@@ -180,7 +184,11 @@ SUK.openAppStore()
 
 ### Reset the status
 
-Resets the status: stored date of version check condition, stored date of request review condition, and stored app version for the release notes.
+Resets the status for the current environment: stored dates of version check and request review
+conditions in persistent and in-memory storage, and the stored app version for the release notes.
+The reset completes synchronously and cancels in-flight and queued version checks, review requests,
+and update alerts that have not yet been presented. An update alert that is already visible keeps
+its captured configuration, and its Update button still opens the corresponding App Store page.
 
 For example, you may use `SUK.reset` method during testing and development.
 
