@@ -97,50 +97,73 @@ final class ResetTests: XCTestCase {
         XCTAssertTrue(launchingAndDaily.shouldCheckVersion())
     }
 
-    func testResetRestoresAllReviewRequestConditions() {
-        let persistentStore = UserDefaultsSchedulingStateStore()
-        let inMemoryStore = InMemorySchedulingStateStore()
+    func testResetPreservesStatelessReviewRequestConditions() {
         let always = RequestReviewConditionAlways()
         let disable = RequestReviewConditionDisable()
 
         XCTAssertTrue(always.shouldRequestReview())
         XCTAssertFalse(disable.shouldRequestReview())
 
-        let daily = RequestReviewConditionDaily()
-        XCTAssertTrue(daily.shouldRequestReview())
-        daily.recordReviewRequestAttempt()
-        XCTAssertFalse(daily.shouldRequestReview())
         SUK.reset()
-        XCTAssertTrue(daily.shouldRequestReview())
-
-        let dailySkipFirstDay = RequestReviewConditionDailySkipFirstDay()
-        SUK.reset()
-        XCTAssertFalse(dailySkipFirstDay.shouldRequestReview())
-        XCTAssertNotEqual(persistentStore.integer(forKey: SwiftyUpdateKitLastRequireReviewDateKey),
-                          0)
-        SUK.reset()
-        XCTAssertEqual(persistentStore.integer(forKey: SwiftyUpdateKitLastRequireReviewDateKey), 0)
-        XCTAssertFalse(dailySkipFirstDay.shouldRequestReview())
-
-        let launchingAndDaily = RequestReviewConditionLaunchingAndDaily()
-        SUK.reset()
-        XCTAssertTrue(launchingAndDaily.shouldRequestReview())
-        launchingAndDaily.recordReviewRequestAttempt()
-        XCTAssertFalse(launchingAndDaily.shouldRequestReview())
-        SUK.reset()
-        XCTAssertTrue(launchingAndDaily.shouldRequestReview())
-
-        let launchingAndDailySkipFirstDay =
-            RequestReviewConditionLaunchingAndDailySkipFirstDay()
-        SUK.reset()
-        XCTAssertFalse(launchingAndDailySkipFirstDay.shouldRequestReview())
-        XCTAssertNotEqual(inMemoryStore.integer(forKey: SwiftyUpdateKitLastRequireReviewDateKey), 0)
-        SUK.reset()
-        XCTAssertEqual(inMemoryStore.integer(forKey: SwiftyUpdateKitLastRequireReviewDateKey), 0)
-        XCTAssertFalse(launchingAndDailySkipFirstDay.shouldRequestReview())
 
         XCTAssertTrue(always.shouldRequestReview())
         XCTAssertFalse(disable.shouldRequestReview())
+    }
+
+    func testResetRestoresDailyReviewRequestCondition() {
+        let daily = RequestReviewConditionDaily()
+
+        XCTAssertTrue(daily.shouldRequestReview())
+        daily.recordReviewRequestAttempt()
+        XCTAssertFalse(daily.shouldRequestReview())
+
+        SUK.reset()
+
+        XCTAssertTrue(daily.shouldRequestReview())
+    }
+
+    func testResetRestartsDailySkipFirstDayReviewRequestCondition() {
+        let userDefaults = SUKUserDefaults.standard
+        let stateContext = SchedulingStateContext(userDefaults: userDefaults,
+                                                  key: SwiftyUpdateKitLastRequireReviewDateKey)
+        let persistentStore = UserDefaultsSchedulingStateStore()
+        let condition = RequestReviewConditionDailySkipFirstDay()
+
+        XCTAssertFalse(condition.shouldRequestReview())
+        XCTAssertNotEqual(persistentStore.integer(for: stateContext), 0)
+
+        SUK.reset()
+
+        XCTAssertEqual(persistentStore.integer(for: stateContext), 0)
+        XCTAssertFalse(condition.shouldRequestReview())
+    }
+
+    func testResetRestoresLaunchingAndDailyReviewRequestCondition() {
+        let condition = RequestReviewConditionLaunchingAndDaily()
+
+        XCTAssertTrue(condition.shouldRequestReview())
+        condition.recordReviewRequestAttempt()
+        XCTAssertFalse(condition.shouldRequestReview())
+
+        SUK.reset()
+
+        XCTAssertTrue(condition.shouldRequestReview())
+    }
+
+    func testResetRestartsLaunchingAndDailySkipFirstDayReviewRequestCondition() {
+        let userDefaults = SUKUserDefaults.standard
+        let stateContext = SchedulingStateContext(userDefaults: userDefaults,
+                                                  key: SwiftyUpdateKitLastRequireReviewDateKey)
+        let inMemoryStore = InMemorySchedulingStateStore()
+        let condition = RequestReviewConditionLaunchingAndDailySkipFirstDay()
+
+        XCTAssertFalse(condition.shouldRequestReview())
+        XCTAssertNotEqual(inMemoryStore.integer(for: stateContext), 0)
+
+        SUK.reset()
+
+        XCTAssertEqual(inMemoryStore.integer(for: stateContext), 0)
+        XCTAssertFalse(condition.shouldRequestReview())
     }
 
     func testResetRestoresReleaseNotesState() {
@@ -157,38 +180,54 @@ final class ResetTests: XCTestCase {
         let inMemoryStore = InMemorySchedulingStateStore()
 
         SUKUserDefaults.setEnvironment(.production)
-        persistentStore.set(20_260_819, forKey: SwiftyUpdateKitLastVersionCheckDateKey)
-        persistentStore.set(20_260_820, forKey: SwiftyUpdateKitLastRequireReviewDateKey)
-        inMemoryStore.set(20_260_821, forKey: SwiftyUpdateKitLastVersionCheckDateKey)
-        inMemoryStore.set(20_260_822, forKey: SwiftyUpdateKitLastRequireReviewDateKey)
-        ReleaseNotes.update("1.2.3", forUserID: "Production")
+        let productionUserDefaults = SUKUserDefaults.standard
+        let versionKey = SwiftyUpdateKitLastVersionCheckDateKey
+        let reviewKey = SwiftyUpdateKitLastRequireReviewDateKey
+        let productionVersionContext = SchedulingStateContext(userDefaults: productionUserDefaults,
+                                                              key: versionKey)
+        let productionReviewContext = SchedulingStateContext(userDefaults: productionUserDefaults,
+                                                             key: reviewKey)
+        persistentStore.set(20_260_819, for: productionVersionContext)
+        persistentStore.set(20_260_820, for: productionReviewContext)
+        inMemoryStore.set(20_260_821, for: productionVersionContext)
+        inMemoryStore.set(20_260_822, for: productionReviewContext)
+        ReleaseNotes.update("1.2.3",
+                            forUserID: "Production",
+                            userDefaults: productionUserDefaults)
 
         SUKUserDefaults.setEnvironment(.development)
-        persistentStore.set(20_260_823, forKey: SwiftyUpdateKitLastVersionCheckDateKey)
-        persistentStore.set(20_260_824, forKey: SwiftyUpdateKitLastRequireReviewDateKey)
-        inMemoryStore.set(20_260_825, forKey: SwiftyUpdateKitLastVersionCheckDateKey)
-        inMemoryStore.set(20_260_826, forKey: SwiftyUpdateKitLastRequireReviewDateKey)
-        ReleaseNotes.update("2.0.0", forUserID: "Development")
+        let developmentUserDefaults = SUKUserDefaults.standard
+        let developmentVersionContext =
+            SchedulingStateContext(userDefaults: developmentUserDefaults,
+                                   key: versionKey)
+        let developmentReviewContext = SchedulingStateContext(userDefaults: developmentUserDefaults,
+                                                              key: reviewKey)
+        persistentStore.set(20_260_823, for: developmentVersionContext)
+        persistentStore.set(20_260_824, for: developmentReviewContext)
+        inMemoryStore.set(20_260_825, for: developmentVersionContext)
+        inMemoryStore.set(20_260_826, for: developmentReviewContext)
+        ReleaseNotes.update("2.0.0",
+                            forUserID: "Development",
+                            userDefaults: developmentUserDefaults)
 
         SUK.reset()
 
-        XCTAssertEqual(persistentStore.integer(forKey: SwiftyUpdateKitLastVersionCheckDateKey), 0)
-        XCTAssertEqual(persistentStore.integer(forKey: SwiftyUpdateKitLastRequireReviewDateKey), 0)
-        XCTAssertEqual(inMemoryStore.integer(forKey: SwiftyUpdateKitLastVersionCheckDateKey), 0)
-        XCTAssertEqual(inMemoryStore.integer(forKey: SwiftyUpdateKitLastRequireReviewDateKey), 0)
-        XCTAssertNil(ReleaseNotes.first(forUserID: "Development").latest)
+        XCTAssertEqual(persistentStore.integer(for: developmentVersionContext), 0)
+        XCTAssertEqual(persistentStore.integer(for: developmentReviewContext), 0)
+        XCTAssertEqual(inMemoryStore.integer(for: developmentVersionContext), 0)
+        XCTAssertEqual(inMemoryStore.integer(for: developmentReviewContext), 0)
+        XCTAssertNil(ReleaseNotes.first(forUserID: "Development",
+                                        userDefaults: developmentUserDefaults).latest)
 
         SUKUserDefaults.setEnvironment(.production)
 
-        XCTAssertEqual(persistentStore.integer(forKey: SwiftyUpdateKitLastVersionCheckDateKey),
-                       20_260_819)
-        XCTAssertEqual(persistentStore.integer(forKey: SwiftyUpdateKitLastRequireReviewDateKey),
-                       20_260_820)
-        XCTAssertEqual(inMemoryStore.integer(forKey: SwiftyUpdateKitLastVersionCheckDateKey),
-                       20_260_821)
-        XCTAssertEqual(inMemoryStore.integer(forKey: SwiftyUpdateKitLastRequireReviewDateKey),
-                       20_260_822)
-        XCTAssertEqual(ReleaseNotes.first(forUserID: "Production").latest, "1.2.3")
+        XCTAssertEqual(persistentStore.integer(for: productionVersionContext), 20_260_819)
+        XCTAssertEqual(persistentStore.integer(for: productionReviewContext), 20_260_820)
+        XCTAssertEqual(inMemoryStore.integer(for: productionVersionContext), 20_260_821)
+        XCTAssertEqual(inMemoryStore.integer(for: productionReviewContext), 20_260_822)
+        XCTAssertEqual(ReleaseNotes.first(forUserID: "Production",
+                                          userDefaults: productionUserDefaults).latest,
+                       "1.2.3")
     }
 
     func testResetInvalidatesInFlightVersionCheckWithoutUnlockingReplacement() {
@@ -230,7 +269,7 @@ final class ResetTests: XCTestCase {
     }
 
     func testProductionAndDevelopmentInFlightChecksRemainIndependent() {
-        initializeSUKForSchedulingTests()
+        initializeSUKForSchedulingTests(development: false)
         SUK.reset()
 
         let productionUserDefaults = SUKUserDefaults.standard
@@ -276,7 +315,7 @@ final class ResetTests: XCTestCase {
     }
 }
 
-final class RoundTwoRegressionTests: XCTestCase {
+final class SchedulingInvalidationTests: XCTestCase {
     override func setUpWithError() throws {
         SUKUserDefaults.setEnvironment(.test)
         SUK.reset()
@@ -289,7 +328,7 @@ final class RoundTwoRegressionTests: XCTestCase {
         }
     }
 
-    func testDailyVersionCheckCallsOpenOverrides() {
+    func testDailyVersionCheckInvokesSubclassOverrides() {
         initializeSUKForSchedulingTests()
         SUK.reset()
 
@@ -328,7 +367,7 @@ final class RoundTwoRegressionTests: XCTestCase {
             0)
     }
 
-    func testLaunchingAndDailyVersionCheckCallsOpenOverrides() {
+    func testLaunchingAndDailyVersionCheckInvokesSubclassOverrides() {
         initializeSUKForSchedulingTests()
         SUK.reset()
 
@@ -424,9 +463,12 @@ final class RoundTwoRegressionTests: XCTestCase {
     }
 
     func testQueuedUpdateAlertUsesCapturedConfigurationAndStoreURL() {
+        let originalStoreURL = "https://apps.apple.com/app/id1111111111"
+        let replacementStoreURL = "https://apps.apple.com/app/id2222222222"
         let originalConfig = schedulingTestConfig(version: "1.0.0",
-                                                  storeURL: "https://apps.apple.com/app/id1111111111",
-                                                  updateAlertTitle: "Original title")
+                                                  storeURL: originalStoreURL,
+                                                  updateAlertTitle: "Original title",
+                                                  development: false)
         SUK.initialize(withConfig: originalConfig)
         SUK.reset()
 
@@ -449,7 +491,7 @@ final class RoundTwoRegressionTests: XCTestCase {
                                })
 
         SUK.initialize(withConfig: schedulingTestConfig(version: "2.0.0",
-                                                        storeURL: "https://apps.apple.com/app/id2222222222",
+                                                        storeURL: replacementStoreURL,
                                                         updateAlertTitle: "Replacement title",
                                                         development: true))
         waitForMainQueue()
@@ -459,17 +501,48 @@ final class RoundTwoRegressionTests: XCTestCase {
 
         updateAction?()
 
+        XCTAssertEqual(openedURL?.absoluteString, originalStoreURL)
+    }
+
+    func testPresentedUpdateAlertActionStillOpensCapturedStoreURLAfterReset() {
+        let config = schedulingTestConfig(version: "1.0.0",
+                                          storeURL: "https://apps.apple.com/app/id1111111111")
+        SUK.initialize(withConfig: config)
+        SUK.reset()
+
+        let token = sharedSchedulingExecutionGate.token(for: SUKUserDefaults.standard)
+        var updateAction: (() -> Void)?
+        var openedURL: URL?
+
+        SUK.enqueueUpdateAlert(config: config,
+                               log: nil,
+                               isCurrent: {
+                                   sharedSchedulingExecutionGate.isCurrent(token)
+                               },
+                               presenter: { _, action in
+                                   updateAction = action
+                               },
+                               openURL: { url in
+                                   openedURL = url
+                               })
+        waitForMainQueue()
+
+        XCTAssertNotNil(updateAction)
+
+        SUK.reset()
+        updateAction?()
+
         XCTAssertEqual(openedURL?.absoluteString,
                        "https://apps.apple.com/app/id1111111111")
     }
 
-    func testReviewRequestCallsOpenOverrides() {
+    func testReviewRequestInvokesSubclassOverrides() {
         initializeSUKForSchedulingTests()
         SUK.reset()
 
         let ineligibleCondition = IneligibleDailyReviewCondition()
         var requestCount = 0
-        SUK.requestReviewIfNeeded(ineligibleCondition) {
+        SUK.requestReviewIfNeededForTesting(ineligibleCondition) {
             requestCount += 1
         }
 
@@ -477,7 +550,7 @@ final class RoundTwoRegressionTests: XCTestCase {
         XCTAssertEqual(requestCount, 0)
 
         let recordingCondition = RecordingLaunchingAndDailyReviewCondition()
-        SUK.requestReviewIfNeeded(recordingCondition) {
+        SUK.requestReviewIfNeededForTesting(recordingCondition) {
             requestCount += 1
         }
 
@@ -489,23 +562,23 @@ final class RoundTwoRegressionTests: XCTestCase {
         initializeSUKForSchedulingTests()
         SUK.reset()
 
-        let recordingStarted = DispatchSemaphore(value: 0)
-        let continueRecording = DispatchSemaphore(value: 0)
+        let started = DispatchSemaphore(value: 0)
+        let proceed = DispatchSemaphore(value: 0)
         let requestCount = LockedCounter()
         let operationCompleted = expectation(description: "Review operation completed")
-        let condition = BlockingDailyReviewCondition(recordingStarted: recordingStarted,
-                                                     continueRecording: continueRecording)
+        let condition = BlockingDailyReviewCondition(recordingStarted: started,
+                                                     continueRecording: proceed)
 
         DispatchQueue.global().async {
-            SUK.requestReviewIfNeeded(condition) {
+            SUK.requestReviewIfNeededForTesting(condition) {
                 requestCount.increment()
             }
             operationCompleted.fulfill()
         }
 
-        XCTAssertEqual(recordingStarted.wait(timeout: .now() + 1), .success)
+        XCTAssertEqual(started.wait(timeout: .now() + 1), .success)
         SUK.reset()
-        continueRecording.signal()
+        proceed.signal()
         wait(for: [operationCompleted], timeout: 1)
 
         XCTAssertEqual(requestCount.value, 0)
@@ -519,23 +592,23 @@ final class RoundTwoRegressionTests: XCTestCase {
         SUK.reset()
 
         let userDefaults = SUKUserDefaults.standard
-        let recordingStarted = DispatchSemaphore(value: 0)
-        let continueRecording = DispatchSemaphore(value: 0)
+        let started = DispatchSemaphore(value: 0)
+        let proceed = DispatchSemaphore(value: 0)
         let requestCount = LockedCounter()
         let operationCompleted = expectation(description: "Review operation completed")
-        let condition = BlockingLaunchingAndDailyReviewCondition(recordingStarted: recordingStarted,
-                                                                 continueRecording: continueRecording)
+        let condition = BlockingLaunchingAndDailyReviewCondition(recordingStarted: started,
+                                                                 continueRecording: proceed)
 
         DispatchQueue.global().async {
-            SUK.requestReviewIfNeeded(condition) {
+            SUK.requestReviewIfNeededForTesting(condition) {
                 requestCount.increment()
             }
             operationCompleted.fulfill()
         }
 
-        XCTAssertEqual(recordingStarted.wait(timeout: .now() + 1), .success)
+        XCTAssertEqual(started.wait(timeout: .now() + 1), .success)
         SUK.reset()
-        continueRecording.signal()
+        proceed.signal()
         wait(for: [operationCompleted], timeout: 1)
 
         let stateContext = SchedulingStateContext(userDefaults: userDefaults,
@@ -547,7 +620,7 @@ final class RoundTwoRegressionTests: XCTestCase {
     func testConcurrentRuntimeSnapshotsKeepConfigurationLogAndEnvironmentTogether() {
         let runtimeState = SUKRuntimeState()
         let mismatches = AtomicDictionary<Int, Bool>()
-        let productionConfig = schedulingTestConfig(version: "production")
+        let productionConfig = schedulingTestConfig(version: "production", development: false)
         let developmentConfig = schedulingTestConfig(version: "development", development: true)
         let productionLog: Log = { message in
             if message as? String != "production" {
@@ -640,10 +713,24 @@ final class AtomicDictionaryTests: XCTestCase {
 }
 
 final class SchedulingConditionTests: XCTestCase {
+    override func setUpWithError() throws {
+        SUKUserDefaults.setEnvironment(.test)
+        SUK.reset()
+    }
+
+    override func tearDownWithError() throws {
+        for environment in [SUKUserDefaults.Environment.production, .development, .test] {
+            SUKUserDefaults.setEnvironment(environment)
+            SUK.reset()
+        }
+    }
+
     func testDailyVersionCheckRecordsOnlyAfterSuccess() {
         let clock = TestClock(currentDate: 20_260_819)
         let stateStore = TestSchedulingStateStore()
         let condition = VersionCheckConditionDaily(clock: clock, stateStore: stateStore)
+        let stateContext = SchedulingStateContext(userDefaults: SUKUserDefaults.standard,
+                                                  key: SwiftyUpdateKitLastVersionCheckDateKey)
 
         XCTAssertTrue(condition.shouldCheckVersion())
         XCTAssertTrue(condition.shouldCheckVersion())
@@ -653,8 +740,7 @@ final class SchedulingConditionTests: XCTestCase {
         condition.recordSuccessfulVersionCheck()
 
         XCTAssertEqual(stateStore.writeCount, 1)
-        XCTAssertEqual(stateStore.integer(forKey: SwiftyUpdateKitLastVersionCheckDateKey),
-                       20_260_819)
+        XCTAssertEqual(stateStore.integer(for: stateContext), 20_260_819)
         XCTAssertFalse(condition.shouldCheckVersion())
 
         clock.date = 20_260_820
@@ -708,6 +794,8 @@ final class SchedulingConditionTests: XCTestCase {
         let condition = VersionCheckConditionDaily(clock: clock, stateStore: stateStore)
         let checkCompleted = expectation(description: "Check completed")
         initializeSUKForSchedulingTests()
+        let stateContext = SchedulingStateContext(userDefaults: SUKUserDefaults.standard,
+                                                  key: SwiftyUpdateKitLastVersionCheckDateKey)
 
         let lookup = StubAppStoreLookup(result: .success([.stub(version: "1.0.0")]))
 
@@ -722,8 +810,7 @@ final class SchedulingConditionTests: XCTestCase {
 
         wait(for: [checkCompleted], timeout: 1)
         XCTAssertEqual(stateStore.writeCount, 1)
-        XCTAssertEqual(stateStore.integer(forKey: SwiftyUpdateKitLastVersionCheckDateKey),
-                       20_260_819)
+        XCTAssertEqual(stateStore.integer(for: stateContext), 20_260_819)
         XCTAssertFalse(condition.shouldCheckVersion())
     }
 
@@ -777,6 +864,40 @@ final class SchedulingConditionTests: XCTestCase {
         lookup.completeNext(with: .failure(TestLookupError.failed))
     }
 
+    func testIneligibleVersionCheckCallsNoopWhileAnotherLookupIsInProgress() {
+        let lookup = ControlledAppStoreLookup()
+        let ineligibleCondition = IneligibleDailyVersionCheckCondition()
+        var noopCallCount = 0
+        initializeSUKForSchedulingTests()
+        SUK.reset()
+
+        SUK.checkVersion(VersionCheckConditionDaily(),
+                         update: nil,
+                         newRelease: nil,
+                         forUserID: "Test",
+                         noop: nil,
+                         lookup: lookup)
+        waitForMainQueue()
+        XCTAssertEqual(lookup.requestCount, 1)
+
+        SUK.checkVersion(ineligibleCondition,
+                         update: nil,
+                         newRelease: nil,
+                         forUserID: "Test",
+                         noop: {
+                             noopCallCount += 1
+                         },
+                         lookup: lookup)
+        waitForMainQueue()
+        waitForMainQueue()
+
+        XCTAssertEqual(ineligibleCondition.eligibilityCallCount, 1)
+        XCTAssertEqual(noopCallCount, 1)
+        XCTAssertEqual(lookup.requestCount, 1)
+
+        lookup.completeNext(with: .failure(TestLookupError.failed))
+    }
+
     func testLaunchingAndDailyCheckCanRetryAfterFailure() {
         let clock = TestClock(currentDate: 20_260_819)
         let stateStore = TestSchedulingStateStore()
@@ -809,19 +930,20 @@ final class SchedulingConditionTests: XCTestCase {
         let clock = TestClock(currentDate: 20_260_819)
         let stateStore = TestSchedulingStateStore()
         let condition = RequestReviewConditionDaily(clock: clock, stateStore: stateStore)
+        let stateContext = SchedulingStateContext(userDefaults: SUKUserDefaults.standard,
+                                                  key: SwiftyUpdateKitLastRequireReviewDateKey)
         var requestCount = 0
 
         XCTAssertTrue(condition.shouldRequestReview())
         XCTAssertEqual(stateStore.writeCount, 0)
 
-        SUK.requestReviewIfNeeded(condition) {
+        SUK.requestReviewIfNeededForTesting(condition) {
             requestCount += 1
             XCTAssertEqual(stateStore.writeCount, 1)
         }
 
         XCTAssertEqual(requestCount, 1)
-        XCTAssertEqual(stateStore.integer(forKey: SwiftyUpdateKitLastRequireReviewDateKey),
-                       20_260_819)
+        XCTAssertEqual(stateStore.integer(for: stateContext), 20_260_819)
         XCTAssertFalse(condition.shouldRequestReview())
     }
 
@@ -830,26 +952,26 @@ final class SchedulingConditionTests: XCTestCase {
         let stateStore = TestSchedulingStateStore()
         let condition = RequestReviewConditionDailySkipFirstDay(clock: clock,
                                                                 stateStore: stateStore)
+        let stateContext = SchedulingStateContext(userDefaults: SUKUserDefaults.standard,
+                                                  key: SwiftyUpdateKitLastRequireReviewDateKey)
         var requestCount = 0
 
-        SUK.requestReviewIfNeeded(condition) {
+        SUK.requestReviewIfNeededForTesting(condition) {
             requestCount += 1
         }
 
         XCTAssertEqual(requestCount, 0)
         XCTAssertEqual(stateStore.writeCount, 1)
-        XCTAssertEqual(stateStore.integer(forKey: SwiftyUpdateKitLastRequireReviewDateKey),
-                       20_260_819)
+        XCTAssertEqual(stateStore.integer(for: stateContext), 20_260_819)
 
         clock.date = 20_260_820
-        SUK.requestReviewIfNeeded(condition) {
+        SUK.requestReviewIfNeededForTesting(condition) {
             requestCount += 1
         }
 
         XCTAssertEqual(requestCount, 1)
         XCTAssertEqual(stateStore.writeCount, 2)
-        XCTAssertEqual(stateStore.integer(forKey: SwiftyUpdateKitLastRequireReviewDateKey),
-                       20_260_820)
+        XCTAssertEqual(stateStore.integer(for: stateContext), 20_260_820)
     }
 }
 
@@ -996,17 +1118,17 @@ private final class TestSchedulingStateStore: SUKSchedulingStateStore {
     private var values: [String: Int] = [:]
     private(set) var writeCount = 0
 
-    func set(_ value: Int, forKey key: String) {
-        values[key] = value
+    func set(_ value: Int, for context: SchedulingStateContext) {
+        values[context.storageKey] = value
         writeCount += 1
     }
 
-    func integer(forKey key: String) -> Int {
-        values[key] ?? 0
+    func integer(for context: SchedulingStateContext) -> Int {
+        values[context.storageKey] ?? 0
     }
 
-    func removeValue(forKey key: String) {
-        values.removeValue(forKey: key)
+    func removeValue(for context: SchedulingStateContext) {
+        values.removeValue(forKey: context.storageKey)
     }
 }
 
@@ -1047,7 +1169,7 @@ private enum TestLookupError: Error {
     case failed
 }
 
-private func initializeSUKForSchedulingTests(development: Bool = false) {
+private func initializeSUKForSchedulingTests(development: Bool = true) {
     SUK.initialize(withConfig: schedulingTestConfig(version: "1.0.0",
                                                     development: development))
 }
@@ -1057,7 +1179,7 @@ private func schedulingTestConfig(version: String,
                                   updateAlertTitle: String = SwiftyUpdateKitConfig
                                       .defaultUpdateAlertTitle,
                                   versionCompare: VersionComparable? = nil,
-                                  development: Bool = false) -> SwiftyUpdateKitConfig
+                                  development: Bool = true) -> SwiftyUpdateKitConfig
 {
     SwiftyUpdateKitConfig(version: version,
                           iTunesID: "1234567890",

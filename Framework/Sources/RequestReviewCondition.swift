@@ -162,84 +162,52 @@ open class RequestReviewConditionLaunchingAndDailySkipFirstDay: RequestReviewCon
     }
 }
 
-extension RequestReviewConditionDaily: ReviewRequestExecutionControlling {
+extension ReviewRequestExecutionControlling where Self: DailyScheduleBacked {
     func reviewRequestPreflightToken(in userDefaults: SUKUserDefaults) -> SchedulingExecutionToken {
-        schedule.executionToken(in: userDefaults)
+        dailySchedule.executionToken(in: userDefaults)
     }
 
     func beginReviewRequest(in userDefaults: SUKUserDefaults,
                             preflightToken: SchedulingExecutionToken) -> SchedulingExecutionDecision
     {
-        schedule.beginExecution(in: userDefaults, preflightToken: preflightToken)
+        dailySchedule.beginExecution(in: userDefaults, preflightToken: preflightToken)
     }
 
     func isCurrentReviewRequest(_ token: SchedulingExecutionToken) -> Bool {
-        schedule.isCurrent(token)
+        dailySchedule.isCurrent(token)
     }
 
     func finishReviewRequest(_ token: SchedulingExecutionToken) {
-        schedule.finishExecution(token)
+        dailySchedule.finishExecution(token)
     }
 }
 
-extension RequestReviewConditionDailySkipFirstDay: ReviewRequestExecutionControlling {
-    func reviewRequestPreflightToken(in userDefaults: SUKUserDefaults) -> SchedulingExecutionToken {
-        schedule.executionToken(in: userDefaults)
-    }
-
-    func beginReviewRequest(in userDefaults: SUKUserDefaults,
-                            preflightToken: SchedulingExecutionToken) -> SchedulingExecutionDecision
-    {
-        schedule.beginExecution(in: userDefaults, preflightToken: preflightToken)
-    }
-
-    func isCurrentReviewRequest(_ token: SchedulingExecutionToken) -> Bool {
-        schedule.isCurrent(token)
-    }
-
-    func finishReviewRequest(_ token: SchedulingExecutionToken) {
-        schedule.finishExecution(token)
+extension RequestReviewConditionDaily: DailyScheduleBacked, ReviewRequestExecutionControlling {
+    var dailySchedule: DailySchedule {
+        schedule
     }
 }
 
-extension RequestReviewConditionLaunchingAndDaily: ReviewRequestExecutionControlling {
-    func reviewRequestPreflightToken(in userDefaults: SUKUserDefaults) -> SchedulingExecutionToken {
-        schedule.executionToken(in: userDefaults)
-    }
-
-    func beginReviewRequest(in userDefaults: SUKUserDefaults,
-                            preflightToken: SchedulingExecutionToken) -> SchedulingExecutionDecision
-    {
-        schedule.beginExecution(in: userDefaults, preflightToken: preflightToken)
-    }
-
-    func isCurrentReviewRequest(_ token: SchedulingExecutionToken) -> Bool {
-        schedule.isCurrent(token)
-    }
-
-    func finishReviewRequest(_ token: SchedulingExecutionToken) {
-        schedule.finishExecution(token)
-    }
-}
-
-extension RequestReviewConditionLaunchingAndDailySkipFirstDay:
+extension RequestReviewConditionDailySkipFirstDay: DailyScheduleBacked,
     ReviewRequestExecutionControlling
 {
-    func reviewRequestPreflightToken(in userDefaults: SUKUserDefaults) -> SchedulingExecutionToken {
-        schedule.executionToken(in: userDefaults)
+    var dailySchedule: DailySchedule {
+        schedule
     }
+}
 
-    func beginReviewRequest(in userDefaults: SUKUserDefaults,
-                            preflightToken: SchedulingExecutionToken) -> SchedulingExecutionDecision
-    {
-        schedule.beginExecution(in: userDefaults, preflightToken: preflightToken)
+extension RequestReviewConditionLaunchingAndDaily: DailyScheduleBacked,
+    ReviewRequestExecutionControlling
+{
+    var dailySchedule: DailySchedule {
+        schedule
     }
+}
 
-    func isCurrentReviewRequest(_ token: SchedulingExecutionToken) -> Bool {
-        schedule.isCurrent(token)
-    }
-
-    func finishReviewRequest(_ token: SchedulingExecutionToken) {
-        schedule.finishExecution(token)
+extension RequestReviewConditionLaunchingAndDailySkipFirstDay: DailyScheduleBacked,
+    ReviewRequestExecutionControlling
+{
+    var dailySchedule: DailySchedule {
+        schedule
     }
 }

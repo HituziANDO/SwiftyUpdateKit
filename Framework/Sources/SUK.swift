@@ -95,7 +95,12 @@ public class SUK {
     /// SwiftyUpdateKit version.
     public static let version = "1.5.0"
 
+    private static let versionCheckInvalidatedLog =
+        "Cancels the version check because its scheduling context was invalidated."
+
     /// Initializes SwiftyUpdateKit.
+    /// Operations that are already queued or in progress keep the configuration and environment
+    /// captured when they started. Call `reset()` before reinitializing to invalidate them.
     ///
     /// - Parameters:
     ///   - config: A configuration.
@@ -163,9 +168,11 @@ public class SUK {
     }
 
     /// Shows the update alert for a user to install new app version.
+    /// The alert and its update action use the configuration captured when this method is called.
     public static func showUpdateAlert() {
+        let runtimeContext = sharedSUKRuntimeState.snapshot()
+
         DispatchQueue.main.async {
-            let runtimeContext = sharedSUKRuntimeState.snapshot()
             guard let config = runtimeContext.config else {
                 logf("`applicationDidFinishLaunching(withConfig:)` method is not called yet.",
                      runtimeContext.log)
@@ -173,7 +180,9 @@ public class SUK {
             }
 
             presentUpdateAlert(config) {
-                Self.openAppStore()
+                let url = URL(string: config.storeURL)!
+                logf(url.absoluteString, runtimeContext.log)
+                openAppStoreURL(url)
             }
         }
     }
@@ -188,11 +197,8 @@ public class SUK {
             guard isCurrent() else { return }
 
             presenter(config) {
-                guard isCurrent() else { return }
-
                 let url = URL(string: config.storeURL)!
                 logf(url.absoluteString, log)
-                guard isCurrent() else { return }
                 openURL(url)
             }
         }
@@ -333,6 +339,9 @@ public class SUK {
     /// Resets the status for the current environment: stored dates of version check and request
     /// review conditions in persistent and in-memory storage, and the stored app version for the
     /// release notes.
+    /// The reset completes synchronously and invalidates in-flight and queued scheduling work,
+    /// including update alerts that have not been presented yet. An alert already on screen keeps
+    /// its update action.
     /// For example, you may use this method during testing and development.
     public static func reset() {
         let userDefaults = SUKUserDefaults.standard
@@ -350,6 +359,8 @@ public class SUK {
                 inMemoryStore.removeValue(for: context)
             }
 
+            // Release-note updates use the same gate, so clearing this value inside the critical
+            // section prevents stale operations from restoring it after reset.
             userDefaults.removeObject(forKey: SwiftyUpdateKitLatestAppVersionKey)
         }
     }
@@ -437,6 +448,30 @@ extension SUK {
             }
 
             let userDefaults = runtimeContext.userDefaults
+            let preflightContext = VersionCheckOperationContext(config: config,
+                                                                logger: runtimeContext.log,
+                                                                userDefaults: userDefaults,
+                                                                token: preflightToken,
+                                                                executionController:
+                                                                executionController)
+            let isEligible = SchedulingExecutionScope.withToken(preflightToken) {
+                condition.shouldCheckVersion()
+            }
+
+            guard preflightContext.isCurrent() else {
+                preflightContext.writeLog(versionCheckInvalidatedLog)
+                return
+            }
+
+            guard isEligible else {
+                preflightContext.writeLog("Skips the version check because its condition declined.")
+                DispatchQueue.main.async {
+                    guard preflightContext.isCurrent() else { return }
+                    next(nil, preflightContext)
+                }
+                return
+            }
+
             let decision: SchedulingExecutionDecision
 
             if let executionController {
@@ -452,26 +487,8 @@ extension SUK {
                                                                logger: runtimeContext.log,
                                                                userDefaults: userDefaults,
                                                                token: token,
-                                                               executionController: executionController)
-
-                    let isEligible = SchedulingExecutionScope.withToken(token) {
-                        condition.shouldCheckVersion()
-                    }
-
-                    guard context.isCurrent() else {
-                        context.finish()
-                        return
-                    }
-
-                    guard isEligible else {
-                        context.finish()
-                        context.writeLog("Skips the version check.")
-                        DispatchQueue.main.async {
-                            guard context.isCurrent() else { return }
-                            next(nil, context)
-                        }
-                        return
-                    }
+                                                               executionController:
+                                                               executionController)
 
                     performVersionLookup(condition,
                                          update: update,
@@ -481,18 +498,15 @@ extension SUK {
                 case .inProgress:
                     logf("Skips the version check because a lookup is already in progress.",
                          runtimeContext.log)
-                case let .notEligible(token):
+                case let .invalidated(token):
                     let context = VersionCheckOperationContext(config: config,
                                                                logger: runtimeContext.log,
                                                                userDefaults: userDefaults,
                                                                token: token,
-                                                               executionController: executionController)
+                                                               executionController:
+                                                               executionController)
                     context.finish()
-                    context.writeLog("Skips the version check.")
-                    DispatchQueue.main.async {
-                        guard context.isCurrent() else { return }
-                        next(nil, context)
-                    }
+                    context.writeLog(versionCheckInvalidatedLog)
             }
         }
     }
@@ -521,18 +535,16 @@ extension SUK {
                         return
                     }
 
-                    let didRecord = context.recordSuccessfulVersionCheck(condition)
+                    let isStillCurrent = context.recordSuccessfulVersionCheck(condition)
                     context.finish()
-                    guard didRecord else { return }
+                    guard isStillCurrent else { return }
 
-                    guard context.isCurrent() else { return }
                     let isOld = context.config.versionCompare.compare(storeVersion,
                                                                       with: context.config.version)
                     guard context.isCurrent() else { return }
 
                     if isOld {
                         context.writeLog("This app version is old.")
-                        guard context.isCurrent() else { return }
 
                         if let update {
                             DispatchQueue.main.async {
@@ -563,8 +575,9 @@ extension SUK {
         }
     }
 
-    static func requestReviewIfNeeded(_ condition: RequestReviewCondition,
-                                      request: () -> Void)
+    /// Synchronously exercises review scheduling without invoking StoreKit from unit tests.
+    static func requestReviewIfNeededForTesting(_ condition: RequestReviewCondition,
+                                                request: () -> Void)
     {
         let runtimeContext = sharedSUKRuntimeState.snapshot()
         let preflightToken = reviewRequestPreflightToken(condition,
@@ -601,13 +614,25 @@ extension SUK {
     {
         let userDefaults = preflightToken.userDefaults
         let executionController = condition as? ReviewRequestExecutionControlling
+        let isPreflightCurrent = executionController?
+            .isCurrentReviewRequest(preflightToken)
+            ?? sharedSchedulingExecutionGate.isCurrent(preflightToken)
+        guard isPreflightCurrent else { return nil }
+
+        let isEligible = SchedulingExecutionScope.withToken(preflightToken) {
+            condition.shouldRequestReview()
+        }
+        let isStillCurrent = executionController?
+            .isCurrentReviewRequest(preflightToken)
+            ?? sharedSchedulingExecutionGate.isCurrent(preflightToken)
+        guard isEligible, isStillCurrent else { return nil }
+
         let decision: SchedulingExecutionDecision
 
         if let executionController {
             decision = executionController.beginReviewRequest(in: userDefaults,
                                                               preflightToken: preflightToken)
         } else {
-            guard sharedSchedulingExecutionGate.isCurrent(preflightToken) else { return nil }
             decision = .started(preflightToken)
         }
 
@@ -615,12 +640,7 @@ extension SUK {
 
         let context = ReviewRequestOperationContext(token: token,
                                                     executionController: executionController)
-
-        let isEligible = SchedulingExecutionScope.withToken(token) {
-            condition.shouldRequestReview()
-        }
-
-        guard isEligible, context.isCurrent() else {
+        guard context.isCurrent() else {
             context.finish()
             return nil
         }
@@ -664,8 +684,9 @@ extension SUK {
         }
 
         guard storeVersion == context.config.version else {
-            context
-                .writeLog("Current app version is not equal to the version released on the App Store.")
+            let message =
+                "Current app version is not equal to the version released on the App Store."
+            context.writeLog(message)
             DispatchQueue.main.async {
                 guard context.isCurrent() else { return }
                 noop?()

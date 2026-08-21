@@ -27,41 +27,12 @@ struct SchedulingStateContext {
 }
 
 protocol SUKSchedulingStateStore {
-    func set(_ value: Int, forKey key: String)
-    func integer(forKey key: String) -> Int
-    func removeValue(forKey key: String)
     func set(_ value: Int, for context: SchedulingStateContext)
     func integer(for context: SchedulingStateContext) -> Int
     func removeValue(for context: SchedulingStateContext)
 }
 
-extension SUKSchedulingStateStore {
-    func set(_ value: Int, for context: SchedulingStateContext) {
-        set(value, forKey: context.key)
-    }
-
-    func integer(for context: SchedulingStateContext) -> Int {
-        integer(forKey: context.key)
-    }
-
-    func removeValue(for context: SchedulingStateContext) {
-        removeValue(forKey: context.key)
-    }
-}
-
 struct UserDefaultsSchedulingStateStore: SUKSchedulingStateStore {
-    func set(_ value: Int, forKey key: String) {
-        SUKUserDefaults.standard.set(value, forKey: key)
-    }
-
-    func integer(forKey key: String) -> Int {
-        SUKUserDefaults.standard.integer(forKey: key)
-    }
-
-    func removeValue(forKey key: String) {
-        SUKUserDefaults.standard.removeObject(forKey: key)
-    }
-
     func set(_ value: Int, for context: SchedulingStateContext) {
         context.userDefaults.set(value, forKey: context.key)
     }
@@ -76,18 +47,6 @@ struct UserDefaultsSchedulingStateStore: SUKSchedulingStateStore {
 }
 
 struct InMemorySchedulingStateStore: SUKSchedulingStateStore {
-    func set(_ value: Int, forKey key: String) {
-        sharedDictionary.setValue(value, forKey: storageKey(forKey: key))
-    }
-
-    func integer(forKey key: String) -> Int {
-        sharedDictionary.value(forKey: storageKey(forKey: key)) as? Int ?? 0
-    }
-
-    func removeValue(forKey key: String) {
-        sharedDictionary.removeValue(forKey: storageKey(forKey: key))
-    }
-
     func set(_ value: Int, for context: SchedulingStateContext) {
         sharedDictionary.setValue(value, forKey: context.storageKey)
     }
@@ -98,10 +57,6 @@ struct InMemorySchedulingStateStore: SUKSchedulingStateStore {
 
     func removeValue(for context: SchedulingStateContext) {
         sharedDictionary.removeValue(forKey: context.storageKey)
-    }
-
-    private func storageKey(forKey key: String) -> String {
-        SUKUserDefaults.standard.storageKey(forKey: key)
     }
 }
 
@@ -117,6 +72,9 @@ enum SchedulingExecutionScope {
     private static let threadDictionaryKey =
         "jp.hituzi.SwiftyUpdateKit.schedulingExecutionToken"
 
+    // A thread-local bridge keeps the parameterless open condition methods source-compatible.
+    // Overrides must call super synchronously on the same thread; a thread hop cannot carry this
+    // token and therefore cannot participate in reset invalidation.
     static var currentToken: SchedulingExecutionToken? {
         (Thread.current.threadDictionary[threadDictionaryKey]
             as? SchedulingExecutionTokenBox)?.token
@@ -141,6 +99,8 @@ enum SchedulingExecutionScope {
 }
 
 struct SchedulingExecutionToken {
+    // The environment and generation survive queue hops; reset increments the generation so work
+    // created earlier becomes stale without consulting the mutable global runtime configuration.
     fileprivate let identifier: UUID
     fileprivate let environment: SUKUserDefaults.Environment
     fileprivate let generation: UInt64
@@ -151,7 +111,7 @@ struct SchedulingExecutionToken {
 enum SchedulingExecutionDecision {
     case started(SchedulingExecutionToken)
     case inProgress
-    case notEligible(SchedulingExecutionToken)
+    case invalidated(SchedulingExecutionToken)
 }
 
 protocol SchedulingExecutionGating: AnyObject {
@@ -165,8 +125,12 @@ protocol SchedulingExecutionGating: AnyObject {
 }
 
 final class SchedulingExecutionGate: SchedulingExecutionGating {
+    // Generation checks and their state access must remain in one critical section so reset cannot
+    // interleave a stale write. Actions must not synchronously re-enter this non-recursive lock.
     private let lock = NSLock()
     private var generations: [SUKUserDefaults.Environment: UInt64] = [:]
+    // The identifier lets a stale completion finish safely without removing a replacement that
+    // started with the same environment and storage key after reset.
     private var runningExecutions: [SchedulingExecutionKey: UUID] = [:]
 
     func token(for userDefaults: SUKUserDefaults) -> SchedulingExecutionToken {
@@ -184,7 +148,7 @@ final class SchedulingExecutionGate: SchedulingExecutionGating {
 
         guard preflightToken.environment == context.userDefaults.env,
               generations[preflightToken.environment, default: 0] == preflightToken.generation
-        else { return .notEligible(preflightToken) }
+        else { return .invalidated(preflightToken) }
 
         let executionKey = SchedulingExecutionKey(environment: context.userDefaults.env,
                                                   storageKey: context.storageKey)
@@ -232,6 +196,7 @@ final class SchedulingExecutionGate: SchedulingExecutionGating {
         lock.lock()
         defer { lock.unlock() }
 
+        // Invalidate existing work before clearing state while the same lock excludes new work.
         generations[userDefaults.env, default: 0] &+= 1
         runningExecutions = runningExecutions.filter { key, _ in
             key.environment != userDefaults.env
@@ -340,4 +305,8 @@ struct DailySchedule {
         context(for: SchedulingExecutionScope.currentToken?.userDefaults
             ?? SUKUserDefaults.standard)
     }
+}
+
+protocol DailyScheduleBacked: AnyObject {
+    var dailySchedule: DailySchedule { get }
 }

@@ -14,6 +14,8 @@ class AtomicDictionary<Key: Hashable, Value> {
                                       attributes: .concurrent)
 
     func setValue(_ value: Value, forKey key: Key) {
+        // Synchronous barriers make mutations visible on return. Code already executing on this
+        // queue must not call a mutating method recursively because dispatch_sync cannot re-enter.
         queue.sync(flags: .barrier) {
             dictionary[key] = value
         }
