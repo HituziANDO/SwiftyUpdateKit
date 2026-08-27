@@ -4,7 +4,8 @@
   "scripts": {
     "prepare": "./prepare.sh",
     "fmt:install": "./codeformat.sh --install",
-    "fmt:fix": "./codeformat.sh --fix"
+    "fmt:fix": "./codeformat.sh --fix",
+    "version:bump": "./bump_version.sh"
   },
   "volta": {
     "node": "18.14.2",

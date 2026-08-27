@@ -66,6 +66,28 @@ npm run fmt:fix
 - Depending on the scope of the change, verify the macOS target build in addition to the iOS
   tests.
 
+## Versioning
+
+The framework version is hard-coded in several places. Do not edit them by hand; run the script
+from the repository root:
+
+```sh
+./bump_version.sh 1.6.0
+# or
+npm run version:bump -- 1.6.0
+```
+
+- The script updates `SwiftyUpdateKit.podspec`, `Framework/Sources/SUK.swift`, and
+  `MARKETING_VERSION` in `Framework/SwiftyUpdateKit.xcodeproj/project.pbxproj`.
+- It accepts `MAJOR.MINOR.PATCH` with an optional pre-release suffix, and exits with a non-zero
+  status when the version is malformed or when any location was not updated.
+- `iOSSample/` and `MacSample/` have their own versions. The script does not change them, and
+  neither should you.
+- After bumping, regenerate the distribution binary with `./build.sh`, then commit and tag the
+  release.
+- When a new location for the version string is added, update `bump_version.sh` together with the
+  expected occurrence counts in its verification step.
+
 ## Documentation
 
 - Update `README.md` when changing a public API or its usage.
