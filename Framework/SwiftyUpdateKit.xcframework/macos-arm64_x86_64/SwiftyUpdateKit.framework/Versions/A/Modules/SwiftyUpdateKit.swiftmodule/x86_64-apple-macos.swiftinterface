@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.0.3 effective-5.10 (swiftlang-6.0.3.1.10 clang-1600.0.30.1)
-// swift-module-flags: -target x86_64-apple-macos10.15 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -enable-bare-slash-regex -module-name SwiftyUpdateKit
-// swift-module-flags-ignorable: -no-verify-emitted-module-interface
+// swift-compiler-version: Apple Swift version 6.3.3 effective-5.10 (swiftlang-6.3.3.1.3 clang-2100.1.1.101)
+// swift-module-flags: -target x86_64-apple-macos10.15 -enable-objc-interop -enable-library-evolution -swift-version 5 -O -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -module-name SwiftyUpdateKit
+// swift-module-flags-ignorable: -no-verify-emitted-module-interface -formal-cxx-interoperability-mode=off -interface-compiler-version 6.3.3
 import AppKit
 import Foundation
 import StoreKit
@@ -14,6 +14,9 @@ public let SwiftyUpdateKitLastVersionCheckDateKey: Swift.String
 public protocol VersionCheckCondition : AnyObject {
   func shouldCheckVersion() -> Swift.Bool
 }
+public protocol VersionCheckSuccessRecording : AnyObject {
+  func recordSuccessfulVersionCheck()
+}
 open class VersionCheckConditionAlways : SwiftyUpdateKit.VersionCheckCondition {
   public init()
   open func shouldCheckVersion() -> Swift.Bool
@@ -24,14 +27,16 @@ open class VersionCheckConditionDisable : SwiftyUpdateKit.VersionCheckCondition 
   open func shouldCheckVersion() -> Swift.Bool
   @objc deinit
 }
-open class VersionCheckConditionDaily : SwiftyUpdateKit.VersionCheckCondition {
+@_hasMissingDesignatedInitializers open class VersionCheckConditionDaily : SwiftyUpdateKit.VersionCheckCondition, SwiftyUpdateKit.VersionCheckSuccessRecording {
   public init()
   open func shouldCheckVersion() -> Swift.Bool
+  open func recordSuccessfulVersionCheck()
   @objc deinit
 }
-open class VersionCheckConditionLaunchingAndDaily : SwiftyUpdateKit.VersionCheckCondition {
+@_hasMissingDesignatedInitializers open class VersionCheckConditionLaunchingAndDaily : SwiftyUpdateKit.VersionCheckCondition, SwiftyUpdateKit.VersionCheckSuccessRecording {
   public init()
   open func shouldCheckVersion() -> Swift.Bool
+  open func recordSuccessfulVersionCheck()
   @objc deinit
 }
 public struct SwiftyUpdateKitConfig {
@@ -90,6 +95,9 @@ public let SwiftyUpdateKitLastRequireReviewDateKey: Swift.String
 public protocol RequestReviewCondition : AnyObject {
   func shouldRequestReview() -> Swift.Bool
 }
+public protocol ReviewRequestAttemptRecording : AnyObject {
+  func recordReviewRequestAttempt()
+}
 open class RequestReviewConditionAlways : SwiftyUpdateKit.RequestReviewCondition {
   public init()
   open func shouldRequestReview() -> Swift.Bool
@@ -100,23 +108,27 @@ open class RequestReviewConditionDisable : SwiftyUpdateKit.RequestReviewConditio
   open func shouldRequestReview() -> Swift.Bool
   @objc deinit
 }
-open class RequestReviewConditionDaily : SwiftyUpdateKit.RequestReviewCondition {
+@_hasMissingDesignatedInitializers open class RequestReviewConditionDaily : SwiftyUpdateKit.RequestReviewCondition, SwiftyUpdateKit.ReviewRequestAttemptRecording {
   public init()
   open func shouldRequestReview() -> Swift.Bool
+  open func recordReviewRequestAttempt()
   @objc deinit
 }
-open class RequestReviewConditionDailySkipFirstDay : SwiftyUpdateKit.RequestReviewCondition {
+@_hasMissingDesignatedInitializers open class RequestReviewConditionDailySkipFirstDay : SwiftyUpdateKit.RequestReviewCondition, SwiftyUpdateKit.ReviewRequestAttemptRecording {
   public init()
   open func shouldRequestReview() -> Swift.Bool
+  open func recordReviewRequestAttempt()
   @objc deinit
 }
-open class RequestReviewConditionLaunchingAndDaily : SwiftyUpdateKit.RequestReviewCondition {
+@_hasMissingDesignatedInitializers open class RequestReviewConditionLaunchingAndDaily : SwiftyUpdateKit.RequestReviewCondition, SwiftyUpdateKit.ReviewRequestAttemptRecording {
   public init()
   open func shouldRequestReview() -> Swift.Bool
+  open func recordReviewRequestAttempt()
   @objc deinit
 }
-open class RequestReviewConditionLaunchingAndDailySkipFirstDay : SwiftyUpdateKit.RequestReviewCondition {
+@_hasMissingDesignatedInitializers open class RequestReviewConditionLaunchingAndDailySkipFirstDay : SwiftyUpdateKit.RequestReviewCondition, SwiftyUpdateKit.ReviewRequestAttemptRecording {
   public init()
   open func shouldRequestReview() -> Swift.Bool
+  open func recordReviewRequestAttempt()
   @objc deinit
 }

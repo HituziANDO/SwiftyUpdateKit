@@ -7,5 +7,4 @@ framework module SwiftyUpdateKit {
 
 module SwiftyUpdateKit.Swift {
   header "SwiftyUpdateKit-Swift.h"
-  requires objc
 }

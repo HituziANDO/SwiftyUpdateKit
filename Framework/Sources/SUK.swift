@@ -93,7 +93,7 @@ private struct ReviewRequestOperationContext {
 /// SwiftyUpdateKit.
 public class SUK {
     /// SwiftyUpdateKit version.
-    public static let version = "1.5.0"
+    public static let version = "1.5.1"
 
     private static let versionCheckInvalidatedLog =
         "Cancels the version check because its scheduling context was invalidated."
