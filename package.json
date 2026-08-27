@@ -14,13 +14,5 @@
   "devDependencies": {
     "husky": "^8.0.3",
     "lint-staged": "^13.1.2"
-  },
-  "lint-staged": {
-    "./**/*.swift": [
-      "./.codeformat/swiftformat"
-    ],
-    "./**/*.{m,h}": [
-      "./.codeformat/uncrustify -c uncrustify-objc.cfg --no-backup -l OC"
-    ]
   }
 }

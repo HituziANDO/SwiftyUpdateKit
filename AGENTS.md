@@ -33,6 +33,9 @@ prompts, release notes, and review requests.
 
 - Format Swift code according to `.swiftformat`. The expected SwiftFormat version is defined in
   `codeformat.sh`.
+- Formatters run on staged files through `.lintstagedrc.cjs`, which excludes
+  `Framework/SwiftyUpdateKit.xcframework/`. Do not widen those globs to cover it: uncrustify
+  reorders the `#include` lines in its generated headers and invalidates the bundle signature.
 - Follow the existing naming, access control, documentation comment, and closure styles.
 - Keep code comments self-contained. When referring to an issue or external resource, summarize
   the reason and include the complete URL.
